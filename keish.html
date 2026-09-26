@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Mei Mei keish 💖</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        handwriting: ['Caveat', 'cursive'],
+                        pixel: ['"Press Start 2P"', 'cursive'],
+                    },
+                    colors: {
+                        theme_bg: 'var(--bg-color)',
+                        theme_text: 'var(--text-main)',
+                        theme_muted: 'var(--text-muted)',
+                        theme_accent: 'var(--accent-main)',
+                        theme_accent_hover: 'var(--accent-hover)',
+                        theme_card: 'var(--card-bg)',
+                        theme_border: 'var(--border-color)',
+                        theme_shadow: 'var(--shadow-color)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slight': 'bounceSlight 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        bounceSlight: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            /* Theme 1: White & Purple (Default) */
+            --bg-color: #faf5ff;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --accent-main: #9333ea;
+            --accent-hover: #a855f7;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --border-color: rgba(147, 51, 234, 0.3);
+            --shadow-color: rgba(147, 51, 234, 0.15);
+            --grid-color: rgba(147, 51, 234, 0.05);
+            --puzzle-bg: radial-gradient(circle at center, #f3e8ff 0%, #faf5ff 100%);
+        }
+
+        .theme-white-pink {
+            --bg-color: #fdf2f8;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --accent-main: #ec4899;
+            --accent-hover: #f472b6;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --border-color: rgba(236, 72, 153, 0.3);
+            --shadow-color: rgba(236, 72, 153, 0.15);
+            --grid-color: rgba(236, 72, 153, 0.05);
+            --puzzle-bg: radial-gradient(circle at center, #fce7f3 0%, #fdf2f8 100%);
+        }
+
+        .theme-black-pink {
+            --bg-color: #0a0a0a;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-main: #ec4899;
+            --accent-hover: #f472b6;
+            --card-bg: rgba(23, 23, 23, 0.75);
+            --border-color: rgba(236, 72, 153, 0.3);
+            --shadow-color: rgba(236, 72, 153, 0.2);
+            --grid-color: rgba(236, 72, 153, 0.08);
+            --puzzle-bg: radial-gradient(circle at center, #831843 0%, #0a0a0a 100%);
+        }
+
+        .theme-black-purple {
+            --bg-color: #0a0a0a;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-main: #9333ea;
+            --accent-hover: #a855f7;
+            --card-bg: rgba(23, 23, 23, 0.75);
+            --border-color: rgba(147, 51, 234, 0.3);
+            --shadow-color: rgba(147, 51, 234, 0.2);
+            --grid-color: rgba(147, 51, 234, 0.08);
+            --puzzle-bg: radial-gradient(circle at center, #2e1065 0%, #0a0a0a 100%);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            transition: background-color 0.5s ease, color 0.5s ease;
+            background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            overflow-x: hidden;
+        }
+
+        * { transition: border-color 0.5s ease, box-shadow 0.5s ease; }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 40px -10px var(--shadow-color);
+            transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+        }
+        
+        .glowing-btn { box-shadow: 0 0 20px var(--shadow-color); }
+        .glowing-btn:hover { box-shadow: 0 0 30px var(--accent-main); }
+
+        /* Polaroid Hover */
+        .polaroid { background: white; padding: 12px 12px 40px 12px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), z-index 0s; }
+        .polaroid:hover { transform: scale(1.15) rotate(0deg) !important; z-index: 50 !important; box-shadow: 0 20px 40px -5px rgba(0,0,0,0.5); }
+        
+        /* Flip Cards */
+        .flip-card { background-color: transparent; perspective: 1000px; height: 320px; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; cursor: pointer; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+        .flip-card-front { background: var(--card-bg); border: 1px solid var(--border-color); }
+        .flip-card-back { background: var(--accent-main); color: white; transform: rotateY(180deg); }
+
+        #gameCanvas { image-rendering: pixelated; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-main); border-radius: 4px; }
+
+        /* Entrance Animation Overlay */
+        #entrance-overlay {
+            position: fixed; inset: 0; z-index: 9999;
+            background: var(--bg-color);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+        
+        @keyframes float-up {
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-20vh) rotate(45deg) scale(1.2); opacity: 0; }
+        }
+        .animate-float-up { animation: float-up linear infinite; }
+
+        .envelope-container { cursor: pointer; transition: transform 0.3s ease; z-index: 10; }
+        .envelope-container:hover { transform: scale(1.05); }
+        .envelope { width: 200px; height: 140px; background: var(--card-bg); border: 2px solid var(--accent-main); border-radius: 10px; position: relative; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 30px var(--shadow-color); transition: all 0.5s ease; }
+        .envelope-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 100px solid transparent; border-right: 100px solid transparent; border-top: 80px solid var(--accent-main); transition: transform 0.8s ease; transform-origin: top; }
+        .tulip-svg { position: absolute; bottom: 20px; width: 60px; height: auto; opacity: 0; transform: translateY(20px); transition: all 0.8s ease 0.3s; pointer-events: none; }
+        
+        .envelope-open .envelope-flap { transform: rotateX(180deg); }
+        .envelope-open .tulip-svg { opacity: 1; transform: translateY(-40px) scale(1.2); }
+        
+        /* Mobile Menu */
+        #mobile-menu { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        /* Memory Game Cards */
+        .memory-card { perspective: 1000px; cursor: pointer; aspect-ratio: 1; }
+        .memory-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+        .memory-card.flipped .memory-card-inner { transform: rotateY(180deg); }
+        .memory-card-front, .memory-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; border-radius: 0.75rem; font-size: 2rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .memory-card-front { background: var(--card-bg); border: 2px solid var(--accent-main); }
+        .memory-card-back { background: var(--bg-color); border: 2px solid var(--border-color); transform: rotateY(180deg); }
+    </style>
+</head>
+<body class="antialiased selection:bg-theme_accent selection:text-white overflow-hidden" id="main-body">
+
+    <!-- Start Entrance Animation -->
+    <div id="entrance-overlay" class="relative overflow-hidden">
+        <!-- Floating Tulips Background -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute text-4xl animate-float-up" style="left: 10%; animation-duration: 7s; animation-delay: 0s;">🌷</div>
+            <div class="absolute text-3xl animate-float-up" style="left: 25%; animation-duration: 9s; animation-delay: 2s;">🌷</div>
+            <div class="absolute text-5xl animate-float-up" style="left: 45%; animation-duration: 6s; animation-delay: 1s;">🌷</div>
+            <div class="absolute text-4xl animate-float-up" style="left: 65%; animation-duration: 8s; animation-delay: 3s;">🌷</div>
+            <div class="absolute text-3xl animate-float-up" style="left: 85%; animation-duration: 7.5s; animation-delay: 0.5s;">🌷</div>
+            <div class="absolute text-4xl animate-float-up" style="left: 15%; animation-duration: 8s; animation-delay: 4s;">🌷</div>
+            <div class="absolute text-5xl animate-float-up" style="left: 35%; animation-duration: 6.5s; animation-delay: 5s;">🌷</div>
+            <div class="absolute text-3xl animate-float-up" style="left: 75%; animation-duration: 9s; animation-delay: 2.5s;">🌷</div>
+            <div class="absolute text-4xl animate-float-up" style="left: 55%; animation-duration: 7s; animation-delay: 4.5s;">🌷</div>
+            <div class="absolute text-5xl animate-float-up" style="left: 90%; animation-duration: 8.5s; animation-delay: 1.5s;">🌷</div>
+        </div>
+
+        <div class="text-center mb-10 animate-pulse-slow z-10 relative bg-theme_bg/50 backdrop-blur-md py-4 px-8 rounded-full border border-theme_border">
+            <h1 class="text-3xl font-serif text-theme_text mb-2">A Special Delivery</h1>
+            <p class="text-theme_muted tracking-widest uppercase text-xs">For Mei Mei keish</p>
+        </div>
+        
+        <div class="envelope-container relative" onclick="openEnvelope()">
+            <!-- Sparkles around envelope -->
+            <div class="absolute -top-6 -left-6 text-2xl animate-spin-slow pointer-events-none">✨</div>
+            <div class="absolute -bottom-4 -right-4 text-xl animate-pulse pointer-events-none">✨</div>
+
+            <div class="envelope" id="the-envelope">
+                <div class="envelope-flap"></div>
+                <!-- Premium SVG Tulip -->
+                <svg class="tulip-svg drop-shadow-xl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 90 L50 60" stroke="#22c55e" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M50 60 C30 60 20 40 20 20 C35 30 45 40 50 50 C55 40 65 30 80 20 C80 40 70 60 50 60Z" fill="var(--accent-main)"/>
+                    <path d="M35 30 C40 45 45 55 50 60 C40 55 30 45 20 20 C25 25 30 28 35 30Z" fill="var(--accent-hover)"/>
+                    <path d="M65 30 C60 45 55 55 50 60 C60 55 70 45 80 20 C75 25 70 28 65 30Z" fill="var(--accent-hover)"/>
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center font-bold text-theme_text z-10 pointer-events-none drop-shadow-md">
+                    TAP ME
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Entrance Animation -->
+
+    <nav class="fixed w-full z-40 glass-card border-b-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="font-serif text-2xl font-bold text-theme_accent italic tracking-wider">For Mei Mei</span>
+                </div>
+                
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#letter" class="text-theme_muted hover:text-theme_accent text-sm font-medium transition-colors">Letter</a>
+                    <a href="#roblox" class="text-theme_muted hover:text-theme_accent text-sm font-medium transition-colors">Memories</a>
+                    <a href="#words" class="text-theme_muted hover:text-theme_accent text-sm font-medium transition-colors">Notes</a>
+                    <a href="#music" class="text-theme_muted hover:text-theme_accent text-sm font-medium transition-colors">Playlist</a>
+                    <a href="#games" class="text-theme_muted hover:text-theme_accent text-sm font-medium transition-colors">Games</a>
+                    <a href="#puzzle" class="text-theme_muted hover:text-theme_accent text-sm font-medium transition-colors">Puzzle</a>
+                </div>
+
+                <!-- Theme Switcher (Desktop) -->
+                <div class="hidden md:flex items-center space-x-3 bg-theme_bg/50 px-3 py-1.5 rounded-full border border-theme_border">
+                    <span class="text-xs text-theme_muted font-medium">Theme</span>
+                    <button onclick="setTheme('default')" class="w-5 h-5 rounded-full bg-white border-2 border-purple-600 shadow-sm hover:scale-125 transition-transform" title="White & Purple"></button>
+                    <button onclick="setTheme('theme-white-pink')" class="w-5 h-5 rounded-full bg-white border-2 border-pink-400 shadow-sm hover:scale-125 transition-transform" title="White & Pink"></button>
+                    <button onclick="setTheme('theme-black-pink')" class="w-5 h-5 rounded-full bg-black border-2 border-pink-500 shadow-sm hover:scale-125 transition-transform" title="Black & Pink"></button>
+                    <button onclick="setTheme('theme-black-purple')" class="w-5 h-5 rounded-full bg-black border-2 border-purple-600 shadow-sm hover:scale-125 transition-transform" title="Black & Purple"></button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="toggleMobileMenu()" class="text-theme_text hover:text-theme_accent focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="absolute top-16 left-0 w-full glass-card border-t border-theme_border transform -translate-y-full opacity-0 pointer-events-none md:hidden flex flex-col p-4 space-y-4 shadow-2xl z-40">
+            <a href="#letter" onclick="toggleMobileMenu()" class="block text-theme_text font-medium text-lg">Letter</a>
+            <a href="#roblox" onclick="toggleMobileMenu()" class="block text-theme_text font-medium text-lg">Memories</a>
+            <a href="#words" onclick="toggleMobileMenu()" class="block text-theme_text font-medium text-lg">Notes</a>
+            <a href="#music" onclick="toggleMobileMenu()" class="block text-theme_text font-medium text-lg">Playlist</a>
+            <a href="#games" onclick="toggleMobileMenu()" class="block text-theme_text font-medium text-lg">Games</a>
+            <a href="#puzzle" onclick="toggleMobileMenu()" class="block text-theme_text font-medium text-lg">Puzzle</a>
+            
+            <div class="pt-4 border-t border-theme_border flex items-center space-x-4">
+                <span class="text-sm text-theme_muted font-medium">Theme:</span>
+                <button onclick="setTheme('default'); toggleMobileMenu()" class="w-6 h-6 rounded-full bg-white border-2 border-purple-600 shadow-sm"></button>
+                <button onclick="setTheme('theme-white-pink'); toggleMobileMenu()" class="w-6 h-6 rounded-full bg-white border-2 border-pink-400 shadow-sm"></button>
+                <button onclick="setTheme('theme-black-pink'); toggleMobileMenu()" class="w-6 h-6 rounded-full bg-black border-2 border-pink-500 shadow-sm"></button>
+                <button onclick="setTheme('theme-black-purple'); toggleMobileMenu()" class="w-6 h-6 rounded-full bg-black border-2 border-purple-600 shadow-sm"></button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between min-h-screen">
+        <div class="md:w-1/2 mt-12 md:mt-0 space-y-6 text-center md:text-left z-10">
+            <h2 class="text-xs font-bold tracking-[0.2em] text-theme_accent uppercase animate-pulse-slow">Specially Made For You</h2>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-theme_text leading-tight">
+                Hello, <br>
+                <span class="text-theme_accent italic">Mei Mei keish</span>
+            </h1>
+            <p class="text-lg text-theme_muted leading-relaxed font-light max-w-lg mx-auto md:mx-0">
+                In a world full of noise, I wanted to create a beautiful corner just for us. Wrapped in your favorite colors, this is my way of showing how much you mean to me.
+            </p>
+            <div class="pt-6 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <a href="#letter" class="inline-flex justify-center items-center px-8 py-3.5 rounded-full text-white bg-theme_accent hover:bg-theme_accent_hover transition-colors shadow-lg font-medium glowing-btn">
+                    Read My Heart
+                </a>
+            </div>
+        </div>
+        
+        <div class="md:w-1/2 relative animate-float flex justify-center mt-10 md:mt-0">
+            <div class="relative w-64 h-64 md:w-80 md:h-80">
+                <div class="absolute inset-0 bg-theme_accent rounded-[3rem] transform rotate-6 opacity-20 blur-2xl transition-all duration-700"></div>
+                <img src="https://placehold.co/600x600/171717/a855f7?text=Just\nFor\nYou" id="hero-img" alt="Memory" class="relative rounded-[2.5rem] shadow-2xl object-cover w-full h-full border-2 border-theme_border z-10 transition-colors">
+                <div class="absolute -top-4 -right-4 text-4xl animate-bounce z-20 drop-shadow-lg">✨</div>
+                <div class="absolute -bottom-6 -left-4 text-4xl z-20 drop-shadow-lg animate-bounce-slight">💌</div>
+            </div>
+        </div>
+    </header>
+
+    <section id="letter" class="py-24 relative overflow-hidden">
+        <div class="absolute left-0 top-1/2 w-64 h-64 bg-theme_accent rounded-full blur-[100px] opacity-10 pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-serif font-bold text-theme_text mb-4">My Written Heart</h2>
+                <div class="w-16 h-1 bg-theme_accent mx-auto rounded-full glowing-btn"></div>
+            </div>
+            
+            <div class="glass-card rounded-3xl p-8 md:p-14 relative">
+                <span class="absolute top-2 left-6 text-8xl text-theme_accent opacity-10 font-serif leading-none z-0">"</span>
+                
+                <div class="font-serif text-lg md:text-xl text-theme_text leading-loose space-y-6 relative z-10">
+                    <p>Dearest <span class="font-bold text-theme_accent">Mei Mei keish</span>,</p>
+                    <p>I wanted to find a unique way to tell you how I feel. Whether you prefer the elegance of white, the boldness of black, or the charm of pink and purple, I built this space so you can make it entirely your own.</p>
+                    <p>Since you came into my life, everything feels incredibly beautiful. I find myself dreaming not just of my own future, but of a future where you are beside me. This is me stepping forward, laying my intentions bare—I want to court you properly, with respect, patience, and absolute sincerity.</p>
+                    <p>You have this wonderful balance of grace and magic that draws me in. I hope this humble creation brings a smile to your face today, tomorrow, and the days after. I'm looking forward to earning your heart, one day at a time.</p>
+                    
+                    <div class="pt-8 text-right">
+                        <p class="text-theme_muted italic text-base font-sans">Yours truly,</p>
+                        <p class="font-bold text-xl text-theme_accent mt-1">Kelvin</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upgraded Roblox Memories Section -->
+    <section id="roblox" class="py-24 bg-theme_accent/5 border-y border-theme_border">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-serif font-bold text-theme_text mb-4">Our Roblox Moments</h2>
+                <p class="text-theme_muted">Hover to reveal the magic. Beautifully scattered memories of our digital adventures together.</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row flex-wrap justify-center items-center gap-8 md:gap-4 lg:gap-8 px-4 pt-8 pb-16">
+                <div class="polaroid w-full max-w-[260px] md:-mt-12 md:rotate-[-8deg] hover:rotate-0 transition-transform duration-500 z-10 relative">
+                    <div class="overflow-hidden bg-gray-200 aspect-square rounded-sm">
+                        <img src="https://placehold.co/400x400/374151/f3f4f6?text=Roblox\nMemory+1" alt="Game 1" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-center font-handwriting text-2xl mt-4 text-gray-800 font-bold">Our first game</p>
+                </div>
+                
+                <div class="polaroid w-full max-w-[260px] md:mt-24 md:rotate-[5deg] hover:rotate-0 transition-transform duration-500 z-20 relative">
+                    <div class="overflow-hidden bg-gray-200 aspect-square rounded-sm">
+                        <img src="https://placehold.co/400x400/4b5563/f3f4f6?text=Roblox\nMemory+2" alt="Game 2" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-center font-handwriting text-2xl mt-4 text-gray-800 font-bold">Late night calls</p>
+                </div>
+                
+                <div class="polaroid w-full max-w-[260px] md:-mt-6 md:rotate-[-4deg] hover:rotate-0 transition-transform duration-500 z-30 relative">
+                    <div class="overflow-hidden bg-gray-200 aspect-square rounded-sm">
+                        <img src="https://placehold.co/400x400/374151/f3f4f6?text=Roblox\nMemory+3" alt="Game 3" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-center font-handwriting text-2xl mt-4 text-gray-800 font-bold">Carrying me in Obby</p>
+                </div>
+                
+                <div class="polaroid w-full max-w-[260px] md:mt-16 md:rotate-[10deg] hover:rotate-0 transition-transform duration-500 z-10 relative">
+                    <div class="overflow-hidden bg-gray-200 aspect-square rounded-sm">
+                        <img src="https://placehold.co/400x400/4b5563/f3f4f6?text=Roblox\nMemory+4" alt="Game 4" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-center font-handwriting text-2xl mt-4 text-gray-800 font-bold">Just us being silly</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upgraded Notes Section (5 Cards) -->
+    <section id="words" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-serif font-bold text-theme_text mb-4">Words to Make You Smile</h2>
+                <p class="text-theme_muted">Hover or tap to flip. Carefully selected just for you.</p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-6 md:gap-8 max-w-6xl mx-auto">
+                <!-- Card 1 -->
+                <div class="flip-card w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] max-w-sm">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card">
+                            <span class="text-4xl mb-4">🌹</span>
+                            <h3 class="text-xl font-bold text-theme_text mb-4">Classic Romance</h3>
+                            <p class="text-theme_muted italic px-4">"Roses are red, violets are blue, I didn't know what perfect was until I met you."</p>
+                        </div>
+                        <div class="flip-card-back glass-card">
+                            <div class="w-full space-y-4">
+                                <div>
+                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Tagalog</span>
+                                    <p class="italic text-base">"Ang rosas ay pula, ang violet ay asul, hindi ko alam ang perpekto hanggang makilala kita."</p>
+                                </div>
+                                <div class="border-t border-white/20 pt-2">
+                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Chinese</span>
+                                    <p class="italic text-base">"玫瑰是红色的，紫罗兰是蓝色的，直到遇见你我才知道什么是完美。"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="flip-card w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] max-w-sm">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card">
+                            <span class="text-4xl mb-4">📖</span>
+                            <h3 class="text-xl font-bold text-theme_text mb-4">Meaningful</h3>
+                            <p class="text-theme_muted italic px-4">"Are you a dictionary? Because you add meaning to my life."</p>
+                        </div>
+                        <div class="flip-card-back glass-card">
+                            <div class="w-full space-y-4">
+                                <div>
+                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Tagalog</span>
+                                    <p class="italic text-base">"Diksyunaryo ka ba? Kasi binibigyan mo ng kahulugan ang buhay ko."</p>
+                                </div>
+                                <div class="border-t border-white/20 pt-2">
+                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Chinese</span>
+                                    <p class="italic text-base">"你是字典吗？因为你让我的生命有了意义。"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="flip-card w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] max-w-sm">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card">
+                            <span class="text-4xl mb-4">❤️‍🩹</span>
+                            <h3 class="text-xl font-bold text-theme_text mb-4">Falling Hard</h3>
+                            <p class="text-theme_muted italic px-4">"Do you have a band-aid? Because I scraped my knee falling for you."</p>
+                        </div>
+                        <div class="flip-card-back glass-card">
+                            <div class="w-full space-y-4">
+                                <div>
+                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Tagalog</span>
+                                    <p class="italic text-base">"May band-aid ka ba? Nagasgasan kasi ang tuhod ko kakahulog sa'yo."</p>
+                                </div>
+                                <div class="border-t border-white/20 pt-2">
+                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Chinese</span>
+                                    <p class="italic text-base">"你有创可贴吗？因为我为你倾倒时擦伤了膝盖。"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 (New) -->
+                <div class="flip-card w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] max-w-sm">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card">
+                            <span class="text-4xl mb-4">🌟</span>
+                            <h3 class="text-xl font-bold text-theme_text mb-4">Starry Night</h3>
+                            <p class="text-theme_muted italic px-4">"You shine brighter than any star in the night sky."</p>
+                        </div>
+                        <div class="flip-card-back glass-card">
+                            <div class="w-full space-y-4">
+                                <div>
+                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Tagalog</span>
+                                    <p class="italic text-base">"Mas maliwanag ka pa sa pinakaningning na bituin sa gabi."</p>
+                                </div>
+                                <div class="border-t border-white/20 pt-2">
+                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Chinese</span>
+                                    <p class="italic text-base">"你比夜空中最亮的星星还要闪耀。"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 (New) -->
+                <div class="flip-card w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] max-w-sm">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card">
+                            <span class="text-4xl mb-4">🍀</span>
+                            <h3 class="text-xl font-bold text-theme_text mb-4">Lucky Me</h3>
+                            <p class="text-theme_muted italic px-4">"I must be the luckiest person in the world to have found you."</p>
+                        </div>
+                        <div class="flip-card-back glass-card">
+                            <div class="w-full space-y-4">
+                                <div>
+                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Tagalog</span>
+                                    <p class="italic text-base">"Ako na yata ang pinakamasuwerte dahil nahanap kita."</p>
+                                </div>
+                                <div class="border-t border-white/20 pt-2">
+                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Chinese</span>
+                                    <p class="italic text-base">"能找到你，我一定是世界上最幸运的人。"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="music" class="py-24 bg-theme_accent/5 border-y border-theme_border">
+        <div class="max-w-xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-serif font-bold text-theme_text mb-2">Our Playlist</h2>
+                <p class="text-theme_muted text-sm">Songs that remind me of you.</p>
+            </div>
+            
+            <div class="glass-card rounded-[2rem] p-6 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-theme_accent blur-3xl opacity-20 -mr-10 -mt-10"></div>
+                
+                <div class="flex items-center space-x-5 mb-8">
+                    <div class="w-24 h-24 rounded-2xl overflow-hidden shadow-lg border border-theme_border flex-shrink-0 relative group">
+                        <img id="album-cover" src="https://placehold.co/400x400/9333ea/ffffff?text=A+Love\nSo+Beautiful" alt="Album Cover" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h3 id="song-title" class="text-xl font-bold text-theme_text truncate mb-1">I Like You So Much, You'll Know It</h3>
+                        <p id="song-artist" class="text-sm text-theme_accent truncate font-medium">Ysabelle Cuevas</p>
+                        <div class="flex items-center space-x-2 mt-2">
+                            <span class="flex h-2 w-2 relative">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-theme_accent opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-theme_accent"></span>
+                            </span>
+                            <span class="text-xs text-theme_muted">Playing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="space-y-2 mb-6 cursor-pointer group" onclick="simulateSeek(event)">
+                    <div class="h-1.5 w-full bg-theme_bg rounded-full overflow-hidden relative">
+                        <div id="progress-bar" class="h-full bg-theme_accent w-[35%] relative">
+                            <div class="absolute right-0 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between text-[10px] text-theme_muted font-medium">
+                        <span id="time-current">1:24</span>
+                        <span id="time-total">3:30</span>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="flex justify-center items-center space-x-6">
+                    <button onclick="changeSong(-1)" class="text-theme_muted hover:text-theme_accent transition-colors p-2">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                    </button>
+                    <button onclick="togglePlay()" id="play-btn" class="w-14 h-14 rounded-full bg-theme_accent hover:bg-theme_accent_hover text-white flex items-center justify-center transition-transform hover:scale-105 shadow-lg shadow-theme_accent/30">
+                        <svg class="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <button onclick="changeSong(1)" class="text-theme_muted hover:text-theme_accent transition-colors p-2">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                    </button>
+                </div>
+                
+                <!-- Playlist Queue -->
+                <div class="mt-8 border-t border-theme_border pt-4">
+                    <h4 class="text-xs uppercase tracking-wider text-theme_muted font-bold mb-3">Up Next</h4>
+                    <div class="space-y-2" id="playlist-queue">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="puzzle" class="py-24 relative overflow-hidden">
+        <!-- Romantic Background Style -->
+        <div class="absolute inset-0 z-0 opacity-40 transition-colors duration-1000" style="background: var(--puzzle-bg);"></div>
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-10 left-10 text-4xl opacity-20 animate-float" style="animation-delay: 0s;">💖</div>
+            <div class="absolute bottom-20 right-20 text-4xl opacity-20 animate-float" style="animation-delay: 2s;">✨</div>
+            <div class="absolute top-1/2 left-1/4 text-4xl opacity-20 animate-float" style="animation-delay: 1s;">🌷</div>
+            <div class="absolute top-1/3 right-1/4 text-4xl opacity-20 animate-float" style="animation-delay: 3s;">💌</div>
+        </div>
+
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-serif font-bold text-theme_text mb-4 drop-shadow-md">The Pathway to My Heart</h2>
+                <p class="text-theme_text/80 font-medium">Answer these 5 questions correctly to proceed.</p>
+                
+                <!-- Progress Indicators -->
+                <div class="flex justify-center items-center space-x-3 mt-6">
+                    <div class="w-3 h-3 rounded-full bg-theme_accent shadow-[0_0_10px_var(--accent-main)]" id="dot-1"></div>
+                    <div class="w-8 h-1 bg-theme_border" id="line-1"></div>
+                    <div class="w-3 h-3 rounded-full bg-theme_border" id="dot-2"></div>
+                    <div class="w-8 h-1 bg-theme_border" id="line-2"></div>
+                    <div class="w-3 h-3 rounded-full bg-theme_border" id="dot-3"></div>
+                    <div class="w-8 h-1 bg-theme_border" id="line-3"></div>
+                    <div class="w-3 h-3 rounded-full bg-theme_border" id="dot-4"></div>
+                    <div class="w-8 h-1 bg-theme_border" id="line-4"></div>
+                    <div class="w-3 h-3 rounded-full bg-theme_border" id="dot-5"></div>
+                </div>
+            </div>
+
+            <div class="glass-card p-8 md:p-12 rounded-3xl relative overflow-hidden" id="puzzle-container">
+                <!-- Puzzles injected by JS -->
+                <div id="puzzle-content" class="text-center transition-opacity duration-300">
+                    <span class="text-theme_accent font-serif text-5xl mb-4 block">1</span>
+                    <h3 class="text-2xl font-bold text-theme_text mb-6">What is your favorite number?</h3>
+                    <input type="text" id="puzzle-input" class="w-full bg-theme_bg/50 border border-theme_border rounded-xl px-4 py-3 text-theme_text focus:outline-none focus:border-theme_accent focus:ring-1 focus:ring-theme_accent text-center text-lg mb-6 transition-all" placeholder="Enter your answer...">
+                    <button onclick="checkPuzzle()" class="w-full py-3 rounded-xl bg-theme_accent hover:bg-theme_accent_hover text-white font-bold transition-colors glowing-btn">Submit Answer</button>
+                    <p id="puzzle-error" class="text-red-400 text-sm mt-3 opacity-0 transition-opacity">Oops, that's not it. Try again!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="games" class="py-24 border-t border-theme_border relative mb-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-serif font-bold text-theme_text mb-4">Just For Fun</h2>
+                <p class="text-theme_muted">Two little games to pass the time and hopefully make you smile.</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-start">
+                <!-- Game 1: Catch My Hearts -->
+                <div class="glass-card rounded-3xl p-6 md:p-8 flex flex-col items-center">
+                    <h3 class="text-2xl font-pixel text-theme_text mb-2 text-center text-[16px] md:text-xl">Catch My Hearts</h3>
+                    <p class="text-sm text-theme_muted mb-6 text-center">Use Left/Right arrows or tap the sides. Don't miss 5!</p>
+                    
+                    <div class="relative w-full max-w-[320px] aspect-[3/4] bg-theme_bg border-2 border-theme_border rounded-2xl overflow-hidden shadow-inner">
+                        <canvas id="gameCanvas" width="320" height="426" class="w-full h-full block touch-none"></canvas>
+                        
+                        <!-- Game Over Screen -->
+                        <div id="game-over-screen" class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+                            <span class="text-4xl mb-2">💔</span>
+                            <h4 class="text-white font-pixel text-sm mb-2">Game Over</h4>
+                            <p class="text-gray-300 text-sm mb-4">Score: <span id="final-score" class="font-bold text-theme_accent">0</span></p>
+                            <button onclick="startGame1()" class="px-6 py-2 bg-theme_accent text-white rounded-full text-sm font-bold hover:scale-105 transition-transform">Play Again</button>
+                        </div>
+                        
+                        <!-- Start Screen -->
+                        <div id="game-start-screen" class="absolute inset-0 bg-theme_bg/90 backdrop-blur-sm flex flex-col items-center justify-center transition-opacity duration-300">
+                            <span class="text-5xl mb-4 animate-bounce">🧺</span>
+                            <button onclick="startGame1()" class="px-6 py-3 bg-theme_accent text-white rounded-full font-bold shadow-lg glowing-btn hover:scale-105 transition-transform">Start Catching</button>
+                        </div>
+                        
+                        <!-- HUD -->
+                        <div class="absolute top-2 left-3 right-3 flex justify-between pointer-events-none">
+                            <span class="font-pixel text-[10px] text-theme_text drop-shadow-md">Score: <span id="score">0</span></span>
+                            <span class="font-pixel text-[10px] text-red-400 drop-shadow-md">Misses: <span id="misses">0</span>/5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game 2: Heart Memory Match -->
+                <div class="glass-card rounded-3xl p-6 md:p-8 flex flex-col items-center">
+                    <h3 class="text-2xl font-pixel text-theme_text mb-2 text-center text-[16px] md:text-xl">Memory Match</h3>
+                    <p class="text-sm text-theme_muted mb-6 text-center">Find all the matching pairs of cute things.</p>
+                    
+                    <div class="w-full max-w-[320px] aspect-square relative">
+                        <!-- Grid dynamically filled by JS -->
+                        <div id="memory-grid" class="w-full h-full grid grid-cols-4 gap-2"></div>
+                        
+                        <!-- Memory Game Win Screen -->
+                        <div id="memory-win-screen" class="absolute inset-0 bg-theme_bg/90 backdrop-blur-sm flex flex-col items-center justify-center rounded-xl opacity-0 pointer-events-none transition-opacity duration-300">
+                            <span class="text-5xl mb-4 animate-spin-slow">✨</span>
+                            <h4 class="text-theme_text font-bold text-xl mb-4">You matched them all!</h4>
+                            <button onclick="initMemoryGame()" class="px-6 py-2 bg-theme_accent text-white rounded-full font-bold shadow-lg glowing-btn hover:scale-105 transition-transform">Play Again</button>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-between w-full max-w-[320px]">
+                        <span class="text-sm font-bold text-theme_muted">Flips: <span id="flips-count" class="text-theme_accent">0</span></span>
+                        <span class="text-sm font-bold text-theme_muted">Matches: <span id="matches-count" class="text-theme_accent">0</span>/8</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 text-center text-theme_muted text-sm border-t border-theme_border pb-24 md:pb-8">
+        <p>Made with endless admiration by Kelvin.<br>For Mei Mei keish.</p>
+    </footer>
+
+    <!-- Chat Bot Floating Icon & Panel -->
+    <button onclick="toggleChat()" class="fixed bottom-6 right-6 w-16 h-16 bg-theme_accent hover:bg-theme_accent_hover rounded-full shadow-[0_10px_25px_var(--shadow-color)] flex items-center justify-center text-white z-[60] transition-transform hover:scale-110 glowing-btn">
+        <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/></svg>
+    </button>
+
+    <div id="floating-chat" class="fixed bottom-28 right-6 w-[350px] sm:w-[400px] glass-card border border-theme_border rounded-3xl shadow-2xl z-50 transform scale-0 opacity-0 pointer-events-none origin-bottom-right transition-all duration-300 flex flex-col overflow-hidden">
+        <!-- Chat Header -->
+        <div class="bg-theme_accent px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white font-serif italic text-xl shadow-inner border border-white/30">
+                    K
+                </div>
+                <div>
+                    <h3 class="text-white font-bold text-lg leading-tight">Virtual Kelvin</h3>
+                    <span class="text-xs text-white/80 flex items-center"><span class="w-2 h-2 rounded-full bg-green-400 mr-1 animate-pulse"></span> Online</span>
+                </div>
+            </div>
+            <button onclick="toggleChat()" class="text-white/80 hover:text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        
+        <!-- Chat Messages Area -->
+        <div class="h-[350px] p-5 overflow-y-auto flex flex-col space-y-4 bg-theme_bg/90" id="chat-messages">
+            <div class="flex items-start">
+                <div class="bg-theme_border text-theme_text rounded-2xl rounded-tl-none px-4 py-2 max-w-[85%] text-sm shadow-sm">
+                    Hi Ms Keish! I'm a little chat placeholder built just for you. Send a message, and I'll keep you company while you explore! 💖
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chat Input Area -->
+        <div class="p-4 bg-theme_card border-t border-theme_border flex items-center space-x-2">
+            <input type="text" id="chat-input" class="flex-1 bg-theme_bg border border-theme_border rounded-full px-4 py-2.5 text-theme_text focus:outline-none focus:border-theme_accent text-sm" placeholder="Say something nice..." onkeypress="handleChatEnter(event)">
+            <button onclick="sendChat()" class="w-10 h-10 rounded-full bg-theme_accent text-white flex items-center justify-center hover:bg-theme_accent_hover transition-colors flex-shrink-0">
+                <svg class="w-4 h-4 transform rotate-45 -mt-0.5 -mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // === THEME LOGIC ===
+        function setTheme(themeName) {
+            const body = document.getElementById('main-body');
+            body.className = body.className.replace(/theme-[a-z-]+/g, '').trim();
+            if (themeName !== 'default') {
+                body.classList.add(themeName);
+            }
+        }
+
+        // === MOBILE MENU LOGIC ===
+        let isMobileMenuOpen = false;
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            isMobileMenuOpen = !isMobileMenuOpen;
+            if (isMobileMenuOpen) {
+                menu.classList.remove('transform', '-translate-y-full', 'opacity-0', 'pointer-events-none');
+            } else {
+                menu.classList.add('transform', '-translate-y-full', 'opacity-0', 'pointer-events-none');
+            }
+        }
+
+        // === ENTRANCE ANIMATION LOGIC ===
+        function openEnvelope() {
+            const envelope = document.getElementById('the-envelope');
+            const overlay = document.getElementById('entrance-overlay');
+            const body = document.getElementById('main-body');
+            
+            envelope.classList.add('envelope-open');
+            
+            setTimeout(() => {
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.style.visibility = 'hidden';
+                    overlay.style.display = 'none';
+                    // Fix scrolling: unlock the body overflow
+                    body.classList.remove('overflow-hidden');
+                }, 1000);
+            }, 1200);
+        }
+
+        // === MUSIC PLAYER LOGIC ===
+        const playlist = [
+            { title: "I Like You So Much, You'll Know It", artist: "Ysabelle Cuevas", duration: "3:30", cover: "9333ea" },
+            { title: "Happiness", artist: "Rex Orange County", duration: "4:32", cover: "ec4899" },
+            { title: "Tahanan", artist: "Adie", duration: "5:08", cover: "3b82f6" },
+            { title: "Palayo sa Mundo", artist: "Zack Tabudlo", duration: "4:15", cover: "f59e0b" }
+        ];
+        let currentSongIndex = 0;
+        let isPlaying = false;
+        let progressInterval;
+        let currentProgress = 0;
+
+        function updatePlayerUI() {
+            const song = playlist[currentSongIndex];
+            document.getElementById('song-title').textContent = song.title;
+            document.getElementById('song-artist').textContent = song.artist;
+            document.getElementById('time-total').textContent = song.duration;
+            document.getElementById('album-cover').src = `https://placehold.co/400x400/${song.cover}/ffffff?text=${encodeURIComponent(song.title.split(' ')[0])}`;
+            
+            const queueContainer = document.getElementById('playlist-queue');
+            queueContainer.innerHTML = '';
+            for(let i = 1; i <= 2; i++) {
+                let nextIndex = (currentSongIndex + i) % playlist.length;
+                let nextSong = playlist[nextIndex];
+                queueContainer.innerHTML += `
+                    <div class="flex justify-between items-center bg-theme_bg/30 p-2 rounded-lg cursor-pointer hover:bg-theme_bg/50 transition-colors" onclick="changeSong(${i})">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded bg-[${nextSong.cover}] flex items-center justify-center text-white text-[10px] font-bold overflow-hidden">
+                                <img src="https://placehold.co/100x100/${nextSong.cover}/ffffff?text=♫" class="w-full h-full object-cover">
+                            </div>
+                            <div class="min-w-0">
+                                <p class="text-sm font-bold text-theme_text truncate max-w-[150px]">${nextSong.title}</p>
+                                <p class="text-[10px] text-theme_muted truncate">${nextSong.artist}</p>
+                            </div>
+                        </div>
+                        <span class="text-xs text-theme_muted">${nextSong.duration}</span>
+                    </div>
+                `;
+            }
+        }
+
+        function togglePlay() {
+            isPlaying = !isPlaying;
+            const btn = document.getElementById('play-btn');
+            if (isPlaying) {
+                btn.innerHTML = `<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+                progressInterval = setInterval(() => {
+                    currentProgress += 0.5;
+                    if(currentProgress > 100) { currentProgress = 0; changeSong(1); }
+                    document.getElementById('progress-bar').style.width = currentProgress + '%';
+                    
+                    let totalSeconds = parseInt(playlist[currentSongIndex].duration.split(':')[0]) * 60 + parseInt(playlist[currentSongIndex].duration.split(':')[1]);
+                    let currentSeconds = Math.floor((currentProgress / 100) * totalSeconds);
+                    let m = Math.floor(currentSeconds / 60);
+                    let s = currentSeconds % 60;
+                    document.getElementById('time-current').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+                }, 500);
+            } else {
+                btn.innerHTML = `<svg class="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+                clearInterval(progressInterval);
+            }
+        }
+
+        function changeSong(dir) {
+            currentSongIndex = (currentSongIndex + dir + playlist.length) % playlist.length;
+            currentProgress = 0;
+            document.getElementById('progress-bar').style.width = '0%';
+            document.getElementById('time-current').textContent = '0:00';
+            updatePlayerUI();
+            if (isPlaying) { isPlaying = false; togglePlay(); }
+        }
+
+        function simulateSeek(e) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percentage = (x / rect.width) * 100;
+            currentProgress = Math.max(0, Math.min(100, percentage));
+            document.getElementById('progress-bar').style.width = currentProgress + '%';
+        }
+
+        updatePlayerUI();
+
+        // === PUZZLE LOGIC ===
+        const puzzleData = [
+            { q: "What is your favorite number?", a: "12" },
+            { q: "What is my special name for you?", a: "ms keish" },
+            { q: "What instrument do I strum when I'm thinking of you?", a: "acoustic guitar" },
+            { q: "Which Adie song feels like home when I'm with you?", a: "tahanan" },
+            { q: "Are you ready to unlock my heart? (Type 'yes')", a: "yes" }
+        ];
+        let currentPuzzleIndex = 0;
+
+        function checkPuzzle() {
+            const inputEl = document.getElementById('puzzle-input');
+            const errorEl = document.getElementById('puzzle-error');
+            const contentEl = document.getElementById('puzzle-content');
+            
+            const answer = inputEl.value.trim().toLowerCase();
+            const correct = puzzleData[currentPuzzleIndex].a;
+
+            if (answer === correct) {
+                errorEl.style.opacity = '0';
+                if(currentPuzzleIndex < 4) {
+                    document.getElementById(`dot-${currentPuzzleIndex + 1}`).classList.remove('shadow-[0_0_10px_var(--accent-main)]');
+                    document.getElementById(`line-${currentPuzzleIndex + 1}`).classList.replace('bg-theme_border', 'bg-theme_accent');
+                    document.getElementById(`dot-${currentPuzzleIndex + 2}`).classList.replace('bg-theme_border', 'bg-theme_accent');
+                    document.getElementById(`dot-${currentPuzzleIndex + 2}`).classList.add('shadow-[0_0_10px_var(--accent-main)]');
+                }
+                
+                currentPuzzleIndex++;
+                
+                contentEl.style.opacity = '0';
+                setTimeout(() => {
+                    if (currentPuzzleIndex < puzzleData.length) {
+                        contentEl.innerHTML = `
+                            <span class="text-theme_accent font-serif text-5xl mb-4 block">${currentPuzzleIndex + 1}</span>
+                            <h3 class="text-2xl font-bold text-theme_text mb-6">${puzzleData[currentPuzzleIndex].q}</h3>
+                            <input type="text" id="puzzle-input" class="w-full bg-theme_bg/50 border border-theme_border rounded-xl px-4 py-3 text-theme_text focus:outline-none focus:border-theme_accent focus:ring-1 focus:ring-theme_accent text-center text-lg mb-6 transition-all" placeholder="Enter your answer..." onkeypress="handlePuzzleEnter(event)">
+                            <button onclick="checkPuzzle()" class="w-full py-3 rounded-xl bg-theme_accent hover:bg-theme_accent_hover text-white font-bold transition-colors glowing-btn">Submit Answer</button>
+                            <p id="puzzle-error" class="text-red-400 text-sm mt-3 opacity-0 transition-opacity">Oops, that's not it. Try again!</p>
+                        `;
+                        contentEl.style.opacity = '1';
+                        document.getElementById('puzzle-input').focus();
+                    } else {
+                        contentEl.innerHTML = `
+                            <span class="text-6xl mb-4 block animate-bounce">⏳</span>
+                            <h3 class="text-2xl font-bold text-theme_text mb-4">Feature coming soon...</h3>
+                            <p class="text-theme_muted italic">"Patience is a virtue, especially for matters of the heart."</p>
+                        `;
+                        contentEl.style.opacity = '1';
+                    }
+                }, 300);
+            } else {
+                errorEl.style.opacity = '1';
+                inputEl.classList.add('border-red-400');
+                inputEl.style.transform = 'translateX(-5px)';
+                setTimeout(() => inputEl.style.transform = 'translateX(5px)', 100);
+                setTimeout(() => inputEl.style.transform = 'translateX(-5px)', 200);
+                setTimeout(() => {
+                    inputEl.style.transform = 'translateX(0)';
+                    inputEl.classList.remove('border-red-400');
+                }, 300);
+            }
+        }
+
+        function handlePuzzleEnter(e) { if(e.key === 'Enter') checkPuzzle(); }
+
+        // === CATCH MY HEARTS GAME ===
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        let gameLoop1;
+        let score = 0;
+        let misses = 0;
+        let isGame1Running = false;
+        const maxMisses = 5;
+        
+        let basket = { x: 135, y: 380, width: 50, height: 20, speed: 6, dx: 0 };
+        let hearts = [];
+        
+        function drawBasket() {
+            ctx.fillStyle = '#a855f7';
+            ctx.fillRect(basket.x, basket.y, basket.width, basket.height);
+            ctx.fillStyle = '#9333ea';
+            ctx.fillRect(basket.x, basket.y + 15, basket.width, 5);
+        }
+
+        function spawnHeart() {
+            if(Math.random() < 0.03 + (score * 0.001)) {
+                hearts.push({
+                    x: Math.random() * (canvas.width - 20),
+                    y: -20,
+                    size: 20,
+                    speed: 2 + Math.random() * 2 + (score * 0.05)
+                });
+            }
+        }
+
+        function drawHearts() {
+            ctx.font = "20px Arial";
+            hearts.forEach((h) => {
+                ctx.fillText("💖", h.x, h.y);
+            });
+        }
+
+        function updateGame1() {
+            if(!isGame1Running) return;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            basket.x += basket.dx;
+            if (basket.x < 0) basket.x = 0;
+            if (basket.x + basket.width > canvas.width) basket.x = canvas.width - basket.width;
+
+            drawBasket();
+            spawnHeart();
+            drawHearts();
+
+            for (let i = hearts.length - 1; i >= 0; i--) {
+                let h = hearts[i];
+                h.y += h.speed;
+
+                if (h.y + h.size > basket.y && h.y < basket.y + basket.height &&
+                    h.x + h.size > basket.x && h.x < basket.x + basket.width) {
+                    hearts.splice(i, 1);
+                    score++;
+                    document.getElementById('score').innerText = score;
+                } else if (h.y > canvas.height) {
+                    hearts.splice(i, 1);
+                    misses++;
+                    document.getElementById('misses').innerText = misses;
+                    if(misses >= maxMisses) {
+                        endGame1();
+                        return;
+                    }
+                }
+            }
+            gameLoop1 = requestAnimationFrame(updateGame1);
+        }
+
+        function startGame1() {
+            document.getElementById('game-start-screen').style.opacity = '0';
+            document.getElementById('game-start-screen').style.pointerEvents = 'none';
+            document.getElementById('game-over-screen').style.opacity = '0';
+            document.getElementById('game-over-screen').style.pointerEvents = 'none';
+            
+            score = 0;
+            misses = 0;
+            hearts = [];
+            basket.x = canvas.width / 2 - basket.width / 2;
+            document.getElementById('score').innerText = score;
+            document.getElementById('misses').innerText = misses;
+            isGame1Running = true;
+            updateGame1();
+        }
+
+        function endGame1() {
+            isGame1Running = false;
+            cancelAnimationFrame(gameLoop1);
+            document.getElementById('final-score').innerText = score;
+            document.getElementById('game-over-screen').style.opacity = '1';
+            document.getElementById('game-over-screen').style.pointerEvents = 'auto';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') basket.dx = -basket.speed;
+            if (e.key === 'ArrowRight') basket.dx = basket.speed;
+        });
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') basket.dx = 0;
+        });
+        
+        canvas.addEventListener('touchstart', handleTouch, {passive: false});
+        canvas.addEventListener('touchmove', handleTouch, {passive: false});
+        canvas.addEventListener('touchend', () => basket.dx = 0);
+
+        function handleTouch(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const touchX = (touch.clientX - rect.left) * scaleX;
+            
+            if (touchX < basket.x + basket.width/2) {
+                basket.dx = -basket.speed;
+            } else {
+                basket.dx = basket.speed;
+            }
+        }
+
+        // === MEMORY MATCH GAME ===
+        const memIcons = ['💖', '🌸', '🌷', '🎀', '✨', '🍓', '💌', '🧸'];
+        let memCards = [];
+        let flippedCards = [];
+        let matches = 0;
+        let flips = 0;
+
+        function initMemoryGame() {
+            const grid = document.getElementById('memory-grid');
+            grid.innerHTML = '';
+            document.getElementById('memory-win-screen').style.opacity = '0';
+            document.getElementById('memory-win-screen').style.pointerEvents = 'none';
+            matches = 0;
+            flips = 0;
+            updateMemStats();
+            
+            let deck = [...memIcons, ...memIcons];
+            deck.sort(() => Math.random() - 0.5);
+
+            memCards = deck.map((icon, index) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.innerHTML = `
+                    <div class="memory-card-inner">
+                        <div class="memory-card-back">❓</div>
+                        <div class="memory-card-front">${icon}</div>
+                    </div>
+                `;
+                card.addEventListener('click', () => flipCard(card, icon, index));
+                grid.appendChild(card);
+                return { element: card, icon: icon, isMatched: false, id: index };
+            });
+        }
+
+        function flipCard(cardEl, icon, id) {
+            if (flippedCards.length >= 2) return;
+            if (cardEl.classList.contains('flipped')) return;
+            if (memCards[id].isMatched) return;
+
+            cardEl.classList.add('flipped');
+            flippedCards.push({ element: cardEl, icon: icon, id: id });
+
+            if (flippedCards.length === 2) {
+                flips++;
+                updateMemStats();
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            
+            if (card1.icon === card2.icon) {
+                memCards[card1.id].isMatched = true;
+                memCards[card2.id].isMatched = true;
+                matches++;
+                updateMemStats();
+                flippedCards = [];
+                
+                if (matches === memIcons.length) {
+                    setTimeout(() => {
+                        document.getElementById('memory-win-screen').style.opacity = '1';
+                        document.getElementById('memory-win-screen').style.pointerEvents = 'auto';
+                    }, 500);
+                }
+            } else {
+                setTimeout(() => {
+                    card1.element.classList.remove('flipped');
+                    card2.element.classList.remove('flipped');
+                    flippedCards = [];
+                }, 1000);
+            }
+        }
+
+        function updateMemStats() {
+            document.getElementById('flips-count').innerText = flips;
+            document.getElementById('matches-count').innerText = matches;
+        }
+
+        window.addEventListener('load', () => {
+            initMemoryGame();
+        });
+
+        // === FLOATING CHATBOT LOGIC ===
+        let isChatOpen = false;
+        function toggleChat() {
+            const chatWin = document.getElementById('floating-chat');
+            isChatOpen = !isChatOpen;
+            if (isChatOpen) {
+                chatWin.classList.remove('scale-0', 'opacity-0', 'pointer-events-none');
+                chatWin.classList.add('scale-100', 'opacity-100');
+                setTimeout(() => document.getElementById('chat-input').focus(), 300);
+            } else {
+                chatWin.classList.add('scale-0', 'opacity-0', 'pointer-events-none');
+                chatWin.classList.remove('scale-100', 'opacity-100');
+            }
+        }
+
+        function sendChat() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if(!message) return;
+            
+            const chatBox = document.getElementById('chat-messages');
+            
+            chatBox.innerHTML += `
+                <div class="flex items-start justify-end">
+                    <div class="bg-theme_accent text-white rounded-2xl rounded-tr-none px-4 py-2 max-w-[85%] text-sm shadow-sm animate-[bounceSlight_0.2s_ease-out]">
+                        ${message.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
+                    </div>
+                </div>
+            `;
+            
+            input.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+            
+            setTimeout(() => {
+                const responses = [
+                    "Aww, you're the best! Keep exploring! 💖",
+                    "I love that you're here. Let me know if you like the games!",
+                    "You make my heart skip a beat. 🌷",
+                    "I hope this page makes you smile today!"
+                ];
+                const reply = responses[Math.floor(Math.random() * responses.length)];
+                
+                chatBox.innerHTML += `
+                    <div class="flex items-start">
+                        <div class="bg-theme_border text-theme_text rounded-2xl rounded-tl-none px-4 py-2 max-w-[85%] text-sm shadow-sm animate-[bounceSlight_0.2s_ease-out]">
+                            ${reply}
+                        </div>
+                    </div>
+                `;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+        }
+
+        function handleChatEnter(e) {
+            if(e.key === 'Enter') sendChat();
+        }
+
+    </script>
+</body>
+</html>
