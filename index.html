@@ -135,13 +135,19 @@
         .polaroid:hover { transform: scale(1.15) rotate(0deg) !important; z-index: 50 !important; box-shadow: 0 20px 40px -5px rgba(0,0,0,0.5); }
         
         /* Flip Cards */
-        .flip-card { background-color: transparent; perspective: 1000px; height: 320px; }
-        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; cursor: pointer; }
+        .flip-card { background-color: transparent; perspective: 1000px; -webkit-perspective: 1000px; height: 320px; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; -webkit-transform-style: preserve-3d; cursor: pointer; }
         .flip-card:hover .flip-card-inner,
         .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
         .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
         .flip-card-front { background: var(--card-bg); border: 1px solid var(--border-color); }
         .flip-card-back { background: var(--accent-main); color: white; transform: rotateY(180deg); }
+        /* iOS Safari renders backdrop-filter + 3D rotateY together incorrectly (mirrored/upside-down text),
+           so these two faces opt out of the blur that .glass-card would otherwise add. */
+        .flip-card-front.glass-card, .flip-card-back.glass-card {
+            -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+        }
         .flip-hint { position: absolute; bottom: 14px; right: 16px; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); opacity: 0.6; display: flex; align-items: center; gap: 4px; }
         .flip-card.flipped .flip-hint { display: none; }
 
@@ -180,10 +186,10 @@
         #mobile-menu { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         
         /* Memory Game Cards */
-        .memory-card { perspective: 1000px; cursor: pointer; aspect-ratio: 1; }
-        .memory-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+        .memory-card { perspective: 1000px; -webkit-perspective: 1000px; cursor: pointer; aspect-ratio: 1; }
+        .memory-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; }
         .memory-card.flipped .memory-card-inner { transform: rotateY(180deg); }
-        .memory-card-front, .memory-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; border-radius: 0.75rem; font-size: 2rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .memory-card-front, .memory-card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; border-radius: 0.75rem; font-size: 2rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
         .memory-card-front { background: var(--card-bg); border: 2px solid var(--accent-main); }
         .memory-card-back { background: var(--bg-color); border: 2px solid var(--border-color); transform: rotateY(180deg); }
     </style>
@@ -587,7 +593,7 @@
         <div class="max-w-2xl mx-auto px-4 sm:px-6 relative z-10">
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-serif font-bold text-theme_text mb-4 drop-shadow-md">The Pathway to My Heart</h2>
-                <p class="text-theme_text/80 font-medium">Answer these 5 questions correctly to proceed.</p>
+                <p class="text-theme_text/80 font-medium">Answer these 5 questions correctly to proceed — each one comes with clues to help you.</p>
                 
                 <!-- Progress Indicators -->
                 <div class="flex justify-center items-center space-x-3 mt-6">
@@ -608,9 +614,23 @@
                 <div id="puzzle-content" class="text-center transition-opacity duration-300">
                     <span class="text-theme_accent font-serif text-5xl mb-4 block">1</span>
                     <h3 class="text-2xl font-bold text-theme_text mb-6">What is your favorite number?</h3>
+                    <div class="bg-theme_bg/50 border border-theme_border rounded-xl px-5 py-4 mb-6 space-y-2">
+                        <p class="flex items-start gap-2 text-sm text-theme_text/90 text-left">
+                            <span class="mt-0.5">💡</span>
+                            <span><strong class="text-theme_accent">Clue 1:</strong> The number of months in a year I'd love to spend by your side.</span>
+                        </p>
+                        <p class="flex items-start gap-2 text-sm text-theme_text/90 text-left">
+                            <span class="mt-0.5">💡</span>
+                            <span><strong class="text-theme_accent">Clue 2:</strong> A dozen roses for a beautiful girl.</span>
+                        </p>
+                        <p class="flex items-start gap-2 text-sm text-theme_text/90 text-left">
+                            <span class="mt-0.5">💡</span>
+                            <span><strong class="text-theme_accent">Clue 3:</strong> You told me it's your absolute favorite number.</span>
+                        </p>
+                    </div>
                     <input type="text" id="puzzle-input" class="w-full bg-theme_bg/50 border border-theme_border rounded-xl px-4 py-3 text-theme_text focus:outline-none focus:border-theme_accent focus:ring-1 focus:ring-theme_accent text-center text-lg mb-6 transition-all" placeholder="Enter your answer...">
                     <button onclick="checkPuzzle()" class="w-full py-3 rounded-xl bg-theme_accent hover:bg-theme_accent_hover text-white font-bold transition-colors glowing-btn">Submit Answer</button>
-                    <p id="puzzle-error" class="text-red-400 text-sm mt-3 opacity-0 transition-opacity">Oops, that's not it. Try again!</p>
+                    <p id="puzzle-error" class="text-red-400 text-sm mt-3 opacity-0 transition-opacity">Try again! Hint: Think of a dozen roses.</p>
                 </div>
             </div>
         </div>
@@ -875,13 +895,67 @@
 
         // === PUZZLE LOGIC ===
         const puzzleData = [
-            { q: "What is your favorite number?", a: "12" },
-            { q: "What is my special name for you?", a: "ms keish" },
-            { q: "What instrument do I strum when I'm thinking of you?", a: "acoustic guitar" },
-            { q: "Which Adie song feels like home when I'm with you?", a: "tahanan" },
-            { q: "Are you ready to unlock my heart? (Type 'yes')", a: "yes" }
+            {
+                q: "What is your favorite number?",
+                a: "12",
+                clues: [
+                    "The number of months in a year I'd love to spend by your side.",
+                    "A dozen roses for a beautiful girl.",
+                    "You told me it's your absolute favorite number."
+                ],
+                hint: "Think of a dozen roses."
+            },
+            {
+                q: "What is my special name for you?",
+                a: "ms keish",
+                clues: [
+                    "It's how I always greet you whenever we talk.",
+                    "It's two words, playfully formal.",
+                    "The first word is a title I put before your nickname."
+                ],
+                hint: "It's what I call you."
+            },
+            {
+                q: "What instrument do I strum when I'm thinking of you?",
+                a: "acoustic guitar",
+                clues: [
+                    "It has strings, not keys or buttons.",
+                    "No amps or electricity needed to play it.",
+                    "I've probably serenaded you with this at least once."
+                ],
+                hint: "No amps needed for this one."
+            },
+            {
+                q: "Which Adie song feels like home when I'm with you?",
+                a: "tahanan",
+                clues: [
+                    "It's a Filipino word, not an English one.",
+                    "It's what you call the place you always want to return to.",
+                    "Adie sings it beautifully."
+                ],
+                hint: "It's the Filipino word for 'home'."
+            },
+            {
+                q: "Are you ready to unlock my heart? (Type 'yes')",
+                a: "yes",
+                clues: [
+                    "There's really only one right answer here.",
+                    "It's a simple three-letter word.",
+                    "I hope your heart already knows it."
+                ],
+                hint: "It's a simple three-letter word."
+            }
         ];
         let currentPuzzleIndex = 0;
+
+        function renderClues(clues) {
+            return clues.map((c, i) => `
+                <p class="flex items-start gap-2 text-sm text-theme_text/90 text-left">
+                    <span class="mt-0.5">💡</span>
+                    <span><strong class="text-theme_accent">Clue ${i + 1}:</strong> ${c}</span>
+                </p>
+            `).join('');
+        }
 
         function checkPuzzle() {
             const inputEl = document.getElementById('puzzle-input');
@@ -905,12 +979,16 @@
                 contentEl.style.opacity = '0';
                 setTimeout(() => {
                     if (currentPuzzleIndex < puzzleData.length) {
+                        const step = puzzleData[currentPuzzleIndex];
                         contentEl.innerHTML = `
                             <span class="text-theme_accent font-serif text-5xl mb-4 block">${currentPuzzleIndex + 1}</span>
-                            <h3 class="text-2xl font-bold text-theme_text mb-6">${puzzleData[currentPuzzleIndex].q}</h3>
+                            <h3 class="text-2xl font-bold text-theme_text mb-6">${step.q}</h3>
+                            <div class="bg-theme_bg/50 border border-theme_border rounded-xl px-5 py-4 mb-6 space-y-2">
+                                ${renderClues(step.clues)}
+                            </div>
                             <input type="text" id="puzzle-input" class="w-full bg-theme_bg/50 border border-theme_border rounded-xl px-4 py-3 text-theme_text focus:outline-none focus:border-theme_accent focus:ring-1 focus:ring-theme_accent text-center text-lg mb-6 transition-all" placeholder="Enter your answer..." onkeypress="handlePuzzleEnter(event)">
                             <button onclick="checkPuzzle()" class="w-full py-3 rounded-xl bg-theme_accent hover:bg-theme_accent_hover text-white font-bold transition-colors glowing-btn">Submit Answer</button>
-                            <p id="puzzle-error" class="text-red-400 text-sm mt-3 opacity-0 transition-opacity">Oops, that's not it. Try again!</p>
+                            <p id="puzzle-error" class="text-red-400 text-sm mt-3 opacity-0 transition-opacity">Try again! Hint: ${step.hint}</p>
                         `;
                         contentEl.style.opacity = '1';
                         document.getElementById('puzzle-input').focus();
@@ -1084,8 +1162,8 @@
                 card.className = 'memory-card';
                 card.innerHTML = `
                     <div class="memory-card-inner">
-                        <div class="memory-card-back">❓</div>
-                        <div class="memory-card-front">${icon}</div>
+                        <div class="memory-card-front">❓</div>
+                        <div class="memory-card-back">${icon}</div>
                     </div>
                 `;
                 card.addEventListener('click', () => flipCard(card, icon, index));
