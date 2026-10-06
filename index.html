@@ -316,7 +316,7 @@
         <div class="md:w-1/2 relative animate-float flex justify-center mt-10 md:mt-0">
             <div class="relative w-64 h-64 md:w-80 md:h-80">
                 <div class="absolute inset-0 bg-theme_accent rounded-[3rem] transform rotate-6 opacity-20 blur-2xl transition-all duration-700"></div>
-                <img src="image\gemini_gakuran.jpg" id="hero-img" alt="Memory" class="relative rounded-[2.5rem] shadow-2xl object-cover w-full h-full border-2 border-theme_border z-10 transition-colors">
+                <img src="https://placehold.co/600x600/171717/a855f7?text=Just\nFor\nYou" id="hero-img" alt="Memory" class="relative rounded-[2.5rem] shadow-2xl object-cover w-full h-full border-2 border-theme_border z-10 transition-colors">
                 <div class="absolute -top-4 -right-4 text-4xl animate-bounce z-20 drop-shadow-lg">✨</div>
                 <div class="absolute -bottom-6 -left-4 text-4xl z-20 drop-shadow-lg animate-bounce-slight">💌</div>
             </div>
@@ -360,28 +360,28 @@
             <div class="grid grid-cols-2 md:flex md:flex-row md:flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-4 lg:gap-8 px-2 sm:px-4 pt-8 pb-16">
                 <div class="polaroid w-full md:max-w-[260px] rotate-[-6deg] md:-mt-12 md:rotate-[-8deg] hover:rotate-0 active:rotate-0 active:scale-105 transition-transform duration-500 z-10 relative">
                     <div class="overflow-hidden bg-gray-200 aspect-square rounded-sm">
-                        <img src="image\Gemini_thera.jpg" alt="Game 1" class="w-full h-full object-cover">
+                        <img src="https://placehold.co/400x400/374151/f3f4f6?text=Roblox\nMemory+1" alt="Game 1" class="w-full h-full object-cover">
                     </div>
                     <p class="text-center font-handwriting text-lg sm:text-2xl mt-2 sm:mt-4 text-gray-800 font-bold">Our first game</p>
                 </div>
                 
                 <div class="polaroid w-full md:max-w-[260px] rotate-[4deg] md:mt-24 md:rotate-[5deg] hover:rotate-0 active:rotate-0 active:scale-105 transition-transform duration-500 z-20 relative">
                     <div class="overflow-hidden bg-gray-200 aspect-square rounded-sm">
-                        <img src="image\gemini_gakuran.jpg" alt="Game 2" class="w-full h-full object-cover">
+                        <img src="https://placehold.co/400x400/4b5563/f3f4f6?text=Roblox\nMemory+2" alt="Game 2" class="w-full h-full object-cover">
                     </div>
                     <p class="text-center font-handwriting text-lg sm:text-2xl mt-2 sm:mt-4 text-gray-800 font-bold">Late night calls</p>
                 </div>
                 
                 <div class="polaroid w-full md:max-w-[260px] rotate-[-3deg] md:-mt-6 md:rotate-[-4deg] hover:rotate-0 active:rotate-0 active:scale-105 transition-transform duration-500 z-30 relative">
                     <div class="overflow-hidden bg-gray-200 aspect-square rounded-sm">
-                        <img src="image\beach.jpeg" alt="Game 3" class="w-full h-full object-cover">
+                        <img src="https://placehold.co/400x400/374151/f3f4f6?text=Roblox\nMemory+3" alt="Game 3" class="w-full h-full object-cover">
                     </div>
                     <p class="text-center font-handwriting text-lg sm:text-2xl mt-2 sm:mt-4 text-gray-800 font-bold">Carrying me in Obby</p>
                 </div>
                 
                 <div class="polaroid w-full md:max-w-[260px] rotate-[7deg] md:mt-16 md:rotate-[10deg] hover:rotate-0 active:rotate-0 active:scale-105 transition-transform duration-500 z-10 relative">
                     <div class="overflow-hidden bg-gray-200 aspect-square rounded-sm">
-                        <img src="image\fish pond.jpg" alt="Game 4" class="w-full h-full object-cover">
+                        <img src="https://placehold.co/400x400/4b5563/f3f4f6?text=Roblox\nMemory+4" alt="Game 4" class="w-full h-full object-cover">
                     </div>
                     <p class="text-center font-handwriting text-lg sm:text-2xl mt-2 sm:mt-4 text-gray-800 font-bold">Just us being silly</p>
                 </div>
@@ -524,6 +524,7 @@
             </div>
             
             <div class="glass-card rounded-[2rem] p-6 shadow-2xl relative overflow-hidden">
+                <audio id="audio-player" preload="metadata"></audio>
                 <div class="absolute top-0 right-0 w-32 h-32 bg-theme_accent blur-3xl opacity-20 -mr-10 -mt-10"></div>
                 
                 <div class="flex items-center space-x-5 mb-8">
@@ -813,23 +814,33 @@
 
         // === MUSIC PLAYER LOGIC ===
         const playlist = [
-            { title: "I Like You So Much, You'll Know It", artist: "Ysabelle Cuevas", duration: "3:30", cover: "9333ea" },
-            { title: "Happiness", artist: "Rex Orange County", duration: "4:32", cover: "ec4899" },
-            { title: "Tahanan", artist: "Adie", duration: "5:08", cover: "3b82f6" },
-            { title: "Palayo sa Mundo", artist: "Zack Tabudlo", duration: "4:15", cover: "f59e0b" }
+            { title: "I Like You So Much, You'll Know It", artist: "Ysabelle Cuevas", cover: "9333ea", src: "music/song1.mp3" },
+            { title: "Happiness", artist: "Rex Orange County", cover: "ec4899", src: "music/song2.mp3" },
+            { title: "Tahanan", artist: "Adie", cover: "3b82f6", src: "music/song3.mp3" },
+            { title: "Palayo sa Mundo", artist: "Zack Tabudlo", cover: "f59e0b", src: "music/song4.mp3" }
         ];
         let currentSongIndex = 0;
         let isPlaying = false;
-        let progressInterval;
-        let currentProgress = 0;
+        const audioPlayer = document.getElementById('audio-player');
+
+        function formatTime(seconds) {
+            if (isNaN(seconds) || seconds < 0) return '0:00';
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return `${m}:${s < 10 ? '0' : ''}${s}`;
+        }
 
         function updatePlayerUI() {
             const song = playlist[currentSongIndex];
             document.getElementById('song-title').textContent = song.title;
             document.getElementById('song-artist').textContent = song.artist;
-            document.getElementById('time-total').textContent = song.duration;
             document.getElementById('album-cover').src = `https://placehold.co/400x400/${song.cover}/ffffff?text=${encodeURIComponent(song.title.split(' ')[0])}`;
-            
+            document.getElementById('progress-bar').style.width = '0%';
+            document.getElementById('time-current').textContent = '0:00';
+            document.getElementById('time-total').textContent = '0:00';
+
+            audioPlayer.src = song.src;
+
             const queueContainer = document.getElementById('playlist-queue');
             queueContainer.innerHTML = '';
             for(let i = 1; i <= 2; i++) {
@@ -843,10 +854,9 @@
                             </div>
                             <div class="min-w-0">
                                 <p class="text-sm font-bold text-theme_text truncate max-w-[150px]">${nextSong.title}</p>
-                                <p class="text-[10px] text-theme_muted truncate">${nextSong.artist}</p>
+                                <p class="text-[10px] text-theme_muted truncate"></p>
                             </div>
                         </div>
-                        <span class="text-xs text-theme_muted">${nextSong.duration}</span>
                     </div>
                 `;
             }
@@ -857,39 +867,50 @@
             const btn = document.getElementById('play-btn');
             if (isPlaying) {
                 btn.innerHTML = `<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
-                progressInterval = setInterval(() => {
-                    currentProgress += 0.5;
-                    if(currentProgress > 100) { currentProgress = 0; changeSong(1); }
-                    document.getElementById('progress-bar').style.width = currentProgress + '%';
-                    
-                    let totalSeconds = parseInt(playlist[currentSongIndex].duration.split(':')[0]) * 60 + parseInt(playlist[currentSongIndex].duration.split(':')[1]);
-                    let currentSeconds = Math.floor((currentProgress / 100) * totalSeconds);
-                    let m = Math.floor(currentSeconds / 60);
-                    let s = currentSeconds % 60;
-                    document.getElementById('time-current').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
-                }, 500);
+                audioPlayer.play().catch(err => {
+                    console.error('Playback failed — check that the audio file path is correct:', err);
+                    isPlaying = false;
+                    btn.innerHTML = `<svg class="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+                });
             } else {
                 btn.innerHTML = `<svg class="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
-                clearInterval(progressInterval);
+                audioPlayer.pause();
             }
         }
 
         function changeSong(dir) {
             currentSongIndex = (currentSongIndex + dir + playlist.length) % playlist.length;
-            currentProgress = 0;
-            document.getElementById('progress-bar').style.width = '0%';
-            document.getElementById('time-current').textContent = '0:00';
             updatePlayerUI();
-            if (isPlaying) { isPlaying = false; togglePlay(); }
+            if (isPlaying) {
+                audioPlayer.play().catch(err => console.error('Playback failed:', err));
+            }
         }
 
         function simulateSeek(e) {
             const rect = e.currentTarget.getBoundingClientRect();
             const x = e.clientX - rect.left;
-            const percentage = (x / rect.width) * 100;
-            currentProgress = Math.max(0, Math.min(100, percentage));
-            document.getElementById('progress-bar').style.width = currentProgress + '%';
+            const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+            if (audioPlayer.duration) {
+                audioPlayer.currentTime = (percentage / 100) * audioPlayer.duration;
+            }
         }
+
+        audioPlayer.addEventListener('timeupdate', () => {
+            if (audioPlayer.duration) {
+                const pct = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+                document.getElementById('progress-bar').style.width = pct + '%';
+                document.getElementById('time-current').textContent = formatTime(audioPlayer.currentTime);
+            }
+        });
+
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            document.getElementById('time-total').textContent = formatTime(audioPlayer.duration);
+        });
+
+        audioPlayer.addEventListener('ended', () => {
+            changeSong(1);
+            if (isPlaying) audioPlayer.play().catch(err => console.error('Playback failed:', err));
+        });
 
         updatePlayerUI();
 
