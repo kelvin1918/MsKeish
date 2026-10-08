@@ -192,6 +192,18 @@
         .memory-card-front, .memory-card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; border-radius: 0.75rem; font-size: 2rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
         .memory-card-front { background: var(--card-bg); border: 2px solid var(--accent-main); }
         .memory-card-back { background: var(--bg-color); border: 2px solid var(--border-color); transform: rotateY(180deg); }
+
+        /* Riddle code boxes */
+        .code-group { display: flex; gap: 6px; justify-content: center; width: 100%; }
+        .code-box { flex: 0 1 44px; min-width: 0; height: 52px; padding: 0; text-align: center; font-size: 1.25rem; font-weight: 700; text-transform: uppercase; border-radius: 0.75rem; border: 2px solid var(--border-color); background: var(--bg-color); color: var(--text-main); outline: none; transition: border-color .2s, transform .2s, box-shadow .2s; caret-color: var(--accent-main); }
+        .code-group.numeric .code-box { flex-basis: 60px; height: 68px; font-size: 1.75rem; }
+        .code-box:focus { border-color: var(--accent-main); transform: translateY(-2px); box-shadow: 0 6px 14px -4px var(--accent-main); }
+        .code-box.filled { border-color: var(--accent-main); }
+        .code-box.wrong { border-color: #f87171; }
+        @keyframes shake-x { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-6px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(4px); } }
+        .shake { animation: shake-x 0.4s ease; }
+        .love-scroll::-webkit-scrollbar { width: 6px; }
+        .love-scroll::-webkit-scrollbar-thumb { background: var(--accent-main); border-radius: 999px; }
     </style>
 </head>
 <body class="antialiased selection:bg-theme_accent selection:text-white overflow-hidden" id="main-body">
@@ -615,45 +627,12 @@
         <div class="max-w-2xl mx-auto px-4 sm:px-6 relative z-10">
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-serif font-bold text-theme_text mb-4 drop-shadow-md">The Pathway to My Heart</h2>
-                <p class="text-theme_text/80 font-medium">Answer these 5 questions correctly to proceed — each one comes with clues to help you.</p>
-                
-                <!-- Progress Indicators -->
-                <div class="flex justify-center items-center space-x-3 mt-6">
-                    <div class="w-3 h-3 rounded-full bg-theme_accent shadow-[0_0_10px_var(--accent-main)]" id="dot-1"></div>
-                    <div class="w-8 h-1 bg-theme_border" id="line-1"></div>
-                    <div class="w-3 h-3 rounded-full bg-theme_border" id="dot-2"></div>
-                    <div class="w-8 h-1 bg-theme_border" id="line-2"></div>
-                    <div class="w-3 h-3 rounded-full bg-theme_border" id="dot-3"></div>
-                    <div class="w-8 h-1 bg-theme_border" id="line-3"></div>
-                    <div class="w-3 h-3 rounded-full bg-theme_border" id="dot-4"></div>
-                    <div class="w-8 h-1 bg-theme_border" id="line-4"></div>
-                    <div class="w-3 h-3 rounded-full bg-theme_border" id="dot-5"></div>
-                </div>
+                <p class="text-theme_text/80 font-medium">Solve these 7 riddles to unlock my heart. Each one comes with clues to help you.</p>
+                <div id="puzzle-progress" class="flex justify-center items-center gap-2 mt-6"></div>
             </div>
 
-            <div class="glass-card p-8 md:p-12 rounded-3xl relative overflow-hidden" id="puzzle-container">
-                <!-- Puzzles injected by JS -->
-                <div id="puzzle-content" class="text-center transition-opacity duration-300">
-                    <span class="text-theme_accent font-serif text-5xl mb-4 block">1</span>
-                    <h3 class="text-2xl font-bold text-theme_text mb-6">What is your favorite number?</h3>
-                    <div class="bg-theme_bg/50 border border-theme_border rounded-xl px-5 py-4 mb-6 space-y-2">
-                        <p class="flex items-start gap-2 text-sm text-theme_text/90 text-left">
-                            <span class="mt-0.5">💡</span>
-                            <span><strong class="text-theme_accent">Clue 1:</strong> The number of months in a year I'd love to spend by your side.</span>
-                        </p>
-                        <p class="flex items-start gap-2 text-sm text-theme_text/90 text-left">
-                            <span class="mt-0.5">💡</span>
-                            <span><strong class="text-theme_accent">Clue 2:</strong> A dozen roses for a beautiful girl.</span>
-                        </p>
-                        <p class="flex items-start gap-2 text-sm text-theme_text/90 text-left">
-                            <span class="mt-0.5">💡</span>
-                            <span><strong class="text-theme_accent">Clue 3:</strong> You told me it's your absolute favorite number.</span>
-                        </p>
-                    </div>
-                    <input type="text" id="puzzle-input" class="w-full bg-theme_bg/50 border border-theme_border rounded-xl px-4 py-3 text-theme_text focus:outline-none focus:border-theme_accent focus:ring-1 focus:ring-theme_accent text-center text-lg mb-6 transition-all" placeholder="Enter your answer...">
-                    <button onclick="checkPuzzle()" class="w-full py-3 rounded-xl bg-theme_accent hover:bg-theme_accent_hover text-white font-bold transition-colors glowing-btn">Submit Answer</button>
-                    <p id="puzzle-error" class="text-red-400 text-sm mt-3 opacity-0 transition-opacity">Try again! Hint: Think of a dozen roses.</p>
-                </div>
+            <div class="glass-card p-5 sm:p-8 md:p-12 rounded-3xl relative overflow-hidden" id="puzzle-container">
+                <div id="puzzle-content" class="text-center transition-opacity duration-300"></div>
             </div>
         </div>
     </section>
@@ -789,6 +768,66 @@
             <button onclick="sendChat()" class="w-10 h-10 rounded-full bg-theme_accent text-white flex items-center justify-center hover:bg-theme_accent_hover transition-colors flex-shrink-0">
                 <svg class="w-4 h-4 transform rotate-45 -mt-0.5 -mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
             </button>
+        </div>
+    </div>
+
+    <!-- Love Letter + Video Modal -->
+    <div id="love-modal" class="fixed inset-0 z-[200] items-center justify-center p-3 sm:p-6" style="display:none;" role="dialog" aria-modal="true" aria-label="Letter from Kelvin">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeLoveModal()"></div>
+        <div class="love-scroll relative w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl shadow-2xl border border-theme_border" style="background: var(--bg-color);">
+            <button onclick="closeLoveModal()" aria-label="Close" class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-theme_accent/10 hover:bg-theme_accent/20 text-theme_text flex items-center justify-center text-lg transition-colors">✕</button>
+
+            <!-- Letter view -->
+            <div id="love-letter-view" class="p-6 sm:p-10">
+                <div class="text-center mb-6">
+                    <span class="text-5xl block mb-3">💌</span>
+                    <h3 class="text-2xl sm:text-3xl font-serif font-bold text-theme_text">You've Unlocked the Way to My Heart</h3>
+                    <div class="w-16 h-px bg-theme_accent mx-auto mt-4"></div>
+                </div>
+
+                <div class="font-serif text-base sm:text-lg text-theme_text/90 leading-relaxed space-y-4">
+                    <p class="font-handwriting text-2xl text-theme_accent">Dear Mei Mei keish,</p>
+                    <p>If you're reading this, it means you solved every riddle, followed every clue, and opened the door I've been quietly standing behind. You reached the way to my heart, and honestly, I think you've been holding the key for a long time.</p>
+                    <p>I made this little corner of the internet because ordinary words never felt like enough. Every riddle you just answered was a piece of us: the dozen roses, the name I always greet you with, the guitar I pick up when you're on my mind, your favorite sweet treats, and the two words that became our favorite number: Together and Forever.</p>
+                    <p>Somewhere between the late-night calls, the silly Roblox adventures, and the songs I kept adding to our playlist, you became my favorite part of every day. You make ordinary moments feel special. Being near you, even through a screen, feels like coming home.</p>
+                    <p>So before you go any further, I want to be honest with you. I'm not asking for a game or for a passing moment. I'm asking for something real. I hope you are ready to commit, to choose each other on the easy days and on the hard ones, to be patient with one another, and to stay honest even when it's uncomfortable. And I hope you are sure, because I am. I would never rush your heart. I only want to be someone who deserves it.</p>
+                    <p>I promise to listen to you, to respect you and the people you love, to stay loyal, to make you laugh on the days you forget how, to cheer on your dreams, and to keep choosing you, again and again, long after this page is closed.</p>
+                    <p>So, with a nervous heart and my whole sincerity, I'll ask you the question I've been carrying all this time:</p>
+                    <p class="text-center font-serif text-xl sm:text-2xl font-bold text-theme_accent py-2">Mei Mei keish, can I court you? 🌷</p>
+                    <p>Take a breath. Whatever you choose, I'll honor it.</p>
+                    <p class="font-handwriting text-2xl text-theme_text text-right pt-2">Always yours,<br>Kelvin 💖</p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3 justify-center mt-8">
+                    <button onclick="loveAgree()" class="py-3 px-8 rounded-full bg-theme_accent hover:bg-theme_accent_hover text-white font-bold transition-colors glowing-btn">Agree 💖</button>
+                    <button onclick="loveDisagree()" class="py-3 px-8 rounded-full border-2 border-theme_border text-theme_text hover:border-theme_accent font-bold transition-colors">Disagree</button>
+                </div>
+                <p id="love-disagree-note" class="text-center text-sm text-theme_muted mt-4 opacity-0 transition-opacity duration-500">That's okay. I respect your answer, and I'm grateful you read my heart this far. Take all the time you need. 🤍</p>
+            </div>
+
+            <!-- Video view -->
+            <div id="love-video-view" class="p-6 sm:p-10" style="display:none;">
+                <div class="text-center mb-6">
+                    <span class="text-5xl block mb-3">🎬</span>
+                    <h3 class="text-2xl sm:text-3xl font-serif font-bold text-theme_text">Our Love Presentation</h3>
+                    <p class="text-theme_muted text-sm mt-2">Thank you for saying yes. I made this for you. 💖</p>
+                </div>
+
+                <!-- Video template: put your video at  video/love.mp4  -->
+                <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-theme_border shadow-xl" style="background: linear-gradient(135deg, #1f1033, #4c1d95);">
+                    <video id="love-video" class="w-full h-full object-contain" controls playsinline preload="none"></video>
+                    <div id="love-video-fallback" class="absolute inset-0 flex-col items-center justify-center text-center text-white p-6" style="display:none; background: linear-gradient(135deg, #1f1033, #4c1d95);">
+                        <span class="text-5xl mb-3 animate-bounce">🎞️</span>
+                        <p class="font-serif text-xl font-bold mb-1">Our story is still being made</p>
+                        <p class="text-white/70 text-sm">Come back soon, I'm putting the final touches on it. 💌</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3 justify-center mt-8">
+                    <button onclick="showLoveView('letter')" class="py-3 px-8 rounded-full border-2 border-theme_border text-theme_text hover:border-theme_accent font-bold transition-colors">Read the letter again</button>
+                    <button onclick="closeLoveModal()" class="py-3 px-8 rounded-full bg-theme_accent hover:bg-theme_accent_hover text-white font-bold transition-colors glowing-btn">Close 🌷</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -938,125 +977,272 @@
         // === PUZZLE LOGIC ===
         const puzzleData = [
             {
-                q: "I’m not too big, and I’m not too small. You can find me in a year, and in a bouquet given with love. Best of all, you once told me I’m your favorite.",
-                a: "12",
-                clues: [
-                    "The number of months in a year I'd love to spend by your side.",
-                    "A dozen roses for a beautiful girl.",
-                    "You told me it's your absolute favorite number."
-                ],
+                type: 'code', numeric: true, groups: [2], answer: "12", reveal: "12",
+                riddle: ["I'm not too big, and I'm not too small.", "You can find me in a year, and in a bouquet given with love.", "Best of all, you once told me I'm your favorite."],
+                prompt: "🌹 What number am I?",
+                clues: ["The number of months in a year I'd love to spend by your side.", "A dozen roses for a beautiful girl.", "You told me it's your absolute favorite number."],
                 hint: "Think of a dozen roses."
             },
             {
-                q: "What is my special name for you?",
-                a: "ms keish",
-                clues: [
-                    "It's how I always greet you whenever we talk.",
-                    "It's two words, playfully formal.",
-                    "The first word is a title I put before your nickname."
-                ],
-                hint: "It's what I call you."
+                type: 'code', groups: [2, 5], answer: "mskeish", reveal: "Ms Keish",
+                riddle: ["I'm not your real name, yet it always reminds me of you.", "I say it whenever we start talking.", "It begins with a title and ends with the nickname I adore."],
+                prompt: "🌸 What special name am I thinking of?",
+                clues: ["It's how I always greet you whenever we talk.", "It's two words, playfully formal.", "The first word is a title I put before your nickname."],
+                hint: "It's what I call you: a title, then your nickname."
             },
             {
-                q: "What instrument do I strum when I'm thinking of you?",
-                a: "acoustic guitar",
-                clues: [
-                    "It has strings, not keys or buttons.",
-                    "No amps or electricity needed to play it.",
-                    "I've probably serenaded you with this at least once."
-                ],
-                hint: "No amps needed for this one."
+                type: 'code', groups: [8, 6], answer: "acousticguitar", reveal: "🎸 Acoustic Guitar",
+                riddle: ["I have six strings and a wooden voice.", "I don't need batteries, wires, or an amp.", "When you're on my mind, I'm often in my hands, turning feelings into songs."],
+                prompt: "🎵 What am I?",
+                clues: [],
+                hint: "Six strings, no amp needed. The answer is two words."
             },
             {
-                q: "Which Adie song feels like home when I'm with you?",
-                a: "tahanan",
-                clues: [
-                    "It's a Filipino word, not an English one.",
-                    "It's what you call the place you always want to return to.",
-                    "Adie sings it beautifully."
-                ],
-                hint: "It's the Filipino word for 'home'."
+                type: 'code', groups: [7], answer: "pudding", reveal: "🍮 Pudding 💖",
+                riddle: ["You won't usually find me in the bread aisle, but I can make any snack or dessert feel complete.", "And whenever someone asks about my favorite treat, I'm the first thing that comes to mind."],
+                prompt: "✨ What am I?",
+                clues: ["I'm known for being soft, creamy, and sweet.", "People often enjoy me chilled and served with a spoon.", "I'm the treat that tops the list whenever someone asks about your favorite."],
+                hint: "Soft, creamy, sweet, and best with a spoon."
             },
             {
-                q: "Are you ready to unlock my heart? (Type 'yes')",
-                a: "yes",
-                clues: [
-                    "There's really only one right answer here.",
-                    "It's a simple three-letter word.",
-                    "I hope your heart already knows it."
-                ],
-                hint: "It's a simple three-letter word."
+                type: 'code', groups: [9], answer: "chocolate", reveal: "🍫 Chocolate ❤️",
+                riddle: ["I may melt in your hands, but never in your heart.", "I make ordinary moments feel a little more special.", "And if I had to guess your favorite sweet treat, I'd only need one try."],
+                prompt: "✨ What am I?",
+                clues: ["I'm made from cacao and loved all around the world.", "I can be shared as a gift, especially on sweet occasions.", "You've made it very easy for me to know I'm your favorite sweet."],
+                hint: "Made from cacao, and it melts in your hands."
+            },
+            {
+                type: 'code', numeric: true, groups: [2], answer: "24", reveal: "❤️ 24 ♾️💕",
+                riddle: ["I am not found in a calendar or a bouquet.", "I was created from two words that mean the world to us.", "One is a promise to stay close, and the other is a promise to stay forever."],
+                prompt: "✨ What number am I?",
+                clues: ["I begin with the idea of Together.", "I end with the promise of Forever.", "When these two words became one special meaning, I became our favorite number."],
+                hint: "Two words, one meaning: Together and Forever became our number."
+            },
+            {
+                type: 'choice', reveal: "My heart is open 🔓💖",
+                riddle: ["My heart waits quietly behind a door,", "Not asking for strength, nor a secret key.", "All it needs is a single answer,", "One that tells me you're willing to take this journey with me.", "So tell me, my love..."],
+                prompt: "❤️ Are you ready to unlock my heart? ❤️",
+                clues: []
             }
         ];
-        let currentPuzzleIndex = 0;
+        let puzzleIndex = 0;
+        let puzzleLocked = false;
+        let loveAgreed = false;
 
-        function renderClues(clues) {
-            return clues.map((c, i) => `
-                <p class="flex items-start gap-2 text-sm text-theme_text/90 text-left">
-                    <span class="mt-0.5">💡</span>
-                    <span><strong class="text-theme_accent">Clue ${i + 1}:</strong> ${c}</span>
-                </p>
-            `).join('');
+        function renderPuzzleProgress() {
+            let h = '';
+            puzzleData.forEach((_, i) => {
+                const done = i < puzzleIndex, active = i === puzzleIndex;
+                h += `<div class="w-3 h-3 rounded-full flex-shrink-0 ${done || active ? 'bg-theme_accent' : 'bg-theme_border'}" ${active ? 'style="box-shadow:0 0 10px var(--accent-main)"' : ''}></div>`;
+                if (i < puzzleData.length - 1) h += `<div class="w-4 sm:w-8 h-1 flex-shrink-0 ${done ? 'bg-theme_accent' : 'bg-theme_border'}"></div>`;
+            });
+            document.getElementById('puzzle-progress').innerHTML = h;
+        }
+
+        function getCodeBoxes() { return Array.from(document.querySelectorAll('#puzzle-content .code-box')); }
+
+        function renderPuzzleStep() {
+            const step = puzzleData[puzzleIndex];
+            const c = document.getElementById('puzzle-content');
+            renderPuzzleProgress();
+            puzzleLocked = false;
+
+            let html = `<p class="text-xs font-bold tracking-widest uppercase text-theme_accent mb-4">Riddle ${puzzleIndex + 1} of ${puzzleData.length}</p>`;
+            html += `<div class="font-serif text-lg sm:text-xl text-theme_text leading-relaxed space-y-1 mb-5">${step.riddle.map(l => `<p>${l}</p>`).join('')}</div>`;
+            html += `<h3 class="text-xl sm:text-2xl font-bold text-theme_text mb-5">${step.prompt}</h3>`;
+
+            if (step.clues.length) {
+                html += `<div class="bg-theme_bg/50 border border-theme_border rounded-xl px-4 sm:px-5 py-4 mb-6 space-y-2">` +
+                    step.clues.map((cl, i) => `
+                        <p class="flex items-start gap-2 text-sm text-theme_text/90 text-left">
+                            <span class="mt-0.5">💡</span>
+                            <span><strong class="text-theme_accent">Clue ${i + 1}:</strong> ${cl}</span>
+                        </p>`).join('') + `</div>`;
+            }
+
+            if (step.type === 'code') {
+                let idx = 0;
+                html += `<div class="flex flex-col items-center gap-3 mb-6">` + step.groups.map(n => {
+                    let boxes = '';
+                    for (let k = 0; k < n; k++, idx++) {
+                        boxes += `<input type="text" class="code-box" autocomplete="off" autocorrect="off" spellcheck="false" ${step.numeric ? 'inputmode="numeric" pattern="[0-9]*"' : 'autocapitalize="characters"'} aria-label="Character ${idx + 1}">`;
+                    }
+                    return `<div class="code-group ${step.numeric ? 'numeric' : ''}">${boxes}</div>`;
+                }).join('') + `</div>`;
+                html += `<button onclick="checkPuzzle()" class="w-full py-3 rounded-xl bg-theme_accent hover:bg-theme_accent_hover text-white font-bold transition-colors glowing-btn">Submit Answer</button>`;
+                html += `<p id="puzzle-error" class="text-red-400 text-sm mt-3 opacity-0 transition-opacity">&nbsp;</p>`;
+            } else {
+                html += `<div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <button onclick="choiceAnswer(true)" class="py-3 px-10 rounded-full bg-theme_accent hover:bg-theme_accent_hover text-white font-bold transition-colors glowing-btn">Yes ❤️</button>
+                    <button onclick="choiceAnswer(false)" class="py-3 px-10 rounded-full border-2 border-theme_border text-theme_text hover:border-theme_accent font-bold transition-colors">No 🥺</button>
+                </div>
+                <p id="puzzle-error" class="text-theme_muted text-sm mt-4 opacity-0 transition-opacity">&nbsp;</p>`;
+            }
+
+            c.innerHTML = html;
+            const first = getCodeBoxes()[0];
+            if (first && puzzleIndex > 0) first.focus();
+        }
+
+        function showPuzzleError(msg, isCode) {
+            const err = document.getElementById('puzzle-error');
+            if (!err) return;
+            err.textContent = msg;
+            err.style.opacity = '1';
+            if (isCode) {
+                const row = document.querySelector('#puzzle-content .code-box').parentElement.parentElement;
+                row.classList.remove('shake'); void row.offsetWidth; row.classList.add('shake');
+                const boxes = getCodeBoxes();
+                boxes.forEach(b => b.classList.add('wrong'));
+                setTimeout(() => boxes.forEach(b => b.classList.remove('wrong')), 600);
+            }
+        }
+
+        function advanceAfterCorrect(step, onDone) {
+            puzzleLocked = true;
+            const c = document.getElementById('puzzle-content');
+            c.innerHTML = `
+                <div class="py-10">
+                    <span class="text-5xl block mb-4 animate-bounce">✨</span>
+                    <p class="text-theme_accent text-xs uppercase tracking-widest font-bold mb-2">Correct!</p>
+                    <p class="font-serif text-3xl font-bold text-theme_text">${step.reveal}</p>
+                </div>`;
+            setTimeout(() => {
+                c.style.opacity = '0';
+                setTimeout(() => { onDone(); c.style.opacity = '1'; }, 300);
+            }, 1300);
         }
 
         function checkPuzzle() {
-            const inputEl = document.getElementById('puzzle-input');
-            const errorEl = document.getElementById('puzzle-error');
-            const contentEl = document.getElementById('puzzle-content');
-            
-            const answer = inputEl.value.trim().toLowerCase();
-            const correct = puzzleData[currentPuzzleIndex].a;
-
-            if (answer === correct) {
-                errorEl.style.opacity = '0';
-                if(currentPuzzleIndex < 4) {
-                    document.getElementById(`dot-${currentPuzzleIndex + 1}`).classList.remove('shadow-[0_0_10px_var(--accent-main)]');
-                    document.getElementById(`line-${currentPuzzleIndex + 1}`).classList.replace('bg-theme_border', 'bg-theme_accent');
-                    document.getElementById(`dot-${currentPuzzleIndex + 2}`).classList.replace('bg-theme_border', 'bg-theme_accent');
-                    document.getElementById(`dot-${currentPuzzleIndex + 2}`).classList.add('shadow-[0_0_10px_var(--accent-main)]');
-                }
-                
-                currentPuzzleIndex++;
-                
-                contentEl.style.opacity = '0';
-                setTimeout(() => {
-                    if (currentPuzzleIndex < puzzleData.length) {
-                        const step = puzzleData[currentPuzzleIndex];
-                        contentEl.innerHTML = `
-                            <span class="text-theme_accent font-serif text-5xl mb-4 block">${currentPuzzleIndex + 1}</span>
-                            <h3 class="text-2xl font-bold text-theme_text mb-6">${step.q}</h3>
-                            <div class="bg-theme_bg/50 border border-theme_border rounded-xl px-5 py-4 mb-6 space-y-2">
-                                ${renderClues(step.clues)}
-                            </div>
-                            <input type="text" id="puzzle-input" class="w-full bg-theme_bg/50 border border-theme_border rounded-xl px-4 py-3 text-theme_text focus:outline-none focus:border-theme_accent focus:ring-1 focus:ring-theme_accent text-center text-lg mb-6 transition-all" placeholder="Enter your answer..." onkeypress="handlePuzzleEnter(event)">
-                            <button onclick="checkPuzzle()" class="w-full py-3 rounded-xl bg-theme_accent hover:bg-theme_accent_hover text-white font-bold transition-colors glowing-btn">Submit Answer</button>
-                            <p id="puzzle-error" class="text-red-400 text-sm mt-3 opacity-0 transition-opacity">Try again! Hint: ${step.hint}</p>
-                        `;
-                        contentEl.style.opacity = '1';
-                        document.getElementById('puzzle-input').focus();
-                    } else {
-                        contentEl.innerHTML = `
-                            <span class="text-6xl mb-4 block animate-bounce">⏳</span>
-                            <h3 class="text-2xl font-bold text-theme_text mb-4">Feature coming soon...</h3>
-                            <p class="text-theme_muted italic">"Patience is a virtue, especially for matters of the heart."</p>
-                        `;
-                        contentEl.style.opacity = '1';
-                    }
-                }, 300);
+            if (puzzleLocked) return;
+            const step = puzzleData[puzzleIndex];
+            if (step.type !== 'code') return;
+            const boxes = getCodeBoxes();
+            const value = boxes.map(b => b.value).join('').toLowerCase();
+            if (value.length < boxes.length) { showPuzzleError('Please fill in every box first. 💭', true); return; }
+            if (value === step.answer) {
+                advanceAfterCorrect(step, () => { puzzleIndex++; renderPuzzleStep(); });
             } else {
-                errorEl.style.opacity = '1';
-                inputEl.classList.add('border-red-400');
-                inputEl.style.transform = 'translateX(-5px)';
-                setTimeout(() => inputEl.style.transform = 'translateX(5px)', 100);
-                setTimeout(() => inputEl.style.transform = 'translateX(-5px)', 200);
-                setTimeout(() => {
-                    inputEl.style.transform = 'translateX(0)';
-                    inputEl.classList.remove('border-red-400');
-                }, 300);
+                showPuzzleError('Try again! Hint: ' + step.hint, true);
             }
         }
 
-        function handlePuzzleEnter(e) { if(e.key === 'Enter') checkPuzzle(); }
+        function choiceAnswer(isYes) {
+            if (puzzleLocked) return;
+            const step = puzzleData[puzzleIndex];
+            if (!isYes) {
+                showPuzzleError("Take your time, my love. I'll be right here whenever you're ready. 🤍", false);
+                return;
+            }
+            advanceAfterCorrect(step, () => {
+                puzzleIndex = puzzleData.length;
+                renderPuzzleProgress();
+                renderUnlocked();
+                openLoveModal();
+            });
+        }
+
+        function renderUnlocked() {
+            document.getElementById('puzzle-content').innerHTML = `
+                <span class="text-6xl block mb-4">🔓</span>
+                <h3 class="text-2xl font-bold text-theme_text mb-2">My heart is open</h3>
+                <p class="text-theme_muted mb-6">You made it all the way here. I wrote you something.</p>
+                <button onclick="openLoveModal()" class="py-3 px-8 rounded-full bg-theme_accent hover:bg-theme_accent_hover text-white font-bold transition-colors glowing-btn">Open my letter 💌</button>`;
+        }
+
+        // Box typing behavior (event delegation, works on desktop + mobile)
+        (function () {
+            const pc = document.getElementById('puzzle-content');
+            const clean = (v) => puzzleData[puzzleIndex] && puzzleData[puzzleIndex].numeric ? v.replace(/\D/g, '') : v.replace(/[^a-zA-Z]/g, '');
+
+            pc.addEventListener('focusin', e => { if (e.target.classList.contains('code-box')) e.target.select(); });
+
+            pc.addEventListener('input', e => {
+                if (!e.target.classList.contains('code-box')) return;
+                const boxes = getCodeBoxes(); const i = boxes.indexOf(e.target);
+                const v = clean(e.target.value).slice(-1);
+                e.target.value = v;
+                e.target.classList.toggle('filled', !!v);
+                if (v && i < boxes.length - 1) boxes[i + 1].focus();
+            });
+
+            pc.addEventListener('keydown', e => {
+                if (!e.target.classList.contains('code-box')) return;
+                const boxes = getCodeBoxes(); const i = boxes.indexOf(e.target);
+                if (e.key === 'Enter') { checkPuzzle(); }
+                else if (e.key === 'Backspace' && !e.target.value && i > 0) {
+                    e.preventDefault(); boxes[i - 1].value = ''; boxes[i - 1].classList.remove('filled'); boxes[i - 1].focus();
+                }
+                else if (e.key === 'ArrowLeft' && i > 0) { e.preventDefault(); boxes[i - 1].focus(); }
+                else if (e.key === 'ArrowRight' && i < boxes.length - 1) { e.preventDefault(); boxes[i + 1].focus(); }
+            });
+
+            pc.addEventListener('paste', e => {
+                if (!e.target.classList.contains('code-box')) return;
+                e.preventDefault();
+                const text = clean((e.clipboardData || window.clipboardData).getData('text'));
+                const boxes = getCodeBoxes(); let i = boxes.indexOf(e.target);
+                for (const ch of text) { if (i >= boxes.length) break; boxes[i].value = ch; boxes[i].classList.add('filled'); i++; }
+                boxes[Math.min(i, boxes.length - 1)].focus();
+            });
+        })();
+
+        // === LOVE LETTER + VIDEO MODAL ===
+        const loveModal = document.getElementById('love-modal');
+        const loveVideo = document.getElementById('love-video');
+
+        loveVideo.addEventListener('error', () => { document.getElementById('love-video-fallback').style.display = 'flex'; });
+        loveVideo.addEventListener('play', () => { if (typeof isPlaying !== 'undefined' && isPlaying) togglePlay(); });
+
+        function showLoveView(which) {
+            document.getElementById('love-letter-view').style.display = which === 'letter' ? 'block' : 'none';
+            document.getElementById('love-video-view').style.display = which === 'video' ? 'block' : 'none';
+            if (which !== 'video') loveVideo.pause();
+            loveModal.querySelector('.love-scroll').scrollTop = 0;
+        }
+
+        function openLoveModal() {
+            showLoveView(loveAgreed ? 'video' : 'letter');
+            if (loveAgreed && !loveVideo.getAttribute('src')) loveVideo.src = 'video/love.mp4';
+            loveModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLoveModal() {
+            loveVideo.pause();
+            loveModal.style.display = 'none';
+            document.body.style.removeProperty('overflow');
+        }
+
+        function loveAgree() {
+            loveAgreed = true;
+            if (!loveVideo.getAttribute('src')) loveVideo.src = 'video/love.mp4';
+            showLoveView('video');
+            loveConfetti();
+        }
+
+        function loveDisagree() {
+            document.getElementById('love-disagree-note').style.opacity = '1';
+        }
+
+        function loveConfetti() {
+            const emojis = ['💖', '💗', '🌷', '✨', '💌', '🌸'];
+            for (let i = 0; i < 36; i++) {
+                const el = document.createElement('span');
+                el.textContent = emojis[i % emojis.length];
+                el.style.cssText = `position:fixed;top:-40px;left:${Math.random() * 100}vw;font-size:${18 + Math.random() * 22}px;z-index:400;pointer-events:none;`;
+                document.body.appendChild(el);
+                const anim = el.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight + 80}px) rotate(${(Math.random() - 0.5) * 720}deg)`, opacity: 0.8 }
+                ], { duration: 2500 + Math.random() * 2000, delay: Math.random() * 600, easing: 'cubic-bezier(.3,.1,.6,1)', fill: 'forwards' });
+                anim.onfinish = () => el.remove();
+            }
+        }
+
+        document.addEventListener('keydown', e => { if (e.key === 'Escape' && loveModal.style.display === 'flex') closeLoveModal(); });
+
+        renderPuzzleStep();
 
         // === CATCH MY HEARTS GAME ===
         const canvas = document.getElementById('gameCanvas');
