@@ -159,27 +159,8 @@
         ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb { background: var(--accent-main); border-radius: 4px; }
 
-        /* Entrance Animation Overlay */
-        #entrance-overlay {
-            position: fixed; inset: 0; z-index: 9999;
-            background: var(--bg-color);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: opacity 1s ease, visibility 1s ease;
-        }
         
-        @keyframes float-up {
-            0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(-20vh) rotate(45deg) scale(1.2); opacity: 0; }
-        }
-        .animate-float-up { animation: float-up linear infinite; }
 
-        .envelope-container { cursor: pointer; transition: transform 0.3s ease; z-index: 10; }
-        .envelope-container:hover { transform: scale(1.05); }
-        .envelope { width: 200px; height: 140px; background: var(--card-bg); border: 2px solid var(--accent-main); border-radius: 10px; position: relative; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 30px var(--shadow-color); transition: all 0.5s ease; }
-        .envelope-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 100px solid transparent; border-right: 100px solid transparent; border-top: 80px solid var(--accent-main); transition: transform 0.8s ease; transform-origin: top; }
-        .tulip-svg { position: absolute; bottom: 20px; width: 60px; height: auto; opacity: 0; transform: translateY(20px); transition: all 0.8s ease 0.3s; pointer-events: none; }
         
         .envelope-open .envelope-flap { transform: rotateX(180deg); }
         .envelope-open .tulip-svg { opacity: 1; transform: translateY(-40px) scale(1.2); }
@@ -206,52 +187,121 @@
         .shake { animation: shake-x 0.4s ease; }
         .love-scroll::-webkit-scrollbar { width: 6px; }
         .love-scroll::-webkit-scrollbar-thumb { background: var(--accent-main); border-radius: 999px; }
+
+        /* ===== Lock Screen (startup) ===== */
+        #entrance-overlay { position: fixed; inset: 0; z-index: 9999; overflow: hidden; }
+        .lock-door { position: absolute; top: 0; bottom: 0; width: 50.3%; z-index: 0; background: var(--puzzle-bg); background-size: 200% 100%; transition: transform 1.4s cubic-bezier(.77, 0, .18, 1); }
+        .lock-door-left { left: 0; background-position: left center; box-shadow: inset -40px 0 60px -40px var(--shadow-color); border-right: 1px solid var(--border-color); }
+        .lock-door-right { right: 0; background-position: right center; box-shadow: inset 40px 0 60px -40px var(--shadow-color); border-left: 1px solid var(--border-color); }
+        #entrance-overlay.opened .lock-door-left { transform: translateX(-101%); }
+        #entrance-overlay.opened .lock-door-right { transform: translateX(101%); }
+        .lock-grid { position: absolute; inset: 0; z-index: 1; pointer-events: none; background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 40px 40px; transition: opacity .7s ease; }
+        .lock-layer { position: absolute; inset: 0; z-index: 3; overflow-y: auto; display: flex; transition: opacity .8s ease, transform 1s ease; }
+        #entrance-overlay.opened .lock-layer, #entrance-overlay.opened .lock-grid { opacity: 0; transform: scale(1.08); }
+        .lock-content { margin: auto; width: 100%; max-width: 26rem; padding: 2rem 1.25rem; text-align: center; }
+        .lock-eyebrow { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent-main); font-weight: 600; }
+        .lock-svg { width: 104px; height: auto; margin: 1.25rem auto 1.5rem; display: block; overflow: visible; animation: lock-bob 4s ease-in-out infinite; filter: drop-shadow(0 10px 18px var(--shadow-color)) drop-shadow(0 0 calc(var(--charge, 0) * 28px) var(--accent-main)); transition: filter .3s ease; }
+        @keyframes lock-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .lock-shackle { transform-box: view-box; transform-origin: 86px 62px; transition: transform .9s cubic-bezier(.34, 1.56, .64, 1); }
+        #entrance-overlay.unlocking .lock-shackle { transform: translateY(-16px) rotate(-34deg); }
+        .lock-heart { transform-box: fill-box; transform-origin: center; animation: lock-beat 1.6s ease-in-out infinite; }
+        @keyframes lock-beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.18); } }
+        .lock-line { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.55rem; line-height: 1.25; color: var(--text-main); opacity: 0; transform: translateY(10px); animation: lock-in .9s ease forwards; animation-delay: var(--d, 0s); }
+        .lock-line.soft { color: var(--text-muted); }
+        @keyframes lock-in { to { opacity: 1; transform: translateY(0); } }
+        .lock-key-area { opacity: 0; animation: lock-in .9s ease forwards; animation-delay: var(--d, 3.6s); }
+        .lock-key-label { font-family: 'Playfair Display', serif; font-style: italic; color: var(--text-muted); font-size: 0.95rem; }
+        .lock-and { font-family: 'Caveat', cursive; font-size: 1.6rem; font-weight: 700; color: var(--accent-main); line-height: 1; }
+        .lock-boxes .code-box { height: 48px; }
+        .lock-btn { width: 100%; padding: 0.85rem 1rem; border-radius: 999px; background: var(--accent-main); color: #fff; font-weight: 700; letter-spacing: 0.04em; box-shadow: 0 10px 24px -8px var(--accent-main); transition: transform .2s ease, background .2s ease; }
+        .lock-btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
+        .lock-btn:active { transform: scale(.98); }
+        .lock-error { min-height: 1.25rem; font-size: 0.85rem; color: #f87171; opacity: 0; transition: opacity .3s ease; }
+        .lock-success { display: none; }
+        #entrance-overlay.unlocking .lock-key-area { display: none; }
+        #entrance-overlay.unlocking .lock-success { display: block; animation: lock-in .8s ease forwards; }
+        #entrance-overlay.unlocking .lock-svg { animation: lock-pop .7s ease; }
+        @keyframes lock-pop { 0% { transform: scale(1); } 40% { transform: scale(1.18) rotate(-4deg); } 100% { transform: scale(1); } }
+        @media (max-height: 700px) { .lock-svg { width: 80px; margin: .75rem auto 1rem; } .lock-line { font-size: 1.35rem; } .lock-boxes .code-box { height: 42px; } }
+        @media (prefers-reduced-motion: reduce) { .lock-line, .lock-key-area { animation-duration: .01s; animation-delay: 0s; } .lock-svg, .lock-heart { animation: none; } .lock-door { transition-duration: .01s; } }
+
+        @keyframes float-up {
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-20vh) rotate(45deg) scale(1.2); opacity: 0; }
+        }
+        .animate-float-up { animation: float-up linear infinite; }
     </style>
 </head>
 <body class="antialiased selection:bg-theme_accent selection:text-white overflow-hidden" id="main-body">
 
-    <!-- Start Entrance Animation -->
-    <div id="entrance-overlay" class="relative overflow-hidden">
-        <!-- Floating Tulips Background -->
-        <div class="absolute inset-0 pointer-events-none">
-            <div class="absolute text-4xl animate-float-up" style="left: 10%; animation-duration: 7s; animation-delay: 0s;">🌷</div>
-            <div class="absolute text-3xl animate-float-up" style="left: 25%; animation-duration: 9s; animation-delay: 2s;">🌷</div>
-            <div class="absolute text-5xl animate-float-up" style="left: 45%; animation-duration: 6s; animation-delay: 1s;">🌷</div>
-            <div class="absolute text-4xl animate-float-up" style="left: 65%; animation-duration: 8s; animation-delay: 3s;">🌷</div>
-            <div class="absolute text-3xl animate-float-up" style="left: 85%; animation-duration: 7.5s; animation-delay: 0.5s;">🌷</div>
-            <div class="absolute text-4xl animate-float-up" style="left: 15%; animation-duration: 8s; animation-delay: 4s;">🌷</div>
-            <div class="absolute text-5xl animate-float-up" style="left: 35%; animation-duration: 6.5s; animation-delay: 5s;">🌷</div>
-            <div class="absolute text-3xl animate-float-up" style="left: 75%; animation-duration: 9s; animation-delay: 2.5s;">🌷</div>
-            <div class="absolute text-4xl animate-float-up" style="left: 55%; animation-duration: 7s; animation-delay: 4.5s;">🌷</div>
-            <div class="absolute text-5xl animate-float-up" style="left: 90%; animation-duration: 8.5s; animation-delay: 1.5s;">🌷</div>
-        </div>
+    <!-- Start Lock Screen -->
+    <div id="entrance-overlay" role="dialog" aria-modal="true" aria-labelledby="lock-title">
+        <div class="lock-door lock-door-left"></div>
+        <div class="lock-door lock-door-right"></div>
+        <div class="lock-grid"></div>
 
-        <div class="text-center mb-10 animate-pulse-slow z-10 relative bg-theme_bg/50 backdrop-blur-md py-4 px-8 rounded-full border border-theme_border">
-            <h1 class="text-3xl font-serif text-theme_text mb-2">A Special Delivery</h1>
-            <p class="text-theme_muted tracking-widest uppercase text-xs">For Mei Mei keish</p>
-        </div>
-        
-        <div class="envelope-container relative" onclick="openEnvelope()">
-            <!-- Sparkles around envelope -->
-            <div class="absolute -top-6 -left-6 text-2xl animate-spin-slow pointer-events-none">✨</div>
-            <div class="absolute -bottom-4 -right-4 text-xl animate-pulse pointer-events-none">✨</div>
+        <div class="lock-layer">
+            <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute text-3xl animate-float-up" style="left: 8%; animation-duration: 8s; animation-delay: 0s;">🌷</div>
+            <div class="absolute text-2xl animate-float-up" style="left: 22%; animation-duration: 10s; animation-delay: 2s;">🌷</div>
+            <div class="absolute text-4xl animate-float-up" style="left: 40%; animation-duration: 7s; animation-delay: 1s;">🌷</div>
+            <div class="absolute text-3xl animate-float-up" style="left: 60%; animation-duration: 9s; animation-delay: 3s;">🌷</div>
+            <div class="absolute text-2xl animate-float-up" style="left: 78%; animation-duration: 8s; animation-delay: 0.5s;">🌷</div>
+            <div class="absolute text-4xl animate-float-up" style="left: 90%; animation-duration: 9.5s; animation-delay: 4s;">🌷</div>
+            <div class="absolute text-2xl animate-float-up" style="left: 14%; animation-duration: 9s; animation-delay: 5s;">🌷</div>
+            <div class="absolute text-3xl animate-float-up" style="left: 70%; animation-duration: 7.5s; animation-delay: 6s;">🌷</div>
+            </div>
 
-            <div class="envelope" id="the-envelope">
-                <div class="envelope-flap"></div>
-                <!-- Premium SVG Tulip -->
-                <svg class="tulip-svg drop-shadow-xl" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50 90 L50 60" stroke="#22c55e" stroke-width="4" stroke-linecap="round"/>
-                    <path d="M50 60 C30 60 20 40 20 20 C35 30 45 40 50 50 C55 40 65 30 80 20 C80 40 70 60 50 60Z" fill="var(--accent-main)"/>
-                    <path d="M35 30 C40 45 45 55 50 60 C40 55 30 45 20 20 C25 25 30 28 35 30Z" fill="var(--accent-hover)"/>
-                    <path d="M65 30 C60 45 55 55 50 60 C60 55 70 45 80 20 C75 25 70 28 65 30Z" fill="var(--accent-hover)"/>
+            <div class="lock-content relative">
+                <p class="lock-eyebrow">A Special Delivery &middot; For Mei Mei keish</p>
+
+                <svg id="lock-icon" class="lock-svg" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="lockMetal" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0" stop-color="#f9fafb"/><stop offset="0.5" stop-color="#cbd5e1"/><stop offset="1" stop-color="#94a3b8"/>
+                        </linearGradient>
+                        <linearGradient id="lockBody" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" style="stop-color: var(--accent-hover)"/><stop offset="1" style="stop-color: var(--accent-main)"/>
+                        </linearGradient>
+                    </defs>
+                    <g class="lock-shackle">
+                        <path d="M34 66 V46 a26 26 0 0 1 52 0 V66" stroke="url(#lockMetal)" stroke-width="10" stroke-linecap="round"/>
+                    </g>
+                    <rect x="18" y="62" width="84" height="66" rx="16" fill="url(#lockBody)"/>
+                    <rect x="18" y="62" width="84" height="22" rx="16" fill="#fff" opacity="0.14"/>
+                    <path class="lock-heart" d="M60 108 C44 97 48 85 55.5 85 C58.5 85 60 88 60 88 C60 88 61.5 85 64.5 85 C72 85 76 97 60 108Z" fill="#fff" opacity="0.95"/>
                 </svg>
-                <div class="absolute inset-0 flex items-center justify-center font-bold text-theme_text z-10 pointer-events-none drop-shadow-md">
-                    TAP ME
+
+                <h1 id="lock-title" class="sr-only">Our promise</h1>
+                <div class="space-y-1 mb-6">
+                    <p class="lock-line" style="--d: 0.3s">No matter where we are,</p>
+                    <p class="lock-line" style="--d: 1.0s">No matter what we do,</p>
+                    <p class="lock-line" style="--d: 1.7s">You'll always be there for me,</p>
+                    <p class="lock-line" style="--d: 2.4s">And I'll always be there for you,</p>
+                    <p class="lock-line soft" style="--d: 3.1s">Even if the world ends&hellip;</p>
+                </div>
+
+                <div id="lock-key" class="lock-key-area space-y-3" style="--d: 3.8s">
+                    <p class="lock-key-label">Finish our promise to unlock the way in 🔑</p>
+                    <div class="lock-boxes flex flex-col items-center gap-2">
+                        <div class="code-group"><input type="text" class="code-box" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" aria-label="Letter 1"><input type="text" class="code-box" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" aria-label="Letter 2"><input type="text" class="code-box" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" aria-label="Letter 3"><input type="text" class="code-box" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" aria-label="Letter 4"><input type="text" class="code-box" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" aria-label="Letter 5"><input type="text" class="code-box" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" aria-label="Letter 6"><input type="text" class="code-box" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" aria-label="Letter 7"><input type="text" class="code-box" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" aria-label="Letter 8"></div>
+                        <span class="lock-and">and</span>
+                        <div class="code-group"><input type="text" class="code-box" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" aria-label="Letter 9"><input type="text" class="code-box" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" aria-label="Letter 10"><input type="text" class="code-box" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" aria-label="Letter 11"><input type="text" class="code-box" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" aria-label="Letter 12"><input type="text" class="code-box" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" aria-label="Letter 13"><input type="text" class="code-box" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" aria-label="Letter 14"><input type="text" class="code-box" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" aria-label="Letter 15"></div>
+                    </div>
+                    <p id="lock-error" class="lock-error" role="alert">&nbsp;</p>
+                    <button type="button" id="lock-btn" class="lock-btn">Unlock 🔓</button>
+                </div>
+
+                <div class="lock-success">
+                    <p class="font-handwriting text-4xl font-bold text-theme_accent">Together and Forever</p>
+                    <p class="lock-key-label mt-1">Unlocked. Welcome in, my love 💖</p>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End Entrance Animation -->
+    <!-- End Lock Screen -->
 
     <nav class="fixed w-full z-40 glass-card border-b-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -748,24 +798,103 @@
             }
         }
 
-        // === ENTRANCE ANIMATION LOGIC ===
-        function openEnvelope() {
-            const envelope = document.getElementById('the-envelope');
+        // === LOCK SCREEN LOGIC (startup) ===
+        (function () {
+            const KEY = 'togetherforever';           // "Together" + "Forever"
             const overlay = document.getElementById('entrance-overlay');
-            const body = document.getElementById('main-body');
-            
-            envelope.classList.add('envelope-open');
-            
-            setTimeout(() => {
-                overlay.style.opacity = '0';
+            const lockIcon = document.getElementById('lock-icon');
+            const errEl = document.getElementById('lock-error');
+            const btn = document.getElementById('lock-btn');
+            const getBoxes = () => Array.from(overlay.querySelectorAll('.code-box'));
+            let tries = 0, done = false;
+
+            // Keep the site behind the lock unreachable (keyboard / screen readers) until it opens
+            const behind = Array.from(document.body.children).filter(el => el !== overlay && el.tagName !== 'SCRIPT');
+            behind.forEach(el => el.setAttribute('inert', ''));
+
+            function setCharge() {
+                const b = getBoxes();
+                lockIcon.style.setProperty('--charge', b.filter(x => x.value).length / b.length);
+            }
+
+            function showError(msg) {
+                errEl.textContent = msg;
+                errEl.style.opacity = '1';
+                const boxes = getBoxes();
+                boxes.forEach(b => b.classList.add('wrong'));
+                lockIcon.classList.remove('shake'); void lockIcon.offsetWidth; lockIcon.classList.add('shake');
+                setTimeout(() => boxes.forEach(b => b.classList.remove('wrong')), 600);
+            }
+
+            function check() {
+                if (done) return;
+                const boxes = getBoxes();
+                const value = boxes.map(b => b.value).join('').toLowerCase();
+                if (value.length < boxes.length) { showError('Fill in every box to turn the key. 💭'); return; }
+                if (value === KEY) { unlock(); return; }
+                tries++;
+                showError(tries < 2
+                    ? "Not quite. Think of the last words of our promise. 💭"
+                    : "Hint: two words we always end with. It starts with T... and F... 💖");
+            }
+
+            function unlock() {
+                done = true;
+                errEl.style.opacity = '0';
+                overlay.classList.add('unlocking');
+                setTimeout(() => { overlay.classList.add('opened'); if (typeof loveConfetti === 'function') loveConfetti(10000); }, 1500);
                 setTimeout(() => {
-                    overlay.style.visibility = 'hidden';
                     overlay.style.display = 'none';
-                    // Fix scrolling: unlock the body overflow
-                    body.classList.remove('overflow-hidden');
-                }, 1000);
-            }, 1200);
-        }
+                    behind.forEach(el => el.removeAttribute('inert'));
+                    document.getElementById('main-body').classList.remove('overflow-hidden');
+                    window.scrollTo(0, 0);
+                }, 3100);
+            }
+
+            overlay.addEventListener('focusin', e => { if (e.target.classList.contains('code-box')) e.target.select(); });
+
+            overlay.addEventListener('input', e => {
+                if (!e.target.classList.contains('code-box')) return;
+                const boxes = getBoxes(); const i = boxes.indexOf(e.target);
+                const v = e.target.value.replace(/[^a-zA-Z]/g, '').slice(-1);
+                e.target.value = v;
+                e.target.classList.toggle('filled', !!v);
+                setCharge();
+                if (v && i < boxes.length - 1) boxes[i + 1].focus();
+                else if (v && boxes.every(b => b.value)) check();   // all filled: try the key automatically
+            });
+
+            overlay.addEventListener('keydown', e => {
+                if (!e.target.classList.contains('code-box')) return;
+                const boxes = getBoxes(); const i = boxes.indexOf(e.target);
+                if (e.key === 'Enter') { check(); }
+                else if (e.key === 'Backspace' && !e.target.value && i > 0) {
+                    e.preventDefault(); boxes[i - 1].value = ''; boxes[i - 1].classList.remove('filled'); boxes[i - 1].focus(); setCharge();
+                }
+                else if (e.key === 'ArrowLeft' && i > 0) { e.preventDefault(); boxes[i - 1].focus(); }
+                else if (e.key === 'ArrowRight' && i < boxes.length - 1) { e.preventDefault(); boxes[i + 1].focus(); }
+            });
+
+            overlay.addEventListener('paste', e => {
+                if (!e.target.classList.contains('code-box')) return;
+                e.preventDefault();
+                const text = (e.clipboardData || window.clipboardData).getData('text').replace(/[^a-zA-Z]/g, '').toLowerCase();
+                const boxes = getBoxes();
+                // allow pasting the whole phrase, or just part of it, starting from the focused box
+                let i = text.startsWith(KEY) ? 0 : boxes.indexOf(e.target);
+                for (const ch of text) { if (i >= boxes.length) break; boxes[i].value = ch; boxes[i].classList.add('filled'); i++; }
+                setCharge();
+                (boxes[Math.min(i, boxes.length - 1)]).focus();
+                if (boxes.every(b => b.value)) check();
+            });
+
+            btn.addEventListener('click', check);
+
+            // Desktop only: put the cursor in the first box once the promise has appeared
+            if (window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
+                setTimeout(() => { if (!done) getBoxes()[0].focus({ preventScroll: true }); }, 4200);
+            }
+        })();
 
         // === MUSIC PLAYER LOGIC ===
         const playlist = [
@@ -1267,12 +1396,12 @@
             document.getElementById('love-disagree-note').style.opacity = '1';
         }
 
-        function loveConfetti() {
+        function loveConfetti(z = 400) {
             const emojis = ['💖', '💗', '🌷', '✨', '💌', '🌸'];
             for (let i = 0; i < 36; i++) {
                 const el = document.createElement('span');
                 el.textContent = emojis[i % emojis.length];
-                el.style.cssText = `position:fixed;top:-40px;left:${Math.random() * 100}vw;font-size:${18 + Math.random() * 22}px;z-index:400;pointer-events:none;`;
+                el.style.cssText = `position:fixed;top:-40px;left:${Math.random() * 100}vw;font-size:${18 + Math.random() * 22}px;z-index:${z};pointer-events:none;`;
                 document.body.appendChild(el);
                 const anim = el.animate([
                     { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
