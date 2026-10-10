@@ -135,11 +135,12 @@
         .polaroid:hover { transform: scale(1.15) rotate(0deg) !important; z-index: 50 !important; box-shadow: 0 20px 40px -5px rgba(0,0,0,0.5); }
         
         /* Flip Cards */
-        .flip-card { background-color: transparent; perspective: 1000px; -webkit-perspective: 1000px; height: 320px; }
+        .flip-card { background-color: transparent; perspective: 1000px; -webkit-perspective: 1000px; height: 340px; -webkit-tap-highlight-color: transparent; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
         .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; -webkit-transform-style: preserve-3d; cursor: pointer; }
-        .flip-card:hover .flip-card-inner,
+        /* Tap / click only (no hover flip) */
         .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
-        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+        .flip-card:focus-visible { outline: 2px solid var(--accent-main); outline-offset: 4px; border-radius: 1.5rem; }
+        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem 1.5rem 2.5rem; }
         .flip-card-front { background: var(--card-bg); border: 1px solid var(--border-color); }
         .flip-card-back { background: var(--accent-main); color: white; transform: rotateY(180deg); }
         /* iOS Safari renders backdrop-filter + 3D rotateY together incorrectly (mirrored/upside-down text),
@@ -148,8 +149,9 @@
             -webkit-backdrop-filter: none;
             backdrop-filter: none;
         }
-        .flip-hint { position: absolute; bottom: 14px; right: 16px; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); opacity: 0.6; display: flex; align-items: center; gap: 4px; }
-        .flip-card.flipped .flip-hint { display: none; }
+        .flip-hint { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); opacity: 0.7; }
+        .flip-card-back .flip-hint { color: rgba(255,255,255,0.75); }
+        .lang-btn { padding: 0.5rem 1.1rem; border-radius: 999px; font-size: 0.875rem; font-weight: 600; transition: background .25s, color .25s; }
 
         #gameCanvas { image-rendering: pixelated; }
         
@@ -422,130 +424,23 @@
         </div>
     </section>
 
-    <!-- Upgraded Notes Section (5 Cards) -->
+    <!-- Words to Make You Smile (tap-to-flip, 3 languages) -->
     <section id="words" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-            <div class="text-center mb-16">
+            <div class="text-center mb-8">
                 <h2 class="text-4xl font-serif font-bold text-theme_text mb-4">Words to Make You Smile</h2>
-                <p class="text-theme_muted">Tap a card (or hover on desktop) to flip it. Carefully selected just for you.</p>
+                <p id="words-subtitle" class="text-theme_muted">Tap a card to flip it. Pick your language below.</p>
             </div>
-            
-            <div class="flex flex-wrap justify-center gap-6 md:gap-8 max-w-6xl mx-auto">
-                <!-- Card 1 -->
-                <div class="flip-card w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] max-w-sm" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('flipped')}">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front glass-card">
-                            <span class="text-4xl mb-4">🌹</span>
-                            <h3 class="text-xl font-bold text-theme_text mb-4">Classic Romance</h3>
-                            <p class="text-theme_muted italic px-4">"Roses are red, violets are blue, I didn't know what perfect was until I met you."</p>
-                        <span class="flip-hint">↺ Tap to flip</span></div>
-                        <div class="flip-card-back glass-card">
-                            <div class="w-full space-y-4">
-                                <div>
-                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Tagalog</span>
-                                    <p class="italic text-base">"Ang rosas ay pula, ang violet ay asul, hindi ko alam ang perpekto hanggang makilala kita."</p>
-                                </div>
-                                <div class="border-t border-white/20 pt-2">
-                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Chinese</span>
-                                    <p class="italic text-base">"玫瑰是红色的，紫罗兰是蓝色的，直到遇见你我才知道什么是完美。"</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Card 2 -->
-                <div class="flip-card w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] max-w-sm" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('flipped')}">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front glass-card">
-                            <span class="text-4xl mb-4">📖</span>
-                            <h3 class="text-xl font-bold text-theme_text mb-4">Meaningful</h3>
-                            <p class="text-theme_muted italic px-4">"Are you a dictionary? Because you add meaning to my life."</p>
-                        <span class="flip-hint">↺ Tap to flip</span></div>
-                        <div class="flip-card-back glass-card">
-                            <div class="w-full space-y-4">
-                                <div>
-                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Tagalog</span>
-                                    <p class="italic text-base">"Diksyunaryo ka ba? Kasi binibigyan mo ng kahulugan ang buhay ko."</p>
-                                </div>
-                                <div class="border-t border-white/20 pt-2">
-                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Chinese</span>
-                                    <p class="italic text-base">"你是字典吗？因为你让我的生命有了意义。"</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="flip-card w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] max-w-sm" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('flipped')}">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front glass-card">
-                            <span class="text-4xl mb-4">❤️‍🩹</span>
-                            <h3 class="text-xl font-bold text-theme_text mb-4">Falling Hard</h3>
-                            <p class="text-theme_muted italic px-4">"Do you have a band-aid? Because I scraped my knee falling for you."</p>
-                        <span class="flip-hint">↺ Tap to flip</span></div>
-                        <div class="flip-card-back glass-card">
-                            <div class="w-full space-y-4">
-                                <div>
-                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Tagalog</span>
-                                    <p class="italic text-base">"May band-aid ka ba? Nagasgasan kasi ang tuhod ko kakahulog sa'yo."</p>
-                                </div>
-                                <div class="border-t border-white/20 pt-2">
-                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Chinese</span>
-                                    <p class="italic text-base">"你有创可贴吗？因为我为你倾倒时擦伤了膝盖。"</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4 (New) -->
-                <div class="flip-card w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] max-w-sm" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('flipped')}">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front glass-card">
-                            <span class="text-4xl mb-4">🌟</span>
-                            <h3 class="text-xl font-bold text-theme_text mb-4">Starry Night</h3>
-                            <p class="text-theme_muted italic px-4">"You shine brighter than any star in the night sky."</p>
-                        <span class="flip-hint">↺ Tap to flip</span></div>
-                        <div class="flip-card-back glass-card">
-                            <div class="w-full space-y-4">
-                                <div>
-                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Tagalog</span>
-                                    <p class="italic text-base">"Mas maliwanag ka pa sa pinakaningning na bituin sa gabi."</p>
-                                </div>
-                                <div class="border-t border-white/20 pt-2">
-                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Chinese</span>
-                                    <p class="italic text-base">"你比夜空中最亮的星星还要闪耀。"</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 5 (New) -->
-                <div class="flip-card w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] max-w-sm" onclick="this.classList.toggle('flipped')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('flipped')}">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front glass-card">
-                            <span class="text-4xl mb-4">🍀</span>
-                            <h3 class="text-xl font-bold text-theme_text mb-4">Lucky Me</h3>
-                            <p class="text-theme_muted italic px-4">"I must be the luckiest person in the world to have found you."</p>
-                        <span class="flip-hint">↺ Tap to flip</span></div>
-                        <div class="flip-card-back glass-card">
-                            <div class="w-full space-y-4">
-                                <div>
-                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Tagalog</span>
-                                    <p class="italic text-base">"Ako na yata ang pinakamasuwerte dahil nahanap kita."</p>
-                                </div>
-                                <div class="border-t border-white/20 pt-2">
-                                    <span class="text-xs font-bold text-white/70 uppercase tracking-widest">Chinese</span>
-                                    <p class="italic text-base">"能找到你，我一定是世界上最幸运的人。"</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="flex justify-center mb-12">
+                <div id="lang-switch" class="inline-flex p-1 gap-1 rounded-full glass-card border border-theme_border" role="group" aria-label="Language">
+                    <button type="button" class="lang-btn bg-theme_accent text-white" data-lang="en" onclick="setWordsLang('en')">English</button>
+                    <button type="button" class="lang-btn text-theme_muted" data-lang="tl" onclick="setWordsLang('tl')">Tagalog</button>
+                    <button type="button" class="lang-btn text-theme_muted" data-lang="zh" onclick="setWordsLang('zh')">中文</button>
                 </div>
             </div>
+
+            <div id="words-grid" class="flex flex-wrap justify-center gap-6 md:gap-8 max-w-6xl mx-auto"></div>
         </div>
     </section>
 
@@ -973,6 +868,153 @@
         });
 
         updatePlayerUI();
+
+        // === WORDS TO MAKE YOU SMILE (tap to flip + language switch) ===
+        const wordsUI = {
+            en: { subtitle: "Tap a card to flip it. Pick your language below.", front: "Tap to flip", back: "Tap to flip back" },
+            tl: { subtitle: "I-tap ang card para i-flip. Piliin ang wika sa ibaba.", front: "I-tap para i-flip", back: "I-tap ulit para ibalik" },
+            zh: { subtitle: "点击卡片翻转。在下方选择语言。", front: "点击翻转", back: "再点一下翻回去" }
+        };
+        const wordsCards = [
+            {
+                emoji: "🔬",
+                tag: { en: "Science Class", tl: "Agham", zh: "科学课" },
+                front: {
+                    en: "Did you know the first law of thermodynamics says energy cannot be created nor destroyed?",
+                    tl: "Alam mo ba na ayon sa unang batas ng thermodynamics, hindi nalilikha at hindi rin nawawasak ang enerhiya?",
+                    zh: "你知道热力学第一定律说，能量既不会凭空产生，也不会凭空消失吗？"
+                },
+                back: {
+                    en: "Our love energy cannot be created nor destroyed, because we share it together.",
+                    tl: "Ang enerhiya ng pagmamahalan natin ay hindi rin nalilikha o nawawasak, kasi pinagsasaluhan natin ito.",
+                    zh: "我们的爱也是一样，既不会凭空产生，也不会消失，因为我们一起分享它。"
+                }
+            },
+            {
+                emoji: "📖",
+                tag: { en: "Rizal x You", tl: "Rizal at Ikaw", zh: "黎刹与你" },
+                front: {
+                    en: "Rizal wrote Noli Me Tangere, \"Touch Me Not.\" My heart has the same rule, with one exception.",
+                    tl: "Isinulat ni Rizal ang Noli Me Tangere, \"Huwag Mo Akong Salingin.\" Ganyan din ang puso ko, pero may isang exception.",
+                    zh: "黎刹写了《不要碰我》（Noli Me Tangere）。我的心也有同样的规矩，但有一个例外。"
+                },
+                back: {
+                    en: "The exception is you. Touch my heart anytime, Mei Mei keish. 💖",
+                    tl: "Ang exception ay ikaw. Salingin mo ang puso ko kahit kailan, Mei Mei keish. 💖",
+                    zh: "这个例外就是你。随时都可以触碰我的心，Mei Mei keish。💖"
+                }
+            },
+            {
+                emoji: "🗣️",
+                tag: { en: "Words Fail Me", tl: "Kapos ang Salita", zh: "词不达意" },
+                front: {
+                    en: "Jose Rizal mastered so many languages, yet none of them has enough words to describe you.",
+                    tl: "Maraming wika ang natutunan ni Jose Rizal, pero wala ni isa ang may sapat na salita para ilarawan ka.",
+                    zh: "黎刹精通许多种语言，可没有哪一种语言有足够的词来形容你。"
+                },
+                back: {
+                    en: "So I'll say it in three: I love you. Mahal kita. 我爱你.",
+                    tl: "Kaya sasabihin ko na lang sa tatlong wika: I love you. Mahal kita. 我爱你.",
+                    zh: "所以我用三种语言告诉你：I love you。Mahal kita。我爱你。"
+                }
+            },
+            {
+                emoji: "📱",
+                tag: { en: "Gen Z Poetry", tl: "Tula ng Gen Z", zh: "Z世代情诗" },
+                front: {
+                    en: "Roses are red, violets are blue, my screen time is 12 hours and most of it is you.",
+                    tl: "Pula ang rosas, asul ang violet, ang screen time ko, halos ikaw ang laman buong araw.",
+                    zh: "玫瑰是红色的，紫罗兰是蓝色的，我的屏幕使用时间，大半都是你。"
+                },
+                back: {
+                    en: "Delete every other app. You're my favorite notification. 🔔",
+                    tl: "I-delete na ang lahat ng ibang app. Ikaw ang paborito kong notification. 🔔",
+                    zh: "其他的 App 都可以删掉。你是我最喜欢的通知。🔔"
+                }
+            },
+            {
+                emoji: "🎮",
+                tag: { en: "Roblox Love", tl: "Pag-ibig sa Roblox", zh: "Roblox 情话" },
+                front: {
+                    en: "Out of every server in all of Roblox, I'd still join the one where you are.",
+                    tl: "Sa lahat ng server sa buong Roblox, doon pa rin ako sasali kung nasaan ka.",
+                    zh: "在 Roblox 所有的服务器里，我还是会加入有你在的那一个。"
+                },
+                back: {
+                    en: "No lag, no ping, just you. 10/10, would stay forever.",
+                    tl: "Walang lag, walang ping, ikaw lang. 10/10, dito na ako forever.",
+                    zh: "不卡顿，不掉线，只有你。十分满分，我想永远留在这里。"
+                }
+            },
+            {
+                emoji: "💭",
+                tag: { en: "Sana Ikaw", tl: "Sana Ikaw", zh: "只愿是你" },
+                front: {
+                    en: "Everyone says \"sana all\" (hope everyone gets it). I only ever say \"sana ikaw\" (hope it's you).",
+                    tl: "Lahat ay nagsasabing \"sana all.\" Ako, \"sana ikaw\" lang.",
+                    zh: "大家都说 “sana all”（希望人人都有）。我只会说 “sana ikaw”（只希望是你）。"
+                },
+                back: {
+                    en: "Why wish for everyone when the one I want is already you?",
+                    tl: "Bakit pa hihiling para sa lahat, kung ikaw na ang gusto ko?",
+                    zh: "我想要的那个人已经是你了，又何必祝愿所有人呢？"
+                }
+            }
+        ];
+        let wordsLang = 'en';
+        const flippedWords = new Set();
+
+        function renderWords() {
+            const ui = wordsUI[wordsLang];
+            document.getElementById('words-subtitle').textContent = ui.subtitle;
+            document.getElementById('words-grid').innerHTML = wordsCards.map((c, i) => `
+                <div class="flip-card w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)] max-w-sm ${flippedWords.has(i) ? 'flipped' : ''}" data-index="${i}" role="button" tabindex="0" aria-label="${c.tag[wordsLang]}">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card" lang="${wordsLang}">
+                            <span class="text-4xl mb-3">${c.emoji}</span>
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-theme_accent mb-3">${c.tag[wordsLang]}</h3>
+                            <p class="text-theme_text font-serif text-base sm:text-lg leading-snug">${c.front[wordsLang]}</p>
+                            <span class="flip-hint">↺ ${ui.front}</span>
+                        </div>
+                        <div class="flip-card-back glass-card" lang="${wordsLang}">
+                            <p class="font-serif italic text-lg sm:text-xl leading-snug">${c.back[wordsLang]}</p>
+                            <span class="flip-hint">↺ ${ui.back}</span>
+                        </div>
+                    </div>
+                </div>`).join('');
+            document.querySelectorAll('#lang-switch .lang-btn').forEach(btn => {
+                const active = btn.dataset.lang === wordsLang;
+                btn.classList.toggle('bg-theme_accent', active);
+                btn.classList.toggle('text-white', active);
+                btn.classList.toggle('text-theme_muted', !active);
+            });
+        }
+
+        function setWordsLang(lang) {
+            if (!wordsUI[lang] || lang === wordsLang) return;
+            wordsLang = lang;
+            renderWords();
+        }
+
+        function toggleWordCard(card) {
+            const i = Number(card.dataset.index);
+            card.classList.toggle('flipped');
+            if (card.classList.contains('flipped')) flippedWords.add(i); else flippedWords.delete(i);
+        }
+
+        (function () {
+            const grid = document.getElementById('words-grid');
+            grid.addEventListener('click', e => {
+                const card = e.target.closest('.flip-card');
+                if (card) toggleWordCard(card);
+            });
+            grid.addEventListener('keydown', e => {
+                if (e.key !== 'Enter' && e.key !== ' ') return;
+                const card = e.target.closest('.flip-card');
+                if (card) { e.preventDefault(); toggleWordCard(card); }
+            });
+            renderWords();
+        })();
 
         // === PUZZLE LOGIC ===
         const puzzleData = [
