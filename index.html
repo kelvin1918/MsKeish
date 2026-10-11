@@ -234,6 +234,15 @@
             100% { transform: translateY(-20vh) rotate(45deg) scale(1.2); opacity: 0; }
         }
         .animate-float-up { animation: float-up linear infinite; }
+
+        /* Chat extras */
+        .typing-dot { display: inline-block; width: 6px; height: 6px; margin: 0 2px; border-radius: 50%; background: var(--text-muted); animation: typing-bounce 1.2s infinite ease-in-out; }
+        .typing-dot:nth-child(2) { animation-delay: 0.15s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.3s; }
+        @keyframes typing-bounce { 0%, 60%, 100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-4px); opacity: 1; } }
+        .chat-chip { flex: 0 0 auto; font-size: 0.75rem; padding: 0.35rem 0.8rem; border-radius: 999px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-main); transition: border-color .2s, color .2s; }
+        .chat-chip:hover { border-color: var(--accent-main); color: var(--accent-main); }
+        #chat-chips::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="antialiased selection:bg-theme_accent selection:text-white overflow-hidden" id="main-body">
@@ -257,7 +266,7 @@
             </div>
 
             <div class="lock-content relative">
-                <p class="lock-eyebrow">A Special Delivery &middot; For Mei Mei Keish</p>
+                <p class="lock-eyebrow">A Special Delivery &middot; For Mei Mei keish</p>
 
                 <svg id="lock-icon" class="lock-svg" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <defs>
@@ -367,7 +376,7 @@
             <h2 class="text-xs font-bold tracking-[0.2em] text-theme_accent uppercase animate-pulse-slow">Specially Made For You</h2>
             <h1 class="text-5xl md:text-7xl font-serif font-bold text-theme_text leading-tight">
                 Hello, <br>
-                <span class="text-theme_accent italic">Mei Mei Keish</span>
+                <span class="text-theme_accent italic">Mei Mei keish</span>
             </h1>
             <p class="text-lg text-theme_muted leading-relaxed font-light max-w-lg mx-auto md:mx-0">
                 In a world full of noise, I wanted to create a beautiful corner just for us. Wrapped in your favorite colors, this is my way of showing how much you mean to me.
@@ -401,16 +410,16 @@
                 <span class="absolute top-2 left-6 text-8xl text-theme_accent opacity-10 font-serif leading-none z-0">"</span>
                 
                 <div class="font-serif text-lg md:text-xl text-theme_text leading-loose space-y-6 relative z-10">
-                    <p>Dearest <span class="font-bold text-theme_accent">Mei Mei Keish</span>,</p>
+                    <p>Dearest <span class="font-bold text-theme_accent">Mei Mei keish</span>,</p>
                     <p>I wanted to find a unique way to tell you how I feel. Whether you prefer the elegance of white, the boldness of black, or the charm of pink and purple, I built this space so you can make it entirely your own.</p>
                     <p>Since you came into my life, everything feels incredibly beautiful. I find myself dreaming not just of my own future, but of a future where you are beside me.  When I was actually hide my feelings to you i just felt like i dont have hope to a girl like you that could ever like me back. You're top girl you even join a motorace and im just nothing. But when you make me feel you like 
                         me too, i dont know what to say. I became speechless. I just keep on my mind youre just triping or what, i just thinking its just my fantasy that a girl like you would like me in this way. But i became fell when you always spamming "Mr Clyde Pogi". Although 
                         im not that pogi so much, you stalked my image and you really said it. I want to admit i liked you since the conflict starts beetween somone trying to mock your voice and your ava, i keep tryin to protect you, to be at your side, and guide you, and sharing 
                         me your stories, which i appreciated the most. It makes me feel that youve been like my entire life, that we are under the darkness of this world. </p>
                     <p>I can still remember the moments where you advice the other friends, you got me there and amaze more to you. Youre make me believe that you got a good heart not only for yourself but for the others. Thats really makes me proud. And when your competition was 
-                        about to begin at the motorace i really prayed fo your successfullness and became winner afterall, thats why I keep reminding you that you caaaannn dooo iittt!!. I will always be here supporting your carreer. I appreciate i became your motivation at that event HAHA. 
+                        about to begin at the motorace i really prayed fo your successfullness and become winner, thats why i keep reminding you that you caaaannn dooo iittt!!. I will always be here supporting your carreer. I appreciate i became your motivsation at that  event HAHA. 
                         Thats why i really wanted to be with you, and i stay with you as always, telling that promise we made for us together and forever. I admit that I am also innocent inside of this world. I dont have idea, or what to do, what to move, I only know spreading kindness.
-                        However, i always keep reminding you that this world is cruel. I dont have idea to counter this as well. I want to explore this world more and more together with you. Stay with me Ms Keish ko</p>
+                        However, i always keep reminding you that this world is cruel. I dont have idea to counter this as well. I want to explore this world more and more together with you. Stay with me Ms keish ko</p>
                     <p>You have this wonderful balance of grace and magic that draws me in. I hope this humble creation brings a smile to your face today, tomorrow, and the days after. I'm looking forward to earning your heart, one day at a time.</p>
                     
                     <div class="pt-8 text-right">
@@ -418,6 +427,41 @@
                         <p class="font-bold text-xl text-theme_accent mt-1">Kelvin</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Time Together (live counter) -->
+    <section id="together" class="py-20 relative overflow-hidden">
+        <div class="absolute right-0 top-1/3 w-72 h-72 bg-theme_accent rounded-full blur-[110px] opacity-10 pointer-events-none"></div>
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+            <p class="text-xs uppercase tracking-[0.3em] text-theme_accent font-semibold mb-3">Every moment with you</p>
+            <h2 class="text-4xl font-serif font-bold text-theme_text mb-2">Our Time Together</h2>
+            <p id="together-since" class="text-theme_muted text-sm mb-10">&nbsp;</p>
+
+            <div class="glass-card rounded-3xl p-5 sm:p-10">
+                <div class="grid grid-cols-4 gap-2 sm:gap-5">
+                    <div class="rounded-2xl bg-theme_bg/60 border border-theme_border py-4 sm:py-7">
+                        <div id="t-days" class="font-serif font-bold text-theme_accent text-2xl sm:text-5xl leading-none tabular-nums">0</div>
+                        <div class="text-[10px] sm:text-xs uppercase tracking-widest text-theme_muted mt-2 sm:mt-3">Days</div>
+                    </div>
+                    <div class="rounded-2xl bg-theme_bg/60 border border-theme_border py-4 sm:py-7">
+                        <div id="t-hours" class="font-serif font-bold text-theme_accent text-2xl sm:text-5xl leading-none tabular-nums">00</div>
+                        <div class="text-[10px] sm:text-xs uppercase tracking-widest text-theme_muted mt-2 sm:mt-3">Hours</div>
+                    </div>
+                    <div class="rounded-2xl bg-theme_bg/60 border border-theme_border py-4 sm:py-7">
+                        <div id="t-mins" class="font-serif font-bold text-theme_accent text-2xl sm:text-5xl leading-none tabular-nums">00</div>
+                        <div class="text-[10px] sm:text-xs uppercase tracking-widest text-theme_muted mt-2 sm:mt-3">Minutes</div>
+                    </div>
+                    <div class="rounded-2xl bg-theme_bg/60 border border-theme_border py-4 sm:py-7">
+                        <div id="t-secs" class="font-serif font-bold text-theme_accent text-2xl sm:text-5xl leading-none tabular-nums">00</div>
+                        <div class="text-[10px] sm:text-xs uppercase tracking-widest text-theme_muted mt-2 sm:mt-3">Seconds</div>
+                    </div>
+                </div>
+
+                <p id="together-summary" class="font-handwriting text-2xl sm:text-3xl text-theme_accent mt-8">&nbsp;</p>
+                <div class="w-16 h-px bg-theme_border mx-auto my-5"></div>
+                <p id="together-next" class="text-theme_muted text-sm">&nbsp;</p>
             </div>
         </div>
     </section>
@@ -665,7 +709,7 @@
             </div>
 
             <p class="font-handwriting text-3xl sm:text-4xl text-theme_accent mb-2">Made with endless admiration</p>
-            <p class="text-theme_muted text-sm mb-8">by Kelvin, for Mei Mei Keish.</p>
+            <p class="text-theme_muted text-sm mb-8">by Kelvin, for Mei Mei keish.</p>
 
             <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-8 text-xs uppercase tracking-widest">
                 <a href="#letter" class="text-theme_muted hover:text-theme_accent transition-colors">Letter</a>
@@ -708,17 +752,26 @@
         </div>
         
         <!-- Chat Messages Area -->
-        <div class="h-[350px] p-5 overflow-y-auto flex flex-col space-y-4 bg-theme_bg/90" id="chat-messages">
+        <div class="h-[min(350px,42vh)] p-5 overflow-y-auto flex flex-col space-y-4 bg-theme_bg/90" id="chat-messages">
             <div class="flex items-start">
                 <div class="bg-theme_border text-theme_text rounded-2xl rounded-tl-none px-4 py-2 max-w-[85%] text-sm shadow-sm">
-                    Hi Ms Keish! I'm a little chat placeholder built just for you. Send a message, and I'll keep you company while you explore! 💖
+                    Hi Ms keish ko! 💖 I'm Virtual Kelvin, the auto-reply version of me, here to keep you company while you explore. How's your day going? You can write to me in English, Tagalog, or 中文.
                 </div>
             </div>
         </div>
         
+        <!-- Quick replies -->
+        <div id="chat-chips" class="px-4 pt-3 pb-1 bg-theme_card border-t border-theme_border flex gap-2 overflow-x-auto whitespace-nowrap">
+            <button type="button" class="chat-chip" onclick="quickChat('I miss you')">I miss you 💭</button>
+            <button type="button" class="chat-chip" onclick="quickChat('I am tired')">I'm tired 😴</button>
+            <button type="button" class="chat-chip" onclick="quickChat('I had a rough day')">Rough day 🥺</button>
+            <button type="button" class="chat-chip" onclick="quickChat('Say something sweet')">Say something sweet 💖</button>
+            <button type="button" class="chat-chip" onclick="quickChat('Good night')">Good night 🌙</button>
+        </div>
+
         <!-- Chat Input Area -->
-        <div class="p-4 bg-theme_card border-t border-theme_border flex items-center space-x-2">
-            <input type="text" id="chat-input" class="flex-1 bg-theme_bg border border-theme_border rounded-full px-4 py-2.5 text-theme_text focus:outline-none focus:border-theme_accent text-sm" placeholder="Say something nice..." onkeypress="handleChatEnter(event)">
+        <div class="p-4 pt-2 bg-theme_card flex items-center space-x-2">
+            <input type="text" id="chat-input" class="flex-1 bg-theme_bg border border-theme_border rounded-full px-4 py-2.5 text-theme_text focus:outline-none focus:border-theme_accent text-sm" placeholder="Tell me how you're feeling..." onkeypress="handleChatEnter(event)">
             <button onclick="sendChat()" class="w-10 h-10 rounded-full bg-theme_accent text-white flex items-center justify-center hover:bg-theme_accent_hover transition-colors flex-shrink-0">
                 <svg class="w-4 h-4 transform rotate-45 -mt-0.5 -mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
             </button>
@@ -740,16 +793,16 @@
                 </div>
 
                 <div class="font-serif text-base sm:text-lg text-theme_text/90 leading-relaxed space-y-4">
-                    <p class="font-handwriting text-2xl text-theme_accent">Dear Mei Mei Keish,</p>
+                    <p class="font-handwriting text-2xl text-theme_accent">Dear Mei Mei keish,</p>
                     <p>If you're reading this, it means you solved every riddle, followed every clue, and opened the door I've been quietly standing behind. You reached the way to my heart, and honestly, I think you've been holding the key for a long time.</p>
                     <p>I made this little corner of the internet because ordinary words never felt like enough. Every riddle you just answered was a piece of us: the dozen roses, the name I always greet you with, the guitar I pick up when you're on my mind, your favorite sweet treats, and the two words that became our favorite number: Together and Forever.</p>
                     <p>Somewhere between the late-night calls, the silly Roblox adventures, and the songs I kept adding to our playlist, you became my favorite part of every day. You make ordinary moments feel special. Being near you, even through a screen, feels like coming home.</p>
-                    <p>I hope you can still accepts me, whoever am I. I already show my face my status and any other else, just to you to know more about me. I am a slave of this world and you will be my majestic princess. Altho you keepin me to dont say it, but you make me feel that you valued me. I hope you can stay to the end even im poor or I called myself as a slave and insecured. But no matter what it is, i will stay here at your side, spend my time to you as always. Youre my home, my rest, my peace i can lean with. I will always adjust myself for you</p>
-                    <p>I hope you you will always still be in there, im just scared to lose you. Im so lucky that i have you. My Ms Chinita, My Ms Keish, My Girl. So dont leave me please🥺</p>
+                    <p>I hope you can still accepts me, whoever am I. I already show my face my status and any other else, just to you to know more about me. I am a slave of this world and you will be my majestic princess. Altho you keepin me to dont say it, but you make me feel that you valued me. I hope you can stay to the end even im poor or i called myself as a slave and insecured. But no matter what it is, i will stay here at your side, spend my time to you as always. Youre my home, my rest, my peace i can lean with. I will always adjust myself for you</p>
+                    <p>I hope you you will always still be in there, im just scared to lose you. Im so luck that i have you. My Ms hinita, My Ms Keish, My Girl. So dont leave me please🥺</p>
                     <p>So before you go any further, I want to be honest with you. I'm not asking for a game or for a passing moment. I'm asking for something real. I hope you are ready to commit, to choose each other on the easy days and on the hard ones, to be patient with one another, and to stay honest even when it's uncomfortable. And I hope you are sure, because I am. I would never rush your heart. I only want to be someone who deserves it.</p>
                     <p>I promise to listen to you, to respect you and the people you love, to stay loyal, to make you laugh on the days you forget how, to cheer on your dreams, and to keep choosing you, again and again, long after this page is closed.</p>
                     <p>So, with a nervous heart and my whole sincerity, I'll ask you the question I've been carrying all this time:</p>
-                    <p class="text-center font-serif text-xl sm:text-2xl font-bold text-theme_accent py-2">Mei Mei Keish, can I court you? 🌷</p>
+                    <p class="text-center font-serif text-xl sm:text-2xl font-bold text-theme_accent py-2">Mei Mei keish, can I court you? 🌷</p>
                     <p>Take a breath. Whatever you choose, I'll honor it.</p>
                     <p class="font-handwriting text-2xl text-theme_text text-right pt-2">Always yours,<br>Kelvin 💖</p>
                 </div>
@@ -852,6 +905,7 @@
             function unlock() {
                 done = true;
                 playTrack(0);   // first song starts the moment the lock opens
+                notifyKelvin('unlocked');
                 errEl.style.opacity = '0';
                 overlay.classList.add('unlocking');
                 setTimeout(() => { overlay.classList.add('opened'); if (typeof loveConfetti === 'function') loveConfetti(10000); }, 1500);
@@ -1097,9 +1151,9 @@
                     zh: "黎刹写了《不要碰我》（Noli Me Tangere）。我的心也有同样的规矩，但有一个例外。"
                 },
                 back: {
-                    en: "The exception is you. Touch my heart anytime, Mei Mei Keish. 💖",
-                    tl: "Ang exception ay ikaw. Salingin mo ang puso ko kahit kailan, Mei Mei Keish. 💖",
-                    zh: "这个例外就是你。随时都可以触碰我的心，Mei Mei Keish。💖"
+                    en: "The exception is you. Touch my heart anytime, Mei Mei keish. 💖",
+                    tl: "Ang exception ay ikaw. Salingin mo ang puso ko kahit kailan, Mei Mei keish. 💖",
+                    zh: "这个例外就是你。随时都可以触碰我的心，Mei Mei keish。💖"
                 }
             },
             {
@@ -1375,6 +1429,7 @@
                 return;
             }
             playTrack(1);   // all riddles answered: second song starts
+            notifyKelvin('riddlesDone');
             advanceAfterCorrect(step, () => {
                 puzzleIndex = puzzleData.length;
                 renderPuzzleProgress();
@@ -1471,6 +1526,7 @@
 
         function loveAgree() {
             loveAgreed = true;
+            notifyKelvin('agree');
             if (!loveVideo.getAttribute('src')) loveVideo.src = 'video/love.mp4';
             pauseMusicForVideo();   // music stops so it doesn't play over the video
             showLoveView('video');
@@ -1480,6 +1536,7 @@
         }
 
         function loveDisagree() {
+            notifyKelvin('disagree');
             document.getElementById('love-disagree-note').style.opacity = '1';
         }
 
@@ -1707,7 +1764,552 @@
             initMemoryGame();
         });
 
-        // === FLOATING CHATBOT LOGIC ===
+        // === ANSWER NOTIFICATIONS (email to Kelvin, via Web3Forms) ===
+        // 1) Go to https://web3forms.com, type YOUR email, and they email you an Access Key (free).
+        // 2) Paste it below in accessKey. That's all. The key can only send emails to your address, so it's fine that it's visible.
+        const NOTIFY = {
+            accessKey: "fc50e465-c3d1-4497-bef5-b08f8e47816a",
+            events: {
+                agree: true,          // she tapped Agree on the letter
+                disagree: true,       // she tapped Disagree
+                unlocked: false,      // she opened the lock screen   (set to true if you want a ping)
+                riddlesDone: false    // she finished all 7 riddles    (set to true if you want a ping)
+            }
+        };
+        const NOTIFY_TEXT = {
+            agree: { subject: "💖 She tapped AGREE!", body: "Mei Mei keish tapped AGREE at the end of your letter. She said yes to you courting her. 💖" },
+            disagree: { subject: "🤍 She tapped Disagree", body: "Mei Mei keish tapped DISAGREE on your letter. She may just need time. Be gentle, keep being kind, and respect her answer. 🤍" },
+            unlocked: { subject: "🔓 She opened your site", body: "She entered 'Together and Forever' and unlocked your site." },
+            riddlesDone: { subject: "💌 She finished all 7 riddles", body: "She answered every riddle and is now reading your letter." }
+        };
+        const notifiedOnce = {};
+        const notifyReady = () => NOTIFY.accessKey && NOTIFY.accessKey.indexOf('PASTE_') !== 0;
+
+        function sendNotification(payload) {
+            return fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(payload),
+                keepalive: true
+            }).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+              .then(data => { if (data && data.success === false) throw new Error(data.message || 'rejected'); });
+        }
+
+        function queueNotificationForLater(payload) {
+            try {
+                const q = JSON.parse(localStorage.getItem('pendingNotifications') || '[]');
+                q.push(payload);
+                localStorage.setItem('pendingNotifications', JSON.stringify(q.slice(-10)));
+            } catch (e) { /* storage not available: nothing to do */ }
+        }
+
+        function notifyKelvin(eventName) {
+            if (!NOTIFY.events[eventName] || notifiedOnce[eventName]) return;
+            notifiedOnce[eventName] = true;
+            if (!notifyReady()) { console.info('[notify] add your Web3Forms access key to get an email for:', eventName); return; }
+            const t = NOTIFY_TEXT[eventName];
+            const when = new Date().toLocaleString('en-PH', { dateStyle: 'full', timeStyle: 'short', timeZone: 'Asia/Manila' });
+            const payload = { access_key: NOTIFY.accessKey, subject: t.subject, from_name: 'Our Love Letter Site', message: t.body + '\n\nTime: ' + when + ' (Philippine time)' };
+            sendNotification(payload).catch(() => queueNotificationForLater(payload));
+        }
+
+        // If a notification couldn't be sent (no signal), try again the next time the page opens
+        (function flushPendingNotifications() {
+            if (!notifyReady()) return;
+            try {
+                const q = JSON.parse(localStorage.getItem('pendingNotifications') || '[]');
+                if (!q.length) return;
+                localStorage.removeItem('pendingNotifications');
+                q.forEach(p => sendNotification(p).catch(() => queueNotificationForLater(p)));
+            } catch (e) { /* ignore */ }
+        })();
+
+        // === OUR TIME TOGETHER (live counter) ===
+        // CHANGE THE DATE BELOW to the day you want to count from (keep the same format).
+        const OUR_STORY = {
+            startsAt: "2026-09-07T00:00:00+08:00",   // <-- YYYY-MM-DDTHH:MM:SS+08:00  (+08:00 = Philippine time)
+            caption: "since we first talked when i reactivate my account"          // shown under the title, next to the date
+        };
+
+        (function ourTimeTogether() {
+            const section = document.getElementById('together');
+            const start = new Date(OUR_STORY.startsAt);
+            if (!section || isNaN(start)) { if (section) section.style.display = 'none'; return; }
+
+            const el = id => document.getElementById(id);
+            const pad = n => String(n).padStart(2, '0');
+            const daysInMonth = (y, m) => new Date(y, m + 1, 0).getDate();   // m is 0-based
+            const plural = (n, w) => n + ' ' + w + (n === 1 ? '' : 's');
+            const ordinal = n => { const r = n % 100; if (r >= 11 && r <= 13) return n + 'th'; return n + (['th', 'st', 'nd', 'rd'][n % 10] || 'th'); };
+            const dayOnly = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+
+            el('together-since').textContent = OUR_STORY.caption + ' · ' + start.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Manila' });
+
+            function tick() {
+                const now = new Date();
+                const diff = Math.max(0, now - start);
+                el('t-days').textContent = Math.floor(diff / 86400000).toLocaleString('en-US');
+                el('t-hours').textContent = pad(Math.floor(diff % 86400000 / 3600000));
+                el('t-mins').textContent = pad(Math.floor(diff % 3600000 / 60000));
+                el('t-secs').textContent = pad(Math.floor(diff % 60000 / 1000));
+
+                // years / months / days
+                let y = 0, m = 0, d = 0;
+                if (now > start) {
+                    y = now.getFullYear() - start.getFullYear();
+                    m = now.getMonth() - start.getMonth();
+                    d = now.getDate() - start.getDate();
+                    if (d < 0) { m--; d += daysInMonth(now.getFullYear(), now.getMonth() - 1); }
+                    if (m < 0) { y--; m += 12; }
+                }
+                const parts = [];
+                if (y) parts.push(plural(y, 'year'));
+                if (m) parts.push(plural(m, 'month'));
+                if (d) parts.push(plural(d, 'day'));
+                el('together-summary').textContent = parts.length
+                    ? "That's " + (parts.length > 1 ? parts.slice(0, -1).join(', ') + ' and ' + parts[parts.length - 1] : parts[0]) + ' of you in my life 💖'
+                    : "Today is where our story begins 💖";
+
+                // next monthsary / anniversary
+                const totalMonths = y * 12 + m;
+                const sd = start.getDate();
+                const targetThisMonth = Math.min(sd, daysInMonth(now.getFullYear(), now.getMonth()));
+                const label = n => (n % 12 === 0 ? ordinal(n / 12) + ' anniversary' : ordinal(n) + ' monthsary');
+                if (now > start && totalMonths >= 1 && now.getDate() === targetThisMonth) {
+                    el('together-next').textContent = '🎉 Happy ' + label(totalMonths) + ' today! 🎉';
+                } else {
+                    let next = new Date(now.getFullYear(), now.getMonth(), targetThisMonth);
+                    if (dayOnly(next) <= dayOnly(now)) {
+                        const nm = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+                        next = new Date(nm.getFullYear(), nm.getMonth(), Math.min(sd, daysInMonth(nm.getFullYear(), nm.getMonth())));
+                    }
+                    const daysLeft = Math.round((dayOnly(next) - dayOnly(now)) / 86400000);
+                    const nextCount = totalMonths + 1;
+                    el('together-next').textContent = 'Next up: our ' + label(nextCount) + ' in ' + plural(daysLeft, 'day') + ' (' + next.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ')';
+                }
+            }
+            tick();
+            setInterval(tick, 1000);
+        })();
+
+        // === FLOATING CHATBOT: auto-replies in Kelvin's voice ===
+        // Not a real AI: it reads what she types (English, Tagalog or Chinese), figures out the feeling
+        // (sad, tired, sick, happy, "I miss you"...) and builds a reply from caring / supportive / loving lines,
+        // so no two chats feel the same. To change how "Kelvin" talks, edit the lines in kelvinIntents below.
+        const kelvinChat = (function () {
+            const pickRandom = a => a[Math.floor(Math.random() * a.length)];
+            const lastPick = {};
+            function pick(key, arr) {
+                if (arr.length === 1) return arr[0];
+                let i, tries = 0;
+                do { i = Math.floor(Math.random() * arr.length); tries++; } while (i === lastPick[key] && tries < 8);
+                lastPick[key] = i;
+                return arr[i];
+            }
+
+            const mem = { lang: 'en', mood: null, moodTurns: 0, turns: 0 };
+            const NAMES = { en: ['Ms keish', 'Ms keish ko', 'Mei Mei'], tl: ['Ms keish ko', 'Ms keish', 'Mei Mei'], zh: ['Mei Mei', 'Keish'] };
+            const GREET = {
+                en: { morning: 'Good morning', afternoon: 'Good afternoon', evening: 'Good evening', night: 'Hi, night owl' },
+                tl: { morning: 'Magandang umaga', afternoon: 'Magandang hapon', evening: 'Magandang gabi', night: 'Gising ka pa pala' },
+                zh: { morning: '早安', afternoon: '下午好', evening: '晚上好', night: '这么晚还没睡' }
+            };
+            const isLate = () => { const h = new Date().getHours(); return h >= 23 || h < 4; };
+            function greeting(lang) {
+                const h = new Date().getHours();
+                const part = h < 5 ? 'night' : h < 12 ? 'morning' : h < 18 ? 'afternoon' : h < 22 ? 'evening' : 'night';
+                return GREET[lang][part];
+            }
+            function fill(s, lang) {
+                return s.replace(/\{name\}/g, () => pickRandom(NAMES[lang])).replace(/\{greet\}/g, () => greeting(lang));
+            }
+
+            const STRONG_TAGALOG = /\b(ako|ikaw|ka|mo|ko|po|opo|hindi|oo|salamat|mahal|kita|pagod|antok|tulog|gutom|kumusta|kamusta|musta|lungkot|malungkot|iyak|sakit|masakit|ingat|sana|naman|kasi|talaga|yung|ung|namin|natin|tayo|gusto|ayoko|ayaw|pwede|wag|huwag|bakit|paano|saan|kailan|sino|ganda|pogi|gwapo|sige|hays|inis|galit|nasaan|ginagawa|kumain|nakakain|aalis|uuwi|puyat|trabaho|pasok|aral|laro|namimiss|sobra|nakakainis|naiinis)\b/i;
+            function detectLang(text) {
+                if (/[\u4e00-\u9fff]/.test(text)) return 'zh';
+                if (STRONG_TAGALOG.test(text)) return 'tl';
+                return null;
+            }
+
+            // Each intent: re = what to look for, then banks of lines per language.
+            // One line is picked from each bank and each becomes its own chat bubble (the last bank is sometimes skipped).
+            const kelvinIntents = [
+                {
+                    id: 'crisis', mood: 'down',
+                    re: /kill myself|want to die|wanna die|end my life|end it all|suicid|self[- ]?harm|hurt myself|don'?t want to live|no reason to live|magpakamatay|gusto kong mamatay|ayoko na mabuhay|ayaw ko na mabuhay|不想活|想死|自杀/i,
+                    fixed: {
+                        en: ["Ms keish, please pause for a second and breathe with me. I'm really glad you told me, and I'm really worried about you right now. 🥺",
+                             "Please don't stay alone with this. Tell someone close to you right now, like family or a friend who can be with you tonight, and message the real me too. I'm only an auto-reply, and you deserve a real person.",
+                             "If you're in the Philippines, you can call the NCMH Crisis Hotline at 1553 or 0917 899 8727, or 911 for emergencies, any time. If you feel you might act on these thoughts, please call right now. Your life matters so much to me. 💖"],
+                        tl: ["Ms keish, huminto ka muna sandali at huminga kasama ako. Natutuwa akong sinabi mo sa akin, at nag-aalala ako sa'yo ngayon. 🥺",
+                             "Huwag mong harapin 'to mag-isa. Sabihin mo agad sa taong malapit sa'yo, tulad ng pamilya o kaibigang pwedeng samahan ka ngayong gabi, at i-message mo rin ang totoong ako. Auto-reply lang ako, at karapat-dapat ka sa totoong tao.",
+                             "Kung nasa Pilipinas ka, pwede kang tumawag sa NCMH Crisis Hotline sa 1553 o 0917 899 8727, o sa 911 kung emergency, kahit anong oras. Kung pakiramdam mo ay baka magawa mo ang mga iniisip mo, tumawag ka na ngayon. Napakahalaga ng buhay mo sa akin. 💖"],
+                        zh: ["Mei Mei，先停一下，跟我一起深呼吸。谢谢你告诉我，我现在真的很担心你。🥺",
+                             "请不要一个人扛着。马上告诉身边信任的人，比如家人或能今晚陪着你的朋友，也请联系真正的我。我只是自动回复，你值得有真人陪伴。",
+                             "如果你在菲律宾，可以随时拨打 NCMH 危机热线 1553 或 0917 899 8727，紧急情况请拨 911。如果你觉得自己可能会伤害自己，请现在就打电话。你的生命对我来说非常重要。💖"]
+                    }
+                },
+                {
+                    id: 'insecure', mood: 'down',
+                    re: /i'?m (so |really )?(not (good|pretty|smart|enough|worth)|ugly|stupid|useless|a burden|a failure|worthless)|i hate myself|i feel (so )?(worthless|useless|ugly)|pangit ako|walang kwenta ako|hindi ako (magaling|sapat|maganda|karapat)|di ako (magaling|sapat|maganda)|ayoko sa sarili ko|我不够好|我很丑|我没用/i,
+                    en: [["Hey, stop right there. 🥺 I'm not letting anyone talk about my favorite person like that, not even you.", "Ms keish ko, no. I don't like hearing you say that about yourself. 🥺", "Wait, wait. That's not true, and I'll say it as many times as you need."],
+                         ["You're kind, you're brave, and you care about everyone around you. I've seen it, I was there, remember?", "I've watched you give advice to your friends and stay strong. That's not someone who isn't enough.", "You have a good heart that makes everyone around you better. I'm proud of you, always."],
+                         ["What made you feel this way today? I'm listening, okay?", "Tell me what happened. I'm not going anywhere. 💖", "I care about you so much. Talk to me?"]],
+                    tl: [["Teka, teka. 🥺 Hindi ko papayagan na ganyan mo sabihin ang tungkol sa paborito kong tao, kahit ikaw pa.", "Ms keish ko, huwag ganyan. Ayokong naririnig na ganyan ang sinasabi mo sa sarili mo. 🥺"],
+                         ["Mabait ka, matapang ka, at nagmamalasakit ka sa lahat. Nakita ko 'yan, nandoon ako, 'di ba?", "Nakita kong nagpapayo ka sa mga kaibigan mo at nananatiling matatag. Hindi 'yan taong kulang. Proud na proud ako sa'yo."],
+                         ["Anong nangyari ngayong araw? Nandito lang ako, nakikinig.", "Kuwentuhan mo ako, hindi ako aalis. 💖"]],
+                    zh: [["别这么说。🥺 我不允许任何人这样说我最在乎的人，包括你自己。"], ["你善良、勇敢，还会关心身边的每个人。你值得所有的好。"], ["今天发生什么事了吗？我在听。💖"]]
+                },
+                {
+                    id: 'doyouloveme', mood: null,
+                    re: /do you (love|like|miss|care (about|for)) me|love mo (ba )?ako|mahal mo (ba )?ako|miss mo (ba )?ako|gusto mo (ba )?ako|你爱我吗|你想我吗/i,
+                    en: [["Of course I do. 🥹 Why would you even ask?", "Always, {name}. Every single day.", "Do I? Ms keish ko... I built a whole website for you. HAHA"],
+                         ["I care about you, I love you, and I'm sure about you. Nothing about that is changing.", "You're the first person I think about when I wake up and the last before I sleep.", "I'll keep showing you in little ways, again and again, until you never doubt it."],
+                         ["Do you need me to say it again? I'll say it all night. 💖", "Are you feeling unsure today? You can tell me anything. 🥺"]],
+                    tl: [["Siyempre. 🥹 Bakit mo pa itatanong?", "Palagi, {name}. Araw-araw.", "Mahal ba kita? Ms keish ko... gumawa ako ng buong website para sa'yo. HAHA"],
+                         ["Mahal kita, mahalaga ka sa akin, at sigurado ako sa'yo. Walang magbabago diyan.", "Ikaw ang una kong naiisip paggising ko at huli bago ako matulog.", "Ipaparamdam ko sa maliliit na paraan, paulit-ulit, hanggang hindi ka na magduda."],
+                         ["Gusto mo bang ulitin ko? Sasabihin ko buong gabi. 💖", "Hindi ka ba sigurado ngayon? Pwede mong sabihin sa akin ang lahat. 🥺"]],
+                    zh: [["当然啊。🥹 为什么还要问呢？"], ["我在乎你、爱你，也很确定。这些都不会变。"], ["要我再说一遍吗？说一整晚都可以。💖"]]
+                },
+                {
+                    id: 'loveyou', mood: null,
+                    re: /i\s*(love|luv)\s*(you|u)\b|\blove (you|u) (so much|too|more)|iloveyou|\bily\b|mahal kita|mahal na mahal kita|love kita|我爱你|爱你/i,
+                    en: [["I love you too. 🥹💖", "Ms keish ko... I love you. More than I can put in words.", "Okay my heart just did a backflip. I love you too! 🥹"],
+                         ["Hearing that from you makes everything feel lighter.", "I'll never get tired of hearing that from you.", "You're my favorite person in this whole world, you know that?"],
+                         ["I'll always be here for you, no matter what. Together and Forever. 🔑💖", "Thank you for trusting me with your heart. I'll take care of it. 🌷", "Say it again, I'm recording it in my heart. HAHA"]],
+                    tl: [["Mahal din kita. 🥹💖", "Ms keish ko... mahal kita. Higit pa sa kayang sabihin ng mga salita.", "Okay, bumaliktad yata ang puso ko. Mahal din kita! 🥹"],
+                         ["Kapag naririnig ko 'yan mula sa'yo, gumagaan ang lahat.", "Hindi ako magsasawang marinig 'yan mula sa'yo.", "Ikaw ang paborito kong tao sa buong mundo, alam mo ba 'yon?"],
+                         ["Palagi akong nandito para sa'yo, kahit ano'ng mangyari. Together and Forever. 🔑💖", "Salamat sa pagtitiwala mo sa puso ko. Aalagaan ko ang puso mo. 🌷", "Ulitin mo pa, ire-record ko sa puso ko. HAHA"]],
+                    zh: [["我也爱你。🥹💖"], ["听到你这样说，一切都变得轻盈了。"], ["我会永远陪着你，Together and Forever。🔑💖"]]
+                },
+                {
+                    id: 'missyou', mood: null,
+                    re: /miss (you|u|kita)|i miss|namimiss|nami-?miss|miss na kita|想你|想念/i,
+                    en: [["I miss you too. 🥺", "Aww, {name}... I miss you every day.", "Come here, virtual hug first. 🫶"],
+                         ["Even when we're far, you're always on my mind. I think about you more than you know.", "The distance doesn't change anything. You're still the first person I think of.", "I'm counting every day until I can see you smile for real. 💖"],
+                         ["Do you want to call later? Even just for a few minutes. 🥺", "Play a song from our playlist and think of me. I'm doing the same. 🎵", "Tell me what you're doing right now, I want to feel close to you."]],
+                    tl: [["Miss din kita. 🥺", "Aww, {name}... araw-araw kitang namimiss.", "Halika, virtual hug muna. 🫶"],
+                         ["Kahit malayo tayo, lagi kang nasa isip ko. Mas madalas kitang iniisip kaysa sa alam mo.", "Hindi nagbabago ang distansya sa nararamdaman ko. Ikaw pa rin ang una kong naaalala.", "Binibilang ko ang bawat araw hanggang makita ko ang tunay mong ngiti. 💖"],
+                         ["Gusto mo bang mag-call mamaya? Kahit ilang minuto lang. 🥺", "I-play mo ang isang kanta sa playlist natin at isipin mo ako. Ganoon din ako. 🎵"]],
+                    zh: [["我也想你。🥺"], ["就算我们离得很远，你也永远在我心里。"], ["晚点打个电话好吗？哪怕只有几分钟。🥺"]]
+                },
+                {
+                    id: 'goodnight', mood: null,
+                    re: /good ?night|\bgn\b|night night|sleep now|going to sleep|going to bed|matutulog na|tulog na ako|matulog na|sleep well|晚安|去睡了|要睡了/i,
+                    en: [["Goodnight, {name}. 🌙", "Sleep well, my love. 🌙", "Okay, time to rest that beautiful mind. 🌙"],
+                         ["Thank you for spending your day with me, even if it's just on this little website.", "I hope you dream of something sweet. Maybe me? HAHA", "Whatever happened today, you did well. You can let it go now."],
+                         ["Don't stay up too late, okay? Put the phone down after this. 💖", "Message me when you wake up. I'll be here. 🌷", "Goodnight. Together and Forever, even in your dreams. 🔑"]],
+                    tl: [["Good night, {name}. 🌙", "Tulog nang mahimbing, mahal ko. 🌙"],
+                         ["Salamat sa pagbabahagi ng araw mo sa akin, kahit dito lang sa munting website na 'to.", "Sana masasayang bagay ang mapanaginipan mo. Ako kaya? HAHA", "Kahit ano'ng nangyari ngayon, nagawa mo nang maayos. Pwede mo na siyang bitawan."],
+                         ["Huwag kang magpuyat, ha? Ibaba mo na ang phone pagkatapos nito. 💖", "Mag-message ka sa akin pagkagising mo. Nandito lang ako. 🌷"]],
+                    zh: [["晚安，Mei Mei。🌙"], ["谢谢你今天来看我。愿你有个好梦。"], ["别熬夜太晚哦，睡吧。💖"]]
+                },
+                {
+                    id: 'goodmorning', mood: null,
+                    re: /good ?morning|\bgm\b|magandang umaga|gising na|早安|早上好|kakagising|just woke up/i,
+                    en: [["Good morning, {name}! ☀️", "Good morning! The best part of my morning is hearing from you. ☀️", "Good morning, my favorite person. ☀️"],
+                         ["Did you sleep well? I hope you did. 🥺", "I hope today is gentle with you. And if it isn't, I'm here.", "Remember to eat breakfast, okay? Don't skip it. 💖"],
+                         ["Whatever you have today, you've got this. I'm cheering for you. 🔥", "Tell me your plans for today so I can cheer you on. 🌷"]],
+                    tl: [["Magandang umaga, {name}! ☀️", "Magandang umaga! Pinakamaganda sa umaga ko ang marinig ka. ☀️"],
+                         ["Nakatulog ka ba nang maayos? Sana oo. 🥺", "Sana mabait sa'yo ang araw na ito. At kung hindi, nandito ako.", "Kumain ka ng almusal, ha? Huwag kang magpalipas. 💖"],
+                         ["Kahit ano'ng meron ka ngayon, kaya mo 'yan. Chine-cheer kita. 🔥"]],
+                    zh: [["早安，Mei Mei！☀️"], ["昨晚睡得好吗？别忘了吃早餐哦。💖"], ["今天不管遇到什么，你都可以的，我为你加油。🔥"]]
+                },
+                {
+                    id: 'sick', mood: 'sick',
+                    re: /\b(sick|fever|headache|migraine|cough|flu|stomach ?ache|cramps?|nauseous|dizzy|not feeling well|injured|sprain(ed)?|toothache|have a cold|got a cold)\b|\bsakit\b|masakit|lagnat|nilalagnat|ubo|sipon|nahihilo|nagsusuka|发烧|头疼|不舒服|胃疼|生病/i,
+                    en: [["Oh no, {name}, you're not feeling well? 🥺", "Wait, are you okay? I'm worried now. 🥺", "Aww no. Come here, I wish I could take care of you right now. 🥺"],
+                         ["Please rest, drink lots of water, and eat something warm if you can.", "Please take care of yourself, okay? Drink water, rest, and take your medicine if you need it.", "Rest first, everything else can wait. Your health comes first, always."],
+                         ["If it doesn't get better, please see a doctor. I'd rather you be safe than strong. 💖", "Tell me how you're feeling later, okay? I'll be worried until you do. 🥺", "I care about you so much, please don't ignore it if it gets worse."]],
+                    tl: [["Naku, {name}, masama ang pakiramdam mo? 🥺", "Teka, okay ka lang ba? Nag-aalala ako. 🥺"],
+                         ["Magpahinga ka muna, uminom ng maraming tubig, at kumain ka ng mainit kung kaya.", "Alagaan mo ang sarili mo, ha? Tubig, pahinga, at gamot kung kailangan."],
+                         ["Kapag hindi gumaan, magpatingin ka sa doktor, please. Mas gusto kong ligtas ka kaysa matapang. 💖", "Sabihin mo sa akin kung ano na ang pakiramdam mo mamaya, ha? Mag-aalala ako hangga't hindi mo sinasabi. 🥺"]],
+                    zh: [["哎呀，你不舒服吗？🥺"], ["先好好休息，多喝水，需要的话记得吃药。"], ["如果没好转，一定要去看医生。你的健康比什么都重要。💖"]]
+                },
+                {
+                    id: 'tired', mood: 'tired',
+                    re: /\b(tired|exhausted|sleepy|drained|burn(ed|t)? ?out|no energy|worn out)\b|pagod|napagod|antok|inaantok|puyat|walang energy|累|困|疲惫|没精神/i,
+                    en: [["Aww, {name}. You've worked so hard. 🥺", "You sound so tired... come here, I'll be your pillow for a moment. 🫶", "Hey, take a breath. You've done enough for today."],
+                         ["Please rest, okay? Even a short nap or a glass of water helps. Your body is asking for kindness.", "You don't have to be productive every second. Rest is allowed, and you deserve it.", "Sleep early tonight if you can. Everything will feel lighter tomorrow."],
+                         ["Have you eaten? I worry about you when you push too hard. 💖", "I'm so proud of how hard you try. Just don't forget to take care of yourself too.", "I'd tell you 'you can do it' again, but tonight I'll just say: rest, I've got you. 💖"]],
+                    tl: [["Aww, {name}. Ang sipag mo na talaga. 🥺", "Mukhang pagod na pagod ka... halika, unan mo muna ako sandali. 🫶"],
+                         ["Magpahinga ka muna, ha? Kahit saglit na idlip o baso ng tubig, malaking tulong na.", "Hindi mo kailangang maging produktibo bawat segundo. Karapat-dapat kang magpahinga.", "Matulog ka nang maaga ngayong gabi kung kaya. Gagaan ang lahat bukas."],
+                         ["Kumain ka na ba? Nag-aalala ako kapag sinosobrahan mo ang sarili mo. 💖", "Proud na proud ako sa sipag mo. Basta huwag mong kalimutang alagaan din ang sarili mo."]],
+                    zh: [["辛苦了，Mei Mei。🥺"], ["先好好休息一下，你值得好好睡一觉。"], ["你吃饭了吗？你太拼的时候我会担心。💖"]]
+                },
+                {
+                    id: 'sad', mood: 'down',
+                    re: /\b(sad|down|depress(ed|ing)?|cry(ing)?|crying|lonely|alone|heartbroken|bad day|rough day|hard day|not okay|not ok|overthink(ing)?|anxious|anxiety|stress(ed)?|worried|scared|afraid|hopeless|empty|burdened|unhappy|not (happy|fine|good|well))\b|lungkot|malungkot|iyak|umiiyak|nalulungkot|nasasaktan|kinakabahan|natatakot|nag-?o?verthink|stress|hirap na hirap|hindi (ako )?(masaya|okay|ok|maayos)|di ako (okay|ok|masaya)|沮丧|难过|伤心|想哭|压力|焦虑|害怕|不开心/i,
+                    en: [["Hey, come here. 🥺 I'm right here.", "Aww, {name}. I'm listening.", "Oh no, {name}... come here, tell me. 🥺"],
+                         ["You don't have to be strong for me. Whatever you're carrying, we can go through it one step at a time.", "Whatever it is, you don't have to carry it alone. I'm here, and I'm not in a hurry.", "It's okay to not be okay. I'm not going anywhere, no matter how heavy it feels."],
+                         ["I care about you more than I can say. Do you want to tell me what happened?", "You matter so much to me, you know that? What's weighing on your mind?", "I'm a little worried about you, but I'm here. What's going on?"]],
+                    tl: [["Halika dito. 🥺 Nandito lang ako.", "Aww, {name}. Nakikinig ako.", "Uy {name}... ano'ng nangyari? 🥺"],
+                         ["Hindi mo kailangang maging matatag para sa akin. Kahit ano pa 'yan, dahan-dahan nating pagdaanan.", "Kahit ano pa 'yang dala-dala mo, hindi mo kailangang buhatin mag-isa. Nandito ako, hindi ako nagmamadali.", "Okay lang na hindi okay. Hindi ako aalis, gaano man kabigat."],
+                         ["Mahal kita at nag-aalala ako sa'yo. Gusto mo bang ikuwento kung ano'ng nangyari?", "Mahalaga ka sa akin, alam mo 'yan, 'di ba? Ano'ng bumabagabag sa'yo?"]],
+                    zh: [["过来，我在这儿。🥺"], ["你不用为了我故意坚强。不管是什么事，我们一步一步来。"], ["我很在乎你，也有点担心你。愿意告诉我发生了什么吗？💖"]]
+                },
+                {
+                    id: 'angry', mood: 'angry',
+                    re: /\b(angry|mad|annoyed|irritated|frustrated|pissed|furious|hate (this|it|him|her|them))\b|badtrip|bad trip|nakakainis|naiinis|\binis\b|galit|nagagalit|nakakabwisit|生气|气死|烦死|烦/i,
+                    en: [["Okay okay, tell me everything. I'm on your side. 😤", "Ugh, that sounds really frustrating. I'm listening.", "Aww, {name}. Breathe with me for a second, then tell me what happened."],
+                         ["You have every right to feel that way. I'm not going anywhere, vent as much as you need.", "I'll listen first, no judgment. And if you want advice later, I'll be here for that too.", "Whatever happened, I've got your back. Always."],
+                         ["Just don't let it ruin your whole day, okay? You deserve peace. 💖", "Drink some water and take a slow breath. Then tell me the whole story. 🫶", "I hate seeing you stressed out. What do you need right now, a rant or a hug (virtual, for now)? 🥺"]],
+                    tl: [["Sige, sige, ikuwento mo lahat. Kakampi mo ako. 😤", "Ay, nakakainis nga 'yan. Nakikinig ako."],
+                         ["May karapatan kang makaramdam ng ganyan. Hindi ako aalis, ilabas mo lahat.", "Makikinig muna ako, walang husga. Kung gusto mo ng payo mamaya, nandito rin ako."],
+                         ["Huwag mo lang hayaang masira ang buong araw mo, ha? Karapat-dapat kang mapayapa. 💖", "Uminom ka ng tubig at huminga nang mabagal, tapos ikuwento mo sa akin."]],
+                    zh: [["好好好，全部告诉我，我站在你这边。😤"], ["你有权利这样生气。想发泄多久都可以，我在听。"], ["别让它毁掉你一整天，好吗？你值得平静。💖"]]
+                },
+                {
+                    id: 'hungry', mood: null,
+                    re: /\b(hungry|starving|haven'?t eaten|didn'?t eat|skipped (breakfast|lunch|dinner|meals?)|no food)\b|gutom|nagugutom|di pa (ako )?kumakain|hindi pa (ako )?kumakain|wala pa akong kain|饿|没吃饭/i,
+                    en: [["Wait, have you not eaten yet? 🥺", "{name}, you're hungry? Please don't skip meals."],
+                         ["Please eat something now, okay? Even something small. You can't take care of everything on an empty stomach.", "Go eat first, I'll wait. Your health matters more than anything on your to-do list."],
+                         ["What are you craving? I hope it's something yummy. (Pudding? Chocolate? 😏)", "Tell me what you ate after, okay? I want to make sure you did. 💖"]],
+                    tl: [["Teka, hindi ka pa kumakain? 🥺", "{name}, gutom ka? Huwag kang magpalipas ng gutom."],
+                         ["Kumain ka na ngayon, ha? Kahit kaunti lang. Hindi mo kayang alagaan ang lahat nang walang laman ang tiyan.", "Kumain ka muna, hihintayin kita. Mas mahalaga ang kalusugan mo kaysa sa kahit anong gawain."],
+                         ["Ano'ng gusto mong kainin? Sana masarap! (Pudding? Chocolate? 😏)", "Sabihin mo sa akin pagkatapos kung ano'ng kinain mo, ha? Gusto kong makasigurado. 💖"]],
+                    zh: [["你还没吃饭吗？🥺"], ["先去吃点东西吧，哪怕只吃一点点。身体最重要。"], ["想吃什么呢？布丁？巧克力？😏 吃完告诉我哦。💖"]]
+                },
+                {
+                    id: 'ate', mood: null,
+                    re: /\b(i )?(just )?(ate|had (lunch|dinner|breakfast|snacks?)|finished eating|done eating)\b|\bkumain na\b|nakakain na|katatapos kumain|吃过了|吃饱了/i,
+                    en: [["Good! I'm proud of you. 🥹", "Yay, thank you for taking care of yourself! 💖"],
+                         ["That makes me feel so much better. I always worry when you skip meals.", "See? That's all I wanted to hear. Now I can relax a little."],
+                         ["What did you eat? Tell me everything, I'm nosy about you. HAHA", "Now drink water too, okay? I'm turning into your mom, I know. HAHA"]],
+                    tl: [["Mabuti! Proud ako sa'yo. 🥹", "Yay, salamat sa pag-aalaga sa sarili mo! 💖"],
+                         ["Gumaan tuloy ang pakiramdam ko. Lagi akong nag-aalala kapag nagpapalipas ka ng kain.", "Ayan, 'yan ang gusto kong marinig. Makakahinga na ako nang maluwag."],
+                         ["Ano'ng kinain mo? Ikuwento mo, usisero ako pagdating sa'yo. HAHA", "Uminom ka rin ng tubig, ha? Para na akong nanay mo, alam ko. HAHA"]],
+                    zh: [["太好了！我为你骄傲。🥹"], ["你好好吃饭，我就放心多了。"], ["吃了什么？告诉我嘛，我对你的事都好奇。哈哈"]]
+                },
+                {
+                    id: 'sorry', mood: null,
+                    re: /\b(sorry|my bad|i apologize|forgive me)\b|pasensya|patawad|对不起|抱歉/i,
+                    en: [["Hey, no need to say sorry. 🥺", "Aww, it's okay, {name}.", "Shh, it's okay. Come here."],
+                         ["I'm not upset, I promise. Nobody's perfect, and I care about you either way.", "Whatever it is, we'll work it out. I'd rather talk it through than have you carry guilt.", "You're allowed to make mistakes. I love you through all of it."]],
+                    tl: [["Uy, hindi mo kailangang mag-sorry. 🥺", "Aww, okay lang 'yan, {name}."],
+                         ["Hindi ako galit, promise. Walang perpekto, at mahalaga ka pa rin sa akin.", "Kahit ano pa 'yan, aayusin natin. Ayokong dala-dala mo ang guilt."]],
+                    zh: [["不用说对不起啦。🥺"], ["我没有生气，真的。没有人是完美的，我一样在乎你。"]]
+                },
+                {
+                    id: 'thanks', mood: null,
+                    re: /\b(thanks|thank you|thank u|tysm|thx)\b|salamat|谢谢|多谢/i,
+                    en: [["Always, {name}. 💖", "Of course! Anything for you.", "You never have to thank me. 🥹"],
+                         ["Seeing you smile is already my thank you.", "That's what I'm here for. I'll always be on your side.", "I'm just happy I get to be someone you can lean on."]],
+                    tl: [["Palagi, {name}. 💖", "Siyempre! Para sa'yo, kahit ano.", "Hindi mo na kailangang magpasalamat. 🥹"],
+                         ["Sapat na sa akin na makita kang ngumingiti.", "'Yan ang dahilan kung bakit ako nandito. Lagi akong nasa panig mo.", "Masaya lang ako na may masasandalan ka sa akin."]],
+                    zh: [["永远都在，Mei Mei。💖"], ["看到你笑，就是对我最好的感谢。"]]
+                },
+                {
+                    id: 'happy', mood: null,
+                    re: /\b(happy|excited|yay|so good|great day|nice day|amazing|awesome|best day|won|passed|got it|i did it|promoted|accepted)\b|masaya|ang saya|kilig|kinikilig|nanalo|pumasa|natapos|nakuha ko|开心|高兴|太好了|好开心/i,
+                    en: [["YAYYY!! 🥹 I'm so happy for you!", "Wait, really?! That makes my whole day, {name}! 🥳", "Ahhh, I love hearing that! Tell me everything!"],
+                         ["You deserve every good thing, you know that? I'm so proud of you.", "I knew you could do it. I've been rooting for you all along. 💖", "Your happiness is my favorite thing in the world, honestly."],
+                         ["Who did you tell first? I hope it's me. HAHA", "Let's celebrate! Chocolate? Pudding? Roblox later? 🎉", "I wish I could hug you right now. Soon, hopefully. 🫶"]],
+                    tl: [["YAYYY!! 🥹 Ang saya-saya ko para sa'yo!", "Teka, totoo?! Buo na ang araw ko, {name}! 🥳", "Ahhh, gustong-gusto kong marinig 'yan! Ikuwento mo lahat!"],
+                         ["Karapat-dapat ka sa lahat ng magagandang bagay, alam mo 'yan. Proud na proud ako.", "Alam kong kaya mo. Sinusuportahan kita mula pa noon. 💖", "Ang saya mo ang paborito kong bagay sa mundo, sa totoo lang."],
+                         ["Sino'ng una mong pinagsabihan? Sana ako. HAHA", "Mag-celebrate tayo! Chocolate? Pudding? Roblox mamaya? 🎉"]],
+                    zh: [["耶！！🥹 我真替你开心！"], ["你值得所有美好的事，我真的为你骄傲。💖"], ["第一个告诉的人是我吗？哈哈"]]
+                },
+                {
+                    id: 'race', mood: null,
+                    re: /\b(race|racing|motorace|motor ?race|motorcycle|competition|compete|competing|tournament|practice|training|rider|riding|track|qualifier|finals?)\b|karera|laban|paligsahan|比赛|赛车|练习|训练/i,
+                    en: [["Let's gooo, {name}! 🏁", "Ahh, my racer! 🏁 I'm so excited for you.", "Yesss, my girl is a racer. I love that about you. 🏁"],
+                         ["You caaannn dooo iittt!! I'll say it as many times as you need. 💖", "I believe in you, 100%. You've got the skill and the heart for this.", "No matter what happens on the track, I'm already proud of you."],
+                         ["Please be careful though, okay? Helmet, gear, all of it. I worry. 🥺", "Whatever the result, I'll be your biggest supporter. I'm here for the wins and the lessons.", "Tell me the schedule, I'll pray and cheer from wherever I am. 🙏"]],
+                    tl: [["Tara na, {name}! 🏁", "Ahh, racer ko! 🏁 Excited na excited ako para sa'yo."],
+                         ["Kaya mooo 'yaaan!! Uulitin ko 'yan hanggang kailangan mo. 💖", "100% naniniwala ako sa'yo. May galing at puso ka para dito.", "Kahit ano'ng mangyari sa track, proud na ako sa'yo."],
+                         ["Mag-ingat ka lang, ha? Helmet, gear, lahat. Nag-aalala ako. 🥺", "Anuman ang resulta, ako ang pinakamalakas mong taga-suporta."]],
+                    zh: [["冲啊，Mei Mei！🏁"], ["你一定可以的！我会一直这样说。💖"], ["不过要注意安全，头盔护具都要戴好，我会担心。🥺"]]
+                },
+                {
+                    id: 'work', mood: null,
+                    re: /\b(exam|quiz|test|school|class|classes|study|studying|homework|project|deadline|thesis|reviewing|work|working|boss|duty|shift|overtime|office)\b|trabaho|pasok|aral|nag-?aaral|requirements|作业|考试|工作|上班|学习/i,
+                    en: [["You're working so hard, {name}. 🥹", "I admire how hard you try, you know that?", "Ahh, that sounds like a lot. I'm with you."],
+                         ["Take it one thing at a time. You've handled harder things before, and I've watched you do it.", "You're smarter and stronger than you think. You've got this. 💖", "Do your best and be kind to yourself. That's already more than enough."],
+                         ["Don't forget to eat, drink water, and rest between tasks, okay? 🥺", "Message me when you're done, I'll be proud of you either way.", "I'm cheering for you from here. Go get it! 🔥"]],
+                    tl: [["Ang sipag mo talaga, {name}. 🥹", "Hinahangaan ko ang pagsisikap mo, alam mo ba 'yon?"],
+                         ["Isa-isa lang. Mas mahirap pa ang nalampasan mo, nakita ko 'yon.", "Mas matalino at mas malakas ka kaysa sa akala mo. Kaya mo 'yan. 💖"],
+                         ["Huwag kalimutang kumain, uminom ng tubig, at magpahinga, ha? 🥺", "Mag-message ka sa akin kapag tapos ka na, proud pa rin ako sa'yo kahit ano."]],
+                    zh: [["你真的好努力，Mei Mei。🥹"], ["一件一件来，你比自己想象的更强大。💖"], ["别忘了吃饭喝水休息，好吗？🥺"]]
+                },
+                {
+                    id: 'bored', mood: null,
+                    re: /\b(bored|boring|nothing to do|so bored)\b|walang magawa|inip|naiinip|nabo-?bore|无聊/i,
+                    en: [["Bored? Then you're stuck with me. HAHA", "Aww, {name}, bored? I got you.", "Oh no, boredom alert! 🚨"],
+                         ["Try the Catch My Hearts and Memory Match games on this page, I made them for moments like this. 🎮", "Scroll up to our Roblox moments, it's a good time to smile at those. 🌷", "Play our playlist and tell me which song you'd pick for today. 🎵"],
+                         ["Or just tell me about your day. I'll listen all night. 💖", "Or tell me something random, I love hearing your random thoughts."]],
+                    tl: [["Bored ka? Edi ako na lang ang kausap mo. HAHA", "Aww, {name}, bored ka? Ako na ang bahala sa'yo."],
+                         ["Subukan mo ang Catch My Hearts at Memory Match dito sa page, ginawa ko 'yan para sa ganitong oras. 🎮", "Balikan mo ang Roblox moments natin, siguradong mapapangiti ka. 🌷", "I-play mo ang playlist natin at sabihin mo kung anong kanta ang pipiliin mo ngayon. 🎵"],
+                         ["O kaya ikuwento mo lang ang araw mo. Makikinig ako buong gabi. 💖"]],
+                    zh: [["无聊吗？那就陪我聊聊吧，哈哈。"], ["去玩玩页面里的接爱心和记忆配对小游戏吧，我就是为了这种时候做的。🎮"]]
+                },
+                {
+                    id: 'game', mood: null,
+                    re: /\b(roblox|obby|play (with me|later|tonight)|let'?s play|game night|games?)\b|laro tayo|maglaro|\blaro\b|玩游戏|一起玩/i,
+                    en: [["Yes!! Roblox with you is my favorite thing. 🎮", "Hahaha, you know I'll never say no to playing with you."],
+                         ["Let's play later! Please carry me in the Obby again. HAHA", "Pick the server, I'll follow wherever you go. 😏"],
+                         ["Just tell me when you're free. I'll make time. 💖"]],
+                    tl: [["Oo naman!! Pinakapaborito ko ang Roblox kasama ka. 🎮", "Hahaha, alam mong hindi ako tatanggi na maglaro kasama ka."],
+                         ["Laro tayo mamaya! Pa-carry ulit ako sa Obby. HAHA", "Ikaw ang pumili ng server, susunod ako kahit saan. 😏"],
+                         ["Sabihin mo lang kung kailan ka free. Maglalaan ako ng oras. 💖"]],
+                    zh: [["好呀！和你玩 Roblox 是我最喜欢的事。🎮"], ["晚点一起玩吧，到时候再带我过关哈哈。"]]
+                },
+                {
+                    id: 'pogi', mood: null,
+                    re: /\b(pogi|gwapo|handsome|clyde|cutie)\b|你好帅|帅/i,
+                    en: [["HAHA stop, Mr Clyde Pogi is blushing right now. 😳", "Ehhh, don't say that, I might actually believe you. 😳"],
+                         ["Coming from you, that means everything. You always know how to make me smile. 💖", "You're the pretty one here, ms keish ko. I'm just lucky you noticed me."]],
+                    tl: [["HAHA tama na, namumula na si Mr Clyde Pogi. 😳", "Ehhh, huwag mong sabihin 'yan, baka maniwala ako. 😳"],
+                         ["Galing sa'yo, napakalaking bagay niyan. Lagi mong alam kung paano ako patatawanin. 💖", "Ikaw ang maganda dito, ms keish ko. Swerte lang ako na napansin mo ako."]],
+                    zh: [["哈哈别这样说，我会脸红的。😳"], ["从你嘴里说出来，对我意义很大。你总能让我笑。💖"]]
+                },
+                {
+                    id: 'complimentHim', mood: null,
+                    re: /you('?re| are) (so |very |really )?(sweet|kind|caring|the best|nice|funny|thoughtful|good)|ang bait mo|sweet mo|bait mo|caring mo|你真好|你好温柔/i,
+                    en: [["Ehh, stop, you're making me shy. 🥹", "Aww, you're sweeter, {name}. I'm just trying to keep up. 💖"],
+                         ["Honestly, you bring out the best in me. I only know how to spread kindness, and you make it easy.", "I just want you to feel cared for, that's all. You deserve that and more."]],
+                    tl: [["Ehh, tama na, nahihiya na ako. 🥹", "Aww, mas sweet ka, {name}. Sinusubukan ko lang sumabay. 💖"],
+                         ["Sa totoo lang, ikaw ang naglalabas ng pinakamabuti sa akin. Ang alam ko lang ay magpalaganap ng kabaitan, at pinadadali mo 'yon.", "Gusto ko lang maramdaman mong inaalagaan ka. Karapat-dapat ka diyan, at higit pa."]],
+                    zh: [["哎呀，别这样，我会害羞的。🥹"], ["其实是你让我变得更好。我只想让你感到被在乎。"]]
+                },
+                {
+                    id: 'howru', mood: null,
+                    re: /how are you|how r u|how('?s| is) your day|how have you been|kumusta ka|musta ka|kamusta ka|你好吗|你怎么样/i,
+                    en: [["I'm better now that you're here. 🥹", "Honestly? Great, because you messaged me. HAHA", "I'm okay, {name}. Even better now."],
+                         ["But more importantly, how are YOU? Did you eat? Did you rest?", "Enough about me. How's your heart today?"]],
+                    tl: [["Mas okay na ako ngayong nandito ka. 🥹", "Sa totoo lang? Masaya, kasi nag-message ka. HAHA"],
+                         ["Pero mas mahalaga, ikaw, kumusta ka? Kumain ka na ba? Nakapagpahinga ka na ba?", "Tama na ang tungkol sa akin. Kumusta ang puso mo ngayon?"]],
+                    zh: [["你来了我就更好了。🥹"], ["不过更重要的是，你呢？吃饭了吗？休息了吗？"]]
+                },
+                {
+                    id: 'whoami', mood: null,
+                    re: /where are you|what are you doing|\bwyd\b|are you busy|are you (real|a bot|ai)|who are you|nasaan ka|anong ginagawa mo|sino ka|busy ka ba|totoo ka ba|bot ka|你在哪|你是谁|你在干嘛/i,
+                    en: [["I'm Virtual Kelvin, the auto-reply version of me. 😅 The real one built this whole page for you.", "Technically I'm a little auto-reply made by Kelvin. 😅 But the feelings behind these words are very real."],
+                         ["The real me is probably thinking about you right now, I'm not even joking. HAHA", "I can't be everywhere, so I made this to keep you company. 💖"],
+                         ["What are YOU up to? Tell me, I'm curious about everything you do.", "Anything you want to tell me? I'm all ears."]],
+                    tl: [["Ako si Virtual Kelvin, ang auto-reply na bersyon niya. 😅 Ang totoong Kelvin ang gumawa ng buong page na 'to para sa'yo.", "Technically, maliit na auto-reply ako na ginawa ni Kelvin. 😅 Pero totoo ang nararamdaman sa likod ng mga salitang 'to."],
+                         ["Malamang iniisip ka na ng totoong Kelvin ngayon, hindi ako nagbibiro. HAHA", "Hindi siya makakapunta kahit saan, kaya ginawa niya ako para samahan ka. 💖"],
+                         ["Ikaw, ano'ng ginagawa mo? Ikuwento mo, curious ako sa lahat ng ginagawa mo."]],
+                    zh: [["我是 Virtual Kelvin，Kelvin 做的自动回复版本。😅 这个页面是真正的他为你做的。"], ["真正的他现在可能正在想你，我没开玩笑。哈哈"], ["你在做什么呢？告诉我吧。"]]
+                },
+                {
+                    id: 'sweet', mood: null,
+                    re: /something (sweet|nice|romantic)|say something|cheer me up|pakilig|pa-?kilig|sweet words|tell me something|说点甜的|哄我/i,
+                    en: [["Okay, ready? 🥹", "Hmm, let me think... 🥹", "Okay okay, hold on to your heart. 🫶"],
+                         ["If I could choose any place to be, it would be wherever you are, even if it's just on a screen.", "You make ordinary moments feel special. I'm so glad you're in my story.", "I'm not good at fancy words, but I'm good at choosing you. Every day.", "Whatever happens, I'll always be there for you, and I know you'll be there for me. Together and Forever. 🔑"],
+                         ["Did that work? Are you smiling? 🥹", "Okay your turn, tell me something sweet too. HAHA", "Bonus: I'm proud of you. Just because. 💖"]],
+                    tl: [["Sige, ready ka na ba? 🥹", "Hmm, teka, mag-iisip muna ako... 🥹"],
+                         ["Kung pwede kong piliin ang kahit anong lugar, doon ako kung nasaan ka, kahit sa screen lang.", "Ginagawa mong espesyal ang ordinaryong sandali. Ang saya ko na kasama ka sa kuwento ko.", "Hindi ako magaling sa magagandang salita, pero magaling akong pumili sa'yo. Araw-araw.", "Kahit ano'ng mangyari, lagi akong nandiyan para sa'yo, at alam kong nandiyan ka rin para sa akin. Together and Forever. 🔑"],
+                         ["Effective ba? Nakangiti ka ba? 🥹", "Ikaw naman, sabihan mo rin ako ng sweet. HAHA"]],
+                    zh: [["好，准备好了吗？🥹"], ["如果可以选择去哪里，我只想去你在的地方，哪怕只是在屏幕里。", "你让平凡的时刻都变得特别，我很庆幸你在我的故事里。"], ["有笑出来吗？🥹"]]
+                },
+                {
+                    id: 'bye', mood: null,
+                    re: /\b(bye|goodbye|gotta go|have to go|need to go|brb|on my way|heading out|going out|leaving now|uuwi na|aalis na|alis na|papunta na)\b|ingat ako|拜拜|再见|走了|要走了/i,
+                    en: [["Okay, take care, {name}! 🥺", "Aww, already? Okay, go go. Ingat ka!", "Bye for now, my love. 🥹"],
+                         ["Please be careful on the road, and message me when you get there, okay?", "Drink water, bring what you need, and stay safe. I worry, you know that.", "Don't forget I'm cheering for you wherever you go. 💖"],
+                         ["Come back later and tell me how it went. I'll be waiting. 🌷", "Text me when you're home. I won't relax until I know you're safe. 🥺"]],
+                    tl: [["Sige, ingat ka, {name}! 🥺", "Aww, aalis ka na? Sige, sige. Ingat ka!", "Paalam muna, mahal ko. 🥹"],
+                         ["Mag-ingat ka sa daan, at mag-message ka pagdating mo, ha?", "Uminom ka ng tubig, dalhin ang kailangan, at manatiling ligtas. Nag-aalala ako, alam mo 'yan."],
+                         ["Balik ka mamaya at ikuwento mo kung paano. Maghihintay ako. 🌷", "I-text mo ako kapag nakauwi ka na. Hindi ako makakampante hangga't hindi ko alam na ligtas ka. 🥺"]],
+                    zh: [["好的，路上小心哦！🥺"], ["到了记得告诉我，我会担心。💖"], ["回来再跟我说说今天怎么样，我等你。🌷"]]
+                },
+                {
+                    id: 'laugh', mood: null,
+                    re: /^\s*(?:(?:ha){2,}h?|(?:he){2,}h?|(?:hi){2,}h?|lol|lmao|😂|🤣|哈哈+)[\s!.😂🤣]*$/i,
+                    en: [["HAHA I love hearing you laugh. 🥹", "Okay that made me smile for real. HAHA", "Your laugh is my favorite sound, even if it's just in text. 💖"],
+                         ["What's so funny? Tell me, I wanna laugh too!", "Okay now I'm curious, what was that about? HAHA"]],
+                    tl: [["HAHA gustong-gusto kong naririnig na tumatawa ka. 🥹", "Ayan, napangiti ako ng totoo. HAHA"],
+                         ["Ano'ng nakakatawa? Ikuwento mo, gusto ko ring tumawa!", "Ngayon curious na ako, ano 'yon? HAHA"]],
+                    zh: [["哈哈，我最喜欢听你笑了。🥹"], ["什么事这么好笑？告诉我，我也想笑！"]]
+                },
+                {
+                    id: 'greeting', mood: null,
+                    re: /^\s*(?:hi+|hello+|hey+|hola|yo|kumusta|kamusta|musta|uy+|oy+|你好|嗨)(?![a-z])/i,
+                    en: [["{greet}, {name}! 💖", "Hi, {name}! 🥹", "Heyyy, there you are! 🥹"],
+                         ["I'm so happy you stopped by.", "I was just thinking about you, I swear. HAHA", "It makes my day when you message me."],
+                         ["How's your day going? Did you eat? 🥺", "How are you feeling today, really? 💖", "Tell me everything, I have all the time for you."]],
+                    tl: [["{greet}, {name}! 💖", "Hi, {name}! 🥹", "Heyyy, nandito ka na! 🥹"],
+                         ["Ang saya ko na dumaan ka.", "Kakaisip ko lang sa'yo, promise. HAHA", "Nagiging espesyal ang araw ko kapag nag-message ka."],
+                         ["Kumusta ang araw mo? Kumain ka na ba? 🥺", "Kumusta ka talaga ngayon? 💖", "Ikuwento mo lahat, may oras ako para sa'yo."]],
+                    zh: [["{greet}，Mei Mei！💖"], ["你来找我，我好开心。"], ["今天过得怎么样？吃饭了吗？🥺"]]
+                },
+                {
+                    id: 'ack', mood: null,
+                    re: /^\s*(?:ok(?:ay)?|k|yes|yeah|yep|yup|sure|oo|opo|sige|hmm+|hm+|ah+|ahh+|ic|i see|ganun ba|talaga|really\??|好|嗯|哦)[\s!.?~]*$/i,
+                    en: [["Hmm? You got quiet on me. 🥺", "Okay. Just checking in, are you alright?", "Mhm. I'm still here, {name}. 💖"],
+                         ["Tell me what's on your mind. Even the small stuff matters to me.", "If you want to talk about anything, I'm listening. No rush. 🌷"]],
+                    tl: [["Hmm? Natahimik ka. 🥺", "Okay. Nagche-check lang, okay ka lang ba?", "Mhm. Nandito pa rin ako, {name}. 💖"],
+                         ["Sabihin mo kung ano ang nasa isip mo. Kahit maliit na bagay, mahalaga sa akin.", "Kung gusto mong may mapag-usapan, nakikinig ako. Walang minuto. 🌷"]],
+                    zh: [["嗯？你突然安静了。🥺"], ["有什么想说的都可以告诉我，我在听。🌷"]]
+                }
+            ];
+
+            const fallback = {
+                id: 'fallback', mood: null,
+                en: [["I hear you, {name}. 🥹", "Mmm, tell me more. I'm listening.", "I love that you shared that with me. 💖"],
+                     ["Everything about your day matters to me, even the little things.", "I may be a little auto-reply, but I care about every word you type.", "Whatever's on your mind, I'm here. No judgment, ever."],
+                     ["How are you feeling about it?", "What would make today a little better for you?", "Have you eaten and rested enough today? I worry, you know. 🥺"]],
+                tl: [["Naiintindihan kita, {name}. 🥹", "Mmm, ikuwento mo pa. Nakikinig ako.", "Natutuwa ako na ibinahagi mo 'yan sa akin. 💖"],
+                     ["Mahalaga sa akin ang lahat ng tungkol sa araw mo, kahit maliliit na bagay.", "Maliit na auto-reply man ako, nagmamalasakit ako sa bawat salitang tina-type mo.", "Anuman ang nasa isip mo, nandito ako. Walang husga, kahit kailan."],
+                     ["Ano'ng pakiramdam mo tungkol dito?", "Ano ang magpapagaan ng araw mo ngayon?", "Kumain ka na ba at nakapagpahinga? Nag-aalala ako, alam mo 'yan. 🥺"]],
+                zh: [["我在听，Mei Mei。🥹"], ["你说的每一件小事，对我都很重要。"], ["你现在感觉怎么样？有没有吃饭休息？🥺"]]
+            };
+
+            const followUp = {
+                en: ["Are you feeling even a little better now? 🥺", "Still thinking about it? I'm right here, okay? 💖"],
+                tl: ["Medyo gumaan na ba ang pakiramdam mo? 🥺", "Iniisip mo pa rin ba 'yon? Nandito lang ako, ha? 💖"],
+                zh: ["现在有好一点了吗？🥺", "还在想那件事吗？我就在这里，好吗？💖"]
+            };
+            const lateNote = {
+                en: "And it's so late already... please try to sleep soon, okay? I worry. 🥺",
+                tl: "At gabi na masyado... subukan mong matulog na, ha? Nag-aalala ako. 🥺",
+                zh: "而且已经很晚了…早点睡好吗？我会担心。🥺"
+            };
+            const CARE_MOODS = ['down', 'tired', 'sick', 'angry'];
+
+            function findIntent(text) {
+                for (const intent of kelvinIntents) if (intent.re.test(text)) return intent;
+                return fallback;
+            }
+
+            // Returns the list of chat bubbles Kelvin sends back for this message
+            function respond(text) {
+                text = text.trim();
+                mem.turns++;
+                const detected = detectLang(text);
+                const wordCount = text.split(/\s+/).length;
+                if (detected) mem.lang = detected;
+                else if (wordCount >= 4) mem.lang = 'en';
+                const lang = mem.lang;
+
+                const intent = findIntent(text);
+                let bubbles;
+                if (intent.fixed) {
+                    bubbles = (intent.fixed[lang] || intent.fixed.en).slice();
+                } else {
+                    const banks = intent[lang] || intent.en;
+                    bubbles = [];
+                    banks.forEach((bank, i) => {
+                        const optional = banks.length >= 3 && i === banks.length - 1;
+                        if (optional && Math.random() < 0.3) return;
+                        bubbles.push(fill(pick(intent.id + lang + i, bank), lang));
+                    });
+                    if ((intent === fallback || intent.id === 'ack') && mem.mood && mem.moodTurns < 4) {
+                        bubbles.push(fill(pick('follow' + lang, followUp[lang]), lang));
+                    }
+                    if (['tired', 'sad', 'sick'].includes(intent.id) && isLate()) bubbles.push(lateNote[lang]);
+                }
+
+                if (intent.mood && CARE_MOODS.includes(intent.mood)) { mem.mood = intent.mood; mem.moodTurns = 0; }
+                else if (intent.id === 'happy' || intent.id === 'thanks' || intent.id === 'loveyou') { mem.mood = null; }
+                else mem.moodTurns++;
+                return bubbles;
+            }
+
+            return { respond, intents: kelvinIntents };
+        })();
+
         let isChatOpen = false;
         function toggleChat() {
             const chatWin = document.getElementById('floating-chat');
@@ -1722,46 +2324,74 @@
             }
         }
 
+        const chatState = { speaking: false, queue: [] };
+
+        function addChatBubble(text, who) {
+            const chatBox = document.getElementById('chat-messages');
+            const row = document.createElement('div');
+            row.className = 'flex items-start' + (who === 'me' ? ' justify-end' : '');
+            const bubble = document.createElement('div');
+            bubble.className = (who === 'me'
+                ? 'bg-theme_accent text-white rounded-2xl rounded-tr-none'
+                : 'bg-theme_border text-theme_text rounded-2xl rounded-tl-none') + ' px-4 py-2 max-w-[85%] text-sm shadow-sm animate-[bounceSlight_0.2s_ease-out]';
+            bubble.textContent = text;   // textContent keeps anything she types safe
+            row.appendChild(bubble);
+            chatBox.appendChild(row);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function setTypingIndicator(on) {
+            const chatBox = document.getElementById('chat-messages');
+            let el = document.getElementById('chat-typing');
+            if (!on) { if (el) el.remove(); return; }
+            if (el) return;
+            el = document.createElement('div');
+            el.id = 'chat-typing';
+            el.className = 'flex items-start';
+            el.innerHTML = '<div class="bg-theme_border rounded-2xl rounded-tl-none px-4 py-3 shadow-sm" aria-label="Kelvin is typing"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>';
+            chatBox.appendChild(el);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // Kelvin "types" each bubble, one after another, like real texting
+        function playKelvinBubbles(bubbles, done) {
+            let i = 0;
+            (function next() {
+                if (i >= bubbles.length) { setTypingIndicator(false); done(); return; }
+                const text = bubbles[i++];
+                setTypingIndicator(true);
+                setTimeout(() => {
+                    setTypingIndicator(false);
+                    addChatBubble(text, 'kelvin');
+                    setTimeout(next, 250);
+                }, Math.min(600 + text.length * 22, 2400));
+            })();
+        }
+
+        function processChatQueue() {
+            if (chatState.speaking || !chatState.queue.length) return;
+            chatState.speaking = true;
+            const text = chatState.queue.shift();
+            playKelvinBubbles(kelvinChat.respond(text), () => { chatState.speaking = false; processChatQueue(); });
+        }
+
         function sendChat() {
             const input = document.getElementById('chat-input');
             const message = input.value.trim();
-            if(!message) return;
-            
-            const chatBox = document.getElementById('chat-messages');
-            
-            chatBox.innerHTML += `
-                <div class="flex items-start justify-end">
-                    <div class="bg-theme_accent text-white rounded-2xl rounded-tr-none px-4 py-2 max-w-[85%] text-sm shadow-sm animate-[bounceSlight_0.2s_ease-out]">
-                        ${message.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
-                    </div>
-                </div>
-            `;
-            
+            if (!message) return;
+            addChatBubble(message, 'me');
             input.value = '';
-            chatBox.scrollTop = chatBox.scrollHeight;
-            
-            setTimeout(() => {
-                const responses = [
-                    "Aww, you're the best! Keep exploring! 💖",
-                    "I love that you're here. Let me know if you like the games!",
-                    "You make my heart skip a beat. 🌷",
-                    "I hope this page makes you smile today!"
-                ];
-                const reply = responses[Math.floor(Math.random() * responses.length)];
-                
-                chatBox.innerHTML += `
-                    <div class="flex items-start">
-                        <div class="bg-theme_border text-theme_text rounded-2xl rounded-tl-none px-4 py-2 max-w-[85%] text-sm shadow-sm animate-[bounceSlight_0.2s_ease-out]">
-                            ${reply}
-                        </div>
-                    </div>
-                `;
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }, 1000);
+            chatState.queue.push(message);
+            processChatQueue();
+        }
+
+        function quickChat(text) {
+            document.getElementById('chat-input').value = text;
+            sendChat();
         }
 
         function handleChatEnter(e) {
-            if(e.key === 'Enter') sendChat();
+            if (e.key === 'Enter') sendChat();
         }
 
     </script>
