@@ -517,7 +517,7 @@
                                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-theme_accent opacity-75"></span>
                                 <span class="relative inline-flex rounded-full h-2 w-2 bg-theme_accent"></span>
                             </span>
-                            <span class="text-xs text-theme_muted">Playing</span>
+                            <span id="play-status" class="text-xs text-theme_muted">Paused</span>
                         </div>
                     </div>
                 </div>
@@ -840,6 +840,7 @@
 
             function unlock() {
                 done = true;
+                playTrack(0);   // first song starts the moment the lock opens
                 errEl.style.opacity = '0';
                 overlay.classList.add('unlocking');
                 setTimeout(() => { overlay.classList.add('opened'); if (typeof loveConfetti === 'function') loveConfetti(10000); }, 1500);
@@ -890,6 +891,9 @@
 
             btn.addEventListener('click', check);
 
+            // first tap / keypress on the lock screen "warms up" audio so iOS lets it start on unlock
+            ['click', 'touchend', 'keydown'].forEach(ev => overlay.addEventListener(ev, () => primeAudio(), true));
+
             // Desktop only: put the cursor in the first box once the promise has appeared
             if (window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
                 setTimeout(() => { if (!done) getBoxes()[0].focus({ preventScroll: true }); }, 4200);
@@ -904,7 +908,6 @@
             { title: "The Only Exception", artist: "Paramore", cover: "f59e0b", src: "music/song4.mp3" }
         ];
         let currentSongIndex = 0;
-        let isPlaying = false;
         const audioPlayer = document.getElementById('audio-player');
 
         function formatTime(seconds) {
@@ -946,28 +949,76 @@
             }
         }
 
-        function togglePlay() {
-            isPlaying = !isPlaying;
-            const btn = document.getElementById('play-btn');
-            if (isPlaying) {
-                btn.innerHTML = `<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
-                audioPlayer.play().catch(err => {
-                    console.error('Playback failed — check that the audio file path is correct:', err);
-                    isPlaying = false;
-                    btn.innerHTML = `<svg class="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
-                });
-            } else {
-                btn.innerHTML = `<svg class="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+        const PLAY_ICON = `<svg class="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+        const PAUSE_ICON = `<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+        let autoplayRetryArmed = false;
+        let audioPrimed = false;
+
+        // The button + "Playing/Paused" label always follow the real state of the audio element
+        function syncPlayButton() {
+            document.getElementById('play-btn').innerHTML = audioPlayer.paused ? PLAY_ICON : PAUSE_ICON;
+            const status = document.getElementById('play-status');
+            if (status) status.textContent = audioPlayer.paused ? 'Paused' : 'Playing';
+        }
+        audioPlayer.addEventListener('play', syncPlayButton);
+        audioPlayer.addEventListener('pause', syncPlayButton);
+
+        // Start playback. If the browser blocks it (no tap yet), try again on the person's next tap / keypress.
+        function startPlayback(autoStart) {
+            const p = audioPlayer.play();
+            if (p && p.catch) p.catch(err => {
+                const name = err && err.name;
+                if (name === 'AbortError') return;
+                if (autoStart && name === 'NotAllowedError') { armAutoplayRetry(); return; }
+                console.error('Playback failed — check that the audio file path is correct:', err);
                 audioPlayer.pause();
-            }
+            });
+        }
+
+        function armAutoplayRetry() {
+            if (autoplayRetryArmed) return;
+            autoplayRetryArmed = true;
+            const events = ['click', 'touchend', 'keydown'];
+            const go = () => {
+                events.forEach(ev => document.removeEventListener(ev, go, true));
+                autoplayRetryArmed = false;
+                const videoBusy = typeof loveVideo !== 'undefined' && !loveVideo.paused;
+                if (audioPlayer.paused && !videoBusy) startPlayback(true);
+            };
+            events.forEach(ev => document.addEventListener(ev, go, true));
+        }
+
+        // iOS Safari only allows scripted audio after the element was started by a tap.
+        // During the lock screen we do a silent play/pause on the first tap so the music can start the moment she unlocks.
+        function primeAudio() {
+            if (audioPrimed) return;
+            audioPrimed = true;
+            audioPlayer.muted = true;
+            const done = () => { audioPlayer.muted = false; };
+            const p = audioPlayer.play();
+            if (p && p.then) p.then(() => { audioPlayer.pause(); audioPlayer.currentTime = 0; done(); }).catch(done);
+            else { audioPlayer.pause(); done(); }
+        }
+
+        function goToSong(index, shouldPlay, auto) {
+            currentSongIndex = (index + playlist.length) % playlist.length;
+            updatePlayerUI();
+            if (shouldPlay) startPlayback(auto);
+        }
+
+        // Jump to a song and play it from the start (used by the story: lock opens -> song 1, riddles done -> song 2)
+        function playTrack(index) {
+            audioPlayer.muted = false;
+            goToSong(index, true, true);
+        }
+
+        function togglePlay() {
+            if (audioPlayer.paused) startPlayback(false);
+            else audioPlayer.pause();
         }
 
         function changeSong(dir) {
-            currentSongIndex = (currentSongIndex + dir + playlist.length) % playlist.length;
-            updatePlayerUI();
-            if (isPlaying) {
-                audioPlayer.play().catch(err => console.error('Playback failed:', err));
-            }
+            goToSong(currentSongIndex + dir, !audioPlayer.paused, false);
         }
 
         function simulateSeek(e) {
@@ -992,11 +1043,11 @@
         });
 
         audioPlayer.addEventListener('ended', () => {
-            changeSong(1);
-            if (isPlaying) audioPlayer.play().catch(err => console.error('Playback failed:', err));
+            goToSong(currentSongIndex + 1, true, true);
         });
 
         updatePlayerUI();
+        syncPlayButton();
 
         // === WORDS TO MAKE YOU SMILE (tap to flip + language switch) ===
         const wordsUI = {
@@ -1305,6 +1356,7 @@
                 showPuzzleError("Take your time, my love. I'll be right here whenever you're ready. 🤍", false);
                 return;
             }
+            playTrack(1);   // all riddles answered: second song starts
             advanceAfterCorrect(step, () => {
                 puzzleIndex = puzzleData.length;
                 renderPuzzleProgress();
@@ -1362,13 +1414,26 @@
         const loveModal = document.getElementById('love-modal');
         const loveVideo = document.getElementById('love-video');
 
-        loveVideo.addEventListener('error', () => { document.getElementById('love-video-fallback').style.display = 'flex'; });
-        loveVideo.addEventListener('play', () => { if (typeof isPlaying !== 'undefined' && isPlaying) togglePlay(); });
+        // Music pauses while the love video plays, then continues when it ends or the popup is closed
+        let musicResumePending = false;
+        function pauseMusicForVideo() {
+            if (!audioPlayer.paused) { musicResumePending = true; audioPlayer.pause(); }
+        }
+        function resumeMusicAfterVideo() {
+            if (musicResumePending) { musicResumePending = false; startPlayback(true); }
+        }
+
+        loveVideo.addEventListener('error', () => {
+            document.getElementById('love-video-fallback').style.display = 'flex';
+            resumeMusicAfterVideo();   // no video to protect, so let the music carry on
+        });
+        loveVideo.addEventListener('play', pauseMusicForVideo);
+        loveVideo.addEventListener('ended', resumeMusicAfterVideo);
 
         function showLoveView(which) {
             document.getElementById('love-letter-view').style.display = which === 'letter' ? 'block' : 'none';
             document.getElementById('love-video-view').style.display = which === 'video' ? 'block' : 'none';
-            if (which !== 'video') loveVideo.pause();
+            if (which !== 'video') { loveVideo.pause(); resumeMusicAfterVideo(); }
             loveModal.querySelector('.love-scroll').scrollTop = 0;
         }
 
@@ -1381,6 +1446,7 @@
 
         function closeLoveModal() {
             loveVideo.pause();
+            resumeMusicAfterVideo();
             loveModal.style.display = 'none';
             document.body.style.removeProperty('overflow');
         }
@@ -1388,8 +1454,11 @@
         function loveAgree() {
             loveAgreed = true;
             if (!loveVideo.getAttribute('src')) loveVideo.src = 'video/love.mp4';
+            pauseMusicForVideo();   // music stops so it doesn't play over the video
             showLoveView('video');
             loveConfetti();
+            const vp = loveVideo.play();   // the video starts right away
+            if (vp && vp.catch) vp.catch(() => {});
         }
 
         function loveDisagree() {
