@@ -913,10 +913,10 @@
 
         // === MUSIC PLAYER LOGIC ===
         const playlist = [
-            { title: "I Like You So Much, You'll Know It", artist: "Ysabelle Cuevas", cover: "9333ea", src: "music/song1.mp3" },
-            { title: "Happiness", artist: "Rex Orange County", cover: "ec4899", src: "music/song2.mp3" },
-            { title: "Tahanan", artist: "Adie", cover: "3b82f6", src: "music/song3.mp3" },
-            { title: "The Only Exception", artist: "Paramore", cover: "f59e0b", src: "music/song4.mp3" }
+            { title: "I Like You So Much, You'll Know It", artist: "Ysabelle Cuevas", cover: "9333ea", art: "image/covers/song1.jpg", src: "music/song1.mp3" },
+            { title: "Happiness", artist: "Rex Orange County", cover: "ec4899", art: "image/covers/song2.jpg", src: "music/song2.mp3" },
+            { title: "Tahanan", artist: "Adie", cover: "3b82f6", art: "image/covers/song3.jpg", src: "music/song3.mp3" },
+            { title: "The Only Exception", artist: "Paramore", cover: "f59e0b", art: "image/covers/song4.jpg", src: "music/song4.mp3" }
         ];
         let currentSongIndex = 0;
         const audioPlayer = document.getElementById('audio-player');
@@ -928,11 +928,18 @@
             return `${m}:${s < 10 ? '0' : ''}${s}`;
         }
 
+        // Album art: uses the real cover (song.art) and falls back to a colored placeholder if the file isn't there
+        function coverPlaceholder(song, size) {
+            return `https://placehold.co/${size}x${size}/${song.cover}/ffffff?text=${encodeURIComponent(size > 200 ? song.title.split(' ')[0] : '♫')}`;
+        }
+
         function updatePlayerUI() {
             const song = playlist[currentSongIndex];
             document.getElementById('song-title').textContent = song.title;
             document.getElementById('song-artist').textContent = song.artist;
-            document.getElementById('album-cover').src = `https://placehold.co/400x400/${song.cover}/ffffff?text=${encodeURIComponent(song.title.split(' ')[0])}`;
+            const coverEl = document.getElementById('album-cover');
+            coverEl.onerror = () => { coverEl.onerror = null; coverEl.src = coverPlaceholder(song, 400); };
+            coverEl.src = song.art || coverPlaceholder(song, 400);
             document.getElementById('progress-bar').style.width = '0%';
             document.getElementById('time-current').textContent = '0:00';
             document.getElementById('time-total').textContent = '0:00';
@@ -948,7 +955,7 @@
                     <div class="flex justify-between items-center bg-theme_bg/30 p-2 rounded-lg cursor-pointer hover:bg-theme_bg/50 transition-colors" onclick="changeSong(${i})">
                         <div class="flex items-center space-x-3">
                             <div class="w-8 h-8 rounded bg-[${nextSong.cover}] flex items-center justify-center text-white text-[10px] font-bold overflow-hidden">
-                                <img src="https://placehold.co/100x100/${nextSong.cover}/ffffff?text=♫" class="w-full h-full object-cover">
+                                <img src="${nextSong.art || coverPlaceholder(nextSong, 100)}" onerror="this.onerror=null;this.src='${coverPlaceholder(nextSong, 100)}'" alt="" class="w-full h-full object-cover">
                             </div>
                             <div class="min-w-0">
                                 <p class="text-sm font-bold text-theme_text truncate max-w-[150px]">${nextSong.title}</p>
