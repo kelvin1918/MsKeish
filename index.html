@@ -244,6 +244,30 @@
         .chat-chip:hover { border-color: var(--accent-main); color: var(--accent-main); }
         #chat-chips::-webkit-scrollbar { display: none; }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        .tl-wrap { position: relative; max-width: 56rem; margin: 0 auto; }
+        .tl-wrap::before { content: ""; position: absolute; top: 0; bottom: 0; left: 18px; width: 2px; background: linear-gradient(to bottom, transparent, var(--accent-main) 8%, var(--accent-main) 92%, transparent); opacity: .5; }
+        .tl-item { position: relative; padding-left: 52px; margin-bottom: 2.5rem; opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+        .tl-item.in { opacity: 1; transform: none; }
+        .tl-dot { position: absolute; left: 6px; top: 14px; width: 26px; height: 26px; border-radius: 50%; background: var(--bg-color); border: 2px solid var(--accent-main); display: flex; align-items: center; justify-content: center; font-size: 12px; box-shadow: 0 0 0 5px var(--shadow-color); }
+        .tl-photo { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; cursor: zoom-in; }
+        .tl-ph { width: 100%; aspect-ratio: 4/3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .4rem; background: linear-gradient(135deg, rgba(236,72,153,.18), rgba(147,51,234,.18)); color: var(--text-muted); font-size: .85rem; }
+        @media (min-width: 768px) {
+            .tl-wrap::before { left: 50%; transform: translateX(-1px); }
+            .tl-item { width: 50%; padding-left: 0; padding-right: 44px; }
+            .tl-item:nth-child(even) { margin-left: 50%; padding-right: 0; padding-left: 44px; }
+            .tl-dot { left: auto; right: -13px; }
+            .tl-item:nth-child(even) .tl-dot { right: auto; left: -13px; }
+        }
+        #dist-map { height: 22rem; border-radius: 1.25rem; z-index: 1; }
+        .map-pin { display: flex; flex-direction: column; align-items: center; transform: translate(-50%, -100%); }
+        .map-pin b { background: var(--accent-main); color: #fff; font: 600 11px/1 sans-serif; padding: 5px 9px; border-radius: 999px; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,.25); }
+        .map-pin i { font-style: normal; font-size: 26px; line-height: 1; filter: drop-shadow(0 3px 3px rgba(0,0,0,.3)); }
+        #tl-lightbox { position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; padding: 1rem; cursor: zoom-out; }
+        #tl-lightbox img { max-width: 100%; max-height: 90vh; border-radius: 1rem; }
+    </style>
 </head>
 <body class="antialiased selection:bg-theme_accent selection:text-white overflow-hidden" id="main-body">
 
@@ -325,6 +349,8 @@
                 <!-- Desktop Nav -->
                 <div class="hidden md:flex space-x-6 items-center">
                     <a href="#letter" class="text-theme_muted hover:text-theme_accent text-sm font-medium transition-colors">Letter</a>
+                    <a href="#journey" class="text-theme_muted hover:text-theme_accent text-sm font-medium transition-colors">Journey</a>
+                    <a href="#map" class="text-theme_muted hover:text-theme_accent text-sm font-medium transition-colors">Map</a>
                     <a href="#roblox" class="text-theme_muted hover:text-theme_accent text-sm font-medium transition-colors">Memories</a>
                     <a href="#words" class="text-theme_muted hover:text-theme_accent text-sm font-medium transition-colors">Notes</a>
                     <a href="#music" class="text-theme_muted hover:text-theme_accent text-sm font-medium transition-colors">Playlist</a>
@@ -355,6 +381,8 @@
         <!-- Mobile Menu Overlay -->
         <div id="mobile-menu" class="absolute top-16 left-0 w-full glass-card border-t border-theme_border transform -translate-y-full opacity-0 pointer-events-none md:hidden flex flex-col p-4 space-y-4 shadow-2xl z-40">
             <a href="#letter" onclick="toggleMobileMenu()" class="block text-theme_text font-medium text-lg">Letter</a>
+            <a href="#journey" onclick="toggleMobileMenu()" class="block text-theme_text font-medium text-lg">Journey</a>
+            <a href="#map" onclick="toggleMobileMenu()" class="block text-theme_text font-medium text-lg">Map</a>
             <a href="#roblox" onclick="toggleMobileMenu()" class="block text-theme_text font-medium text-lg">Memories</a>
             <a href="#words" onclick="toggleMobileMenu()" class="block text-theme_text font-medium text-lg">Notes</a>
             <a href="#music" onclick="toggleMobileMenu()" class="block text-theme_text font-medium text-lg">Playlist</a>
@@ -465,6 +493,33 @@
             </div>
         </div>
     </section>
+
+    <!-- Our Journey (timeline) -->
+    <section id="journey" class="py-24 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-14">
+                <p class="text-xs uppercase tracking-[0.3em] text-theme_accent font-semibold mb-3">Miles apart, same moon 🌙</p>
+                <h2 class="text-4xl font-serif font-bold text-theme_text mb-4">Our Journey</h2>
+                <div class="w-16 h-1 bg-theme_accent mx-auto rounded-full glowing-btn"></div>
+            </div>
+            <div id="tl-wrap" class="tl-wrap"></div>
+        </div>
+    </section>
+
+    <!-- Distance map -->
+    <section id="map" class="py-20 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+            <p class="text-xs uppercase tracking-[0.3em] text-theme_accent font-semibold mb-3">Far, but never apart</p>
+            <h2 class="text-4xl font-serif font-bold text-theme_text mb-2">Where We Are</h2>
+            <p id="map-distance" class="text-theme_muted text-sm mb-8">&nbsp;</p>
+            <div class="glass-card rounded-3xl p-3 sm:p-4">
+                <div id="dist-map"></div>
+            </div>
+            <p class="font-handwriting text-2xl sm:text-3xl text-theme_accent mt-6">Two places, one heart. 💖</p>
+        </div>
+    </section>
+
+    <div id="tl-lightbox" onclick="this.style.display='none'"><img alt=""></div>
 
     <!-- Upgraded Roblox Memories Section -->
     <section id="roblox" class="py-24 bg-theme_accent/5 border-y border-theme_border">
@@ -807,11 +862,10 @@
                     <p class="font-handwriting text-2xl text-theme_text text-right pt-2">Always yours,<br>Kelvin 💖</p>
                 </div>
 
-                <div class="flex flex-col sm:flex-row gap-3 justify-center mt-8">
-                    <button onclick="loveAgree()" class="py-3 px-8 rounded-full bg-theme_accent hover:bg-theme_accent_hover text-white font-bold transition-colors glowing-btn">Agree 💖</button>
-                    <button onclick="loveDisagree()" class="py-3 px-8 rounded-full border-2 border-theme_border text-theme_text hover:border-theme_accent font-bold transition-colors">Disagree</button>
+                <p class="text-center font-handwriting text-2xl text-theme_accent mt-8">And on 24 October 2026, you said yes. 💖</p>
+                <div class="flex justify-center mt-5">
+                    <button onclick="loveWatchVideo()" class="py-3 px-8 rounded-full bg-theme_accent hover:bg-theme_accent_hover text-white font-bold transition-colors glowing-btn">Watch our video 🎬</button>
                 </div>
-                <p id="love-disagree-note" class="text-center text-sm text-theme_muted mt-4 opacity-0 transition-opacity duration-500">That's okay. I respect your answer, and I'm grateful you read my heart this far. Take all the time you need. 🤍</p>
             </div>
 
             <!-- Video view -->
@@ -1524,20 +1578,14 @@
             document.body.style.removeProperty('overflow');
         }
 
-        function loveAgree() {
+        function loveWatchVideo() {
             loveAgreed = true;
-            notifyKelvin('agree');
             if (!loveVideo.getAttribute('src')) loveVideo.src = 'video/love.mp4';
             pauseMusicForVideo();   // music stops so it doesn't play over the video
             showLoveView('video');
             loveConfetti();
             const vp = loveVideo.play();   // the video starts right away
             if (vp && vp.catch) vp.catch(() => {});
-        }
-
-        function loveDisagree() {
-            notifyKelvin('disagree');
-            document.getElementById('love-disagree-note').style.opacity = '1';
         }
 
         function loveConfetti(z = 400) {
@@ -1770,15 +1818,11 @@
         const NOTIFY = {
             accessKey: "fc50e465-c3d1-4497-bef5-b08f8e47816a",
             events: {
-                agree: true,          // she tapped Agree on the letter
-                disagree: true,       // she tapped Disagree
                 unlocked: false,      // she opened the lock screen   (set to true if you want a ping)
                 riddlesDone: false    // she finished all 7 riddles    (set to true if you want a ping)
             }
         };
         const NOTIFY_TEXT = {
-            agree: { subject: "💖 She tapped AGREE!", body: "Mei Mei keish tapped AGREE at the end of your letter. She said yes to you courting her. 💖" },
-            disagree: { subject: "🤍 She tapped Disagree", body: "Mei Mei keish tapped DISAGREE on your letter. She may just need time. Be gentle, keep being kind, and respect her answer. 🤍" },
             unlocked: { subject: "🔓 She opened your site", body: "She entered 'Together and Forever' and unlocked your site." },
             riddlesDone: { subject: "💌 She finished all 7 riddles", body: "She answered every riddle and is now reading your letter." }
         };
@@ -2394,6 +2438,73 @@
             if (e.key === 'Enter') sendChat();
         }
 
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script>
+        // === OUR JOURNEY: add a new moment by adding one line to this list ===
+        const JOURNEY = [
+            { date: "2026-10-18", icon: "🍫", title: "Chocolate rice pudding night",
+              text: "Her favorite is chocolate, mine is pudding, so we combined them. We cooked a chocolate rice pudding (champurado) together on a call, miles apart but in the same kitchen of our hearts.",
+              photo: "image/timeline/cooking.jpg" },
+            { date: "2026-10-24", icon: "💖", title: "She said yes",
+              text: "That night she surprised me and called. She agreed to my words: that we will be together, and forever. Our official day.",
+              photo: "image/timeline/yes.jpg" },
+            { date: "2026-11-24", icon: "🌙", title: "Our first month",
+              text: "One month of us. (Kelvin: write your caption here and add your photo.)",
+              photo: "image/timeline/first-month.jpg" }
+        ];
+
+        (function buildJourney() {
+            const wrap = document.getElementById('tl-wrap');
+            const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+            JOURNEY.forEach(m => {
+                const d = new Date(m.date + 'T12:00:00+08:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Manila' });
+                const el = document.createElement('div');
+                el.className = 'tl-item';
+                el.innerHTML = '<div class="tl-dot">' + m.icon + '</div>' +
+                    '<div class="glass-card rounded-2xl overflow-hidden">' +
+                    '<div class="tl-media"></div>' +
+                    '<div class="p-5"><p class="text-xs uppercase tracking-widest text-theme_accent font-semibold">' + d + '</p>' +
+                    '<h3 class="font-serif text-xl font-bold text-theme_text mt-1 mb-2">' + esc(m.title) + '</h3>' +
+                    '<p class="text-theme_muted text-sm leading-relaxed">' + esc(m.text) + '</p></div></div>';
+                const media = el.querySelector('.tl-media');
+                const img = new Image();
+                img.className = 'tl-photo'; img.alt = m.title; img.loading = 'lazy'; img.src = m.photo;
+                img.onclick = () => { const lb = document.getElementById('tl-lightbox'); lb.querySelector('img').src = m.photo; lb.style.display = 'flex'; };
+                img.onerror = () => { media.innerHTML = '<div class="tl-ph"><span style="font-size:2rem">' + m.icon + '</span><span>Photo coming soon</span></div>'; };
+                media.appendChild(img);
+                wrap.appendChild(el);
+            });
+            const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.15 });
+            wrap.querySelectorAll('.tl-item').forEach(el => io.observe(el));
+        })();
+
+        // === WHERE WE ARE (map) ===
+        const PLACES = {
+            kelvin: { name: "Kelvin", place: "Rizal, Lipa City, Batangas", lat: 13 + 52/60 + 53.9/3600, lng: 121 + 9/60 + 28.4/3600, icon: "💙" },
+            meimei: { name: "Mei Mei keish", place: "Tuburan, Cebu", lat: 10.668659, lng: 123.827692, icon: "💖" }
+        };
+
+        (function buildMap() {
+            if (typeof L === 'undefined') { document.getElementById('dist-map').innerHTML = '<p class="p-8 text-theme_muted">The map needs an internet connection to load.</p>'; return; }
+            const a = PLACES.kelvin, b = PLACES.meimei;
+            const R = 6371, rad = x => x * Math.PI / 180;
+            const h = Math.sin(rad(b.lat - a.lat) / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(rad(b.lng - a.lng) / 2) ** 2;
+            const km = Math.round(2 * R * Math.asin(Math.sqrt(h)));
+            document.getElementById('map-distance').textContent = 'About ' + km + ' km (' + Math.round(km * 0.621371) + ' miles) in a straight line, and still right here in my heart.';
+
+            const map = L.map('dist-map', { scrollWheelZoom: false, tap: false });
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+            [a, b].forEach(p => {
+                L.marker([p.lat, p.lng], { icon: L.divIcon({ className: '', iconSize: [0, 0], html: '<div class="map-pin"><b>' + p.name + '</b><i>' + p.icon + '</i></div>' }) })
+                    .addTo(map).bindPopup('<b>' + p.name + '</b><br>' + p.place);
+            });
+            L.polyline([[a.lat, a.lng], [b.lat, b.lng]], { color: '#ec4899', weight: 3, dashArray: '8 10' }).addTo(map);
+            const fit = () => { map.invalidateSize(); map.fitBounds([[a.lat, a.lng], [b.lat, b.lng]], { padding: [60, 60] }); };
+            fit();
+            window.addEventListener('resize', fit);
+            new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { fit(); o.disconnect(); } }).observe(document.getElementById('dist-map'));
+        })();
     </script>
 </body>
 </html>
